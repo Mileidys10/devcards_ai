@@ -1,0 +1,922 @@
+[
+  {
+    "id": "poo-01",
+    "title": "Objeto vs. Instancia",
+    "category": "POO",
+    "difficulty": "Principiante",
+    "icon": "📦",
+    "question": "¿Cuál es la diferencia exacta entre un Objeto y una Instancia?",
+    "definition": "Una Clase es el plano o molde (blueprint). Una Instancia es la materialización concreta en memoria de esa clase. Un Objeto es la entidad resultante que agrupa estado (atributos) y comportamiento (métodos). En la práctica, 'instancia' y 'objeto' se usan casi como sinónimos, pero 'instancia' enfatiza su relación de origen con la clase ('este objeto es una instancia de la clase Coche').",
+    "analogy": "El plano arquitectónico en papel es la Clase. La casa construida en el terreno con ladrillos reales es la Instancia (el Objeto tangible). Puedes construir 10 casas (instancias) distintas a partir del mismo plano.",
+    "code_example": "class Coche:\n    def __init__(self, color: str):\n        self.color = color  # Estado\n\n# 'mi_coche' es una instancia concreta de la clase Coche\nmi_coche = Coche(color='Rojo')",
+    "quiz_question": "Si 'Usuario' es una clase y escribimos 'u1 = Usuario(\"Ana\")':",
+    "quiz_options": [
+      "u1 es la clase y Usuario es el objeto",
+      "u1 es una instancia concreta (objeto) de la clase Usuario",
+      "Usuario es una instancia en memoria de u1",
+      "No hay diferencia entre u1 y Usuario"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Clase = Molde conceptual | Instancia/Objeto = Entidad viva creada en memoria RAM."
+  },
+  {
+    "id": "poo-02",
+    "title": "Encapsulamiento",
+    "category": "POO",
+    "difficulty": "Principiante",
+    "icon": "🔒",
+    "question": "¿Qué es el Encapsulamiento y por qué protege el estado de un sistema?",
+    "definition": "Es el principio de agrupar los datos (atributos) y los métodos que operan sobre ellos dentro de una misma unidad, ocultando los detalles internos y restringiendo el acceso directo a su estado mediante modificadores de acceso (private, protected, public) y métodos de acceso controlado (getters, setters, métodos de negocio).",
+    "analogy": "Una cápsula de medicamento. Los químicos activos están protegidos dentro de la cubierta de gelatina; tú la tomas sin manipular los polvos directamente. O la caja de cambios de un automóvil: cambias de marcha mediante la palanca sin tocar los engranajes giratorios con las manos.",
+    "code_example": "class CuentaBancaria:\n    def __init__(self, saldo_inicial: float):\n        self.__saldo = saldo_inicial  # Privado (__)\n\n    def depositar(self, monto: float):\n        if monto > 0:\n            self.__saldo += monto\n\n    def obtener_saldo(self) -> float:\n        return self.__saldo",
+    "quiz_question": "¿Cuál es el principal beneficio del encapsulamiento?",
+    "quiz_options": [
+      "Hacer que el código corra más rápido en la CPU",
+      "Evitar que componentes externos corrompan el estado interno con valores inválidos",
+      "Permitir la herencia múltiple de clases",
+      "Reemplazar todas las funciones por variables globales"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Oculta el 'cómo' y protege el estado; solo expone el 'qué' mediante interfaces públicas."
+  },
+  {
+    "id": "poo-03",
+    "title": "Polimorfismo",
+    "category": "POO",
+    "difficulty": "Intermedio",
+    "icon": "🎭",
+    "question": "¿Qué es el Polimorfismo y cómo desacopla el código del cliente?",
+    "definition": "Etimológicamente 'muchas formas'. Es la capacidad de diferentes clases de responder a un mismo mensaje o llamada de método de forma particular según su propia naturaleza. Permite escribir código cliente que interactúa con una interfaz o clase base genérica sin importar qué implementación concreta se utilice.",
+    "analogy": "El botón de encendido de un control remoto. Envía la orden 'Encender' a un televisor, a un equipo de sonido o a un proyector. Cada dispositivo responde encendiéndose a su propia manera, pero el control no necesita saber la electrónica interna de cada uno.",
+    "code_example": "class Notificador:\n    def enviar(self, mensaje: str): pass\n\nclass EmailNotificador(Notificador):\n    def enviar(self, mensaje: str):\n        print(f'Enviando Correo: {mensaje}')\n\nclass SMSNotificador(Notificador):\n    def enviar(self, mensaje: str):\n        print(f'Enviando SMS: {mensaje}')\n\n# Polimorfismo: misma llamada, distinto comportamiento\ndef alertar(notificador: Notificador):\n    notificador.enviar('¡Servidor caído!')",
+    "quiz_question": "El polimorfismo por subtipado permite:",
+    "quiz_options": [
+      "Obligar a que todas las clases tengan exactamente el mismo código fuente",
+      "Tratar a objetos de distintas clases derivadas de manera uniforme mediante su tipo base",
+      "Evitar el uso de clases abstractas o interfaces",
+      "Convertir enteros en cadenas de texto automáticamente"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Misma interfaz, múltiples implementaciones específicas."
+  },
+  {
+    "id": "ds-01",
+    "title": "El Nodo (Node)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Principiante",
+    "icon": "🔗",
+    "question": "¿Qué es un Nodo y por qué es el ladrillo fundamental de las estructuras dinámicas?",
+    "definition": "Un Nodo es una estructura de datos básica compuesta por dos elementos fundamentales: 1) El dato o carga útil (payload/value) que almacena la información, y 2) Uno o más punteros o referencias a memoria hacia otros nodos (enlaces como 'next', 'prev', 'left', 'right'). Es la base de listas enlazadas, árboles y grafos.",
+    "analogy": "Un vagón de tren de juguete con un imán en cada extremo. En el vagón transportas pasajeros o carga (el dato), y los imanes (punteros) lo conectan al vagón siguiente y al anterior formando el convoy.",
+    "code_example": "class Nodo:\n    def __init__(self, valor):\n        self.valor = valor    # Dato útil\n        self.siguiente = None # Puntero al próximo nodo\n\n# Conectar dos nodos manualmente\nnodo_a = Nodo(10)\nnodo_b = Nodo(20)\nnodo_a.siguiente = nodo_b  # Enlace",
+    "quiz_question": "¿Qué dos componentes básicos contiene un nodo simple?",
+    "quiz_options": [
+      "Una clave primaria y un índice SQL",
+      "El valor/dato y una o más referencias (punteros) a otros nodos",
+      "Una función lambda y un bucle while",
+      "El tamaño del archivo y el tipo MIME"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Un Nodo = Dato + Puntero(s) a memoria. Permite crear estructuras de tamaño ilimitado y dinámico."
+  },
+  {
+    "id": "ds-02",
+    "title": "Lista Enlazada vs. Arreglo (Array)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Intermedio",
+    "icon": "⛓️",
+    "question": "¿Cuándo conviene usar una Lista Enlazada en vez de un Arreglo (Array)?",
+    "definition": "Un Arreglo almacena elementos en posiciones contiguas de memoria, lo que permite acceso instantáneo por índice O(1), pero insertar o eliminar en el medio es costoso O(n) porque hay que desplazar los elementos. Una Lista Enlazada dispersa sus nodos en cualquier lugar de la memoria enlazados por punteros: insertar o eliminar al inicio o donde ya tienes el puntero es O(1), pero buscar por índice requiere recorrer secuencialmente O(n).",
+    "analogy": "Un Arreglo es una fila de casilleros numerados del 1 al 10 en la pared (encuentras el casillero 7 al instante, pero meter un casillero nuevo entre el 3 y el 4 exige mover los casilleros 4 al 10 a la derecha). Una Lista Enlazada es una búsqueda del tesoro: en cada pista encuentras el mensaje y la dirección donde está la siguiente pista.",
+    "code_example": "# Inserción al inicio en Lista Enlazada: O(1) tiempo constante\ndef insertar_al_inicio(cabeza, nuevo_valor):\n    nuevo = Nodo(nuevo_valor)\n    nuevo.siguiente = cabeza\n    return nuevo # Nueva cabeza instantánea",
+    "quiz_question": "La ventaja principal de una lista enlazada frente a un arreglo estático es:",
+    "quiz_options": [
+      "Acceso directo aleatorio O(1) a cualquier posición",
+      "Inserción y eliminación rápida O(1) sin tener que desplazar bloques de memoria",
+      "Menor consumo de memoria al no usar punteros",
+      "Soporte nativo en procesadores sin memoria RAM"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Arreglo: Rápido para leer por índice O(1). | Lista Enlazada: Rápida para insertar/borrar en extremos O(1)."
+  },
+  {
+    "id": "ds-03",
+    "title": "Pila (Stack - LIFO)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Principiante",
+    "icon": "📚",
+    "question": "¿Cómo opera una Pila (Stack) y en qué casos reales se aplica?",
+    "definition": "Una Pila es una colección lineal que sigue la disciplina LIFO (Last In, First Out / Último en entrar, primero en salir). Las dos operaciones elementales son 'push' (apilar en el tope) y 'pop' (desapilar del tope), ambas con complejidad O(1). Se usa en el Call Stack de ejecución de funciones, en el botón 'Deshacer' (Ctrl+Z) y en la navegación 'Atrás' del navegador.",
+    "analogy": "Una pila de platos limpios en un restaurante: colocas platos limpios arriba de la pila y cuando alguien necesita un plato toma siempre el que está en la cima. Para sacar el del fondo tendrías que retirar todos los de arriba.",
+    "code_example": "pila = []\npila.append('Página 1')  # push\npila.append('Página 2')  # push\nultima = pila.pop()      # pop -> 'Página 2' (LIFO)",
+    "quiz_question": "¿Cuál es la política de acceso de una Pila (Stack)?",
+    "quiz_options": [
+      "FIFO (First In, First Out)",
+      "LIFO (Last In, First Out)",
+      "Acceso aleatorio por clave hash",
+      "El elemento con menor prioridad sale primero"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "LIFO: El último elemento insertado es el primero en ser procesado."
+  },
+  {
+    "id": "ds-04",
+    "title": "Cola (Queue - FIFO)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Principiante",
+    "icon": "🚶‍♂️🚶‍♀️",
+    "question": "¿Cómo opera una Cola (Queue) y por qué es clave en sistemas concurrentes?",
+    "definition": "Una Cola es una colección lineal gobernada por el principio FIFO (First In, First Out / Primero en entrar, primero en salir). Los elementos se encolan ('enqueue') por el extremo final y se desencolan ('dequeue') por el extremo frontal, ambos en tiempo O(1). Es fundamental en colas de mensajes (RabbitMQ, Kafka), buffers de impresión y planificación de procesos en el sistema operativo.",
+    "analogy": "La fila de clientes en la taquilla de un banco o cine: el primer cliente que llega a la fila es el primero en ser atendido. Quien llega después se forma al final.",
+    "code_example": "from collections import deque\ncola = deque()\ncola.append('Cliente A')   # enqueue\ncola.append('Cliente B')   # enqueue\natendido = cola.popleft() # dequeue -> 'Cliente A' (FIFO)",
+    "quiz_question": "¿Qué estructura de datos modela una cola de trabajos de impresión?",
+    "quiz_options": [
+      "Pila (Stack)",
+      "Cola (Queue - FIFO)",
+      "Árbol de Decisión Binario",
+      "Matriz Dispersa"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "FIFO: El primer elemento en llegar es el primero en ser despachado."
+  },
+  {
+    "id": "ds-05",
+    "title": "Árbol Binario de Búsqueda (BST)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Intermedio",
+    "icon": "🌳",
+    "question": "¿Cuál es la regla sagrada de ordenamiento en un Binary Search Tree (BST)?",
+    "definition": "Un BST es una estructura jerárquica no lineal donde cada nodo tiene a lo sumo dos hijos (izquierdo y derecho) y cumple la propiedad de búsqueda: Para cualquier nodo N, todos los valores en su subárbol izquierdo son MENORES que N.valor, y todos los valores en su subárbol derecho son MAYORES que N.valor. Permite búsqueda, inserción y eliminación en tiempo promedio O(log n).",
+    "analogy": "Buscar una palabra en un diccionario de 1000 páginas abriéndolo por la mitad: si la palabra buscada es alfabéticamente menor, descartas toda la mitad derecha y repites la búsqueda en la mitad izquierda. En cada paso reduces el universo de búsqueda a la mitad.",
+    "code_example": "class NodoBST:\n    def __init__(self, valor):\n        self.valor = valor\n        self.izq = None  # Valores menores\n        self.der = None  # Valores mayores\n\ndef buscar(raiz, objetivo):\n    if not raiz or raiz.valor == objetivo:\n        return raiz\n    if objetivo < raiz.valor:\n        return buscar(raiz.izq, objetivo)\n    return buscar(raiz.der, objetivo)",
+    "quiz_question": "En un BST, si el nodo actual tiene valor 50, ¿dónde se ubicará el valor 25?",
+    "quiz_options": [
+      "En el subárbol derecho",
+      "En el subárbol izquierdo",
+      "En el nodo raíz reemplazando al 50",
+      "No se puede insertar valores menores que 50"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Izquierda < Raíz < Derecha. Búsqueda eficiente en O(log n)."
+  },
+  {
+    "id": "ds-06",
+    "title": "Tabla Hash (Hash Table / Diccionario)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Intermedio",
+    "icon": "⚡",
+    "question": "¿Por qué las Tablas Hash logran búsquedas casi instantáneas O(1)?",
+    "definition": "Una Tabla Hash asocia claves a valores mediante una 'Función Hash' (función matemática que transforma una clave de cualquier tipo en un índice entero dentro de un arreglo interno). Al conocer el índice exacto de antemano, puede guardar y recuperar el valor en tiempo constante O(1) promedio. Las colisiones (cuando dos claves generan el mismo índice) se resuelven mediante encadenamiento (listas enlazadas) o sondeo abierto.",
+    "analogy": "El guardarropa de un teatro: entregas tu abrigo y te dan una ficha con el número 42. Al salir entregas la ficha 42 y la persona va directamente a la percha 42 sin tener que revisar abrigo por abrigo.",
+    "code_example": "# En Python los diccionarios son Tablas Hash altamente optimizadas\nusuarios = {'u_101': 'Carlos', 'u_102': 'María'}\n# Acceso instantáneo en O(1) sin recorrer la colección\nnombre = usuarios['u_101']",
+    "quiz_question": "¿Cuál es la complejidad temporal promedio de búsqueda en una tabla hash bien distribuida?",
+    "quiz_options": [
+      "O(n^2) Cuadrática",
+      "O(log n) Logarítmica",
+      "O(1) Tiempo Constante",
+      "O(n!) Factorial"
+    ],
+    "quiz_answer": 2,
+    "key_takeaway": "Función Hash convierte Clave en Índice -> Acceso directo en O(1)."
+  },
+  {
+    "id": "hex-01",
+    "title": "Arquitectura Hexagonal (Puertos y Adaptadores)",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "⬡",
+    "question": "¿Qué es la Arquitectura Hexagonal y cuál es su objetivo supremo?",
+    "definition": "Propuesta por Alistair Cockburn en 2005 (Ports and Adapters), su objetivo supremo es DESACOPLAR la lógica de negocio (Dominio) de cualquier tecnología externa (frameworks, bases de datos, APIs HTTP, interfaces gráficas). La lógica de negocio reside en el centro y se comunica con el exterior únicamente a través de 'Puertos' (interfaces). Las tecnologías externas se conectan mediante 'Adaptadores' que implementan o consumen esos puertos.",
+    "analogy": "Un teléfono móvil y sus puertos USB / Bluetooth. El procesador interno (tu Dominio) no sabe si vas a conectar unos audífonos Sony, unos parlantes JBL o un cargador de pared. Solo sabe que hay un puerto estándar. Quien fabrica el accesorio construye el 'Adaptador' que encaja en el puerto.",
+    "code_example": "# 1. DOMINIO (Puro, sin frameworks ni SQL)\nclass Cuenta:\n    def debitar(self, monto: float):\n        if monto > self.saldo: raise ValueError('Fondos insuficientes')\n        self.saldo -= monto\n\n# 2. PUERTO DE SALIDA (Interfaz/Contrato)\nclass RepositorioCuentasPort(ABC):\n    @abstractmethod\n    def guardar(self, cuenta: Cuenta): pass\n\n# 3. ADAPTADOR SECUNDARIO (Implementación concreta tecnológica)\nclass PostgresCuentasAdapter(RepositorioCuentasPort):\n    def guardar(self, cuenta: Cuenta):\n        db.execute('UPDATE cuentas SET saldo = ...')",
+    "quiz_question": "En Arquitectura Hexagonal, el Dominio (Lógica de Negocio):",
+    "quiz_options": [
+      "Debe importar directamente los modelos ORM de Hibernate o SQLAlchemy",
+      "No debe depender de frameworks, bases de datos ni bibliotecas de transporte web",
+      "Debe encargarse de renderizar las vistas HTML y parsear JSON",
+      "Solo puede implementarse usando bases de datos relacionales SQL"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "El Dominio es agnóstico a la tecnología; la tecnología es un detalle intercambiable."
+  },
+  {
+    "id": "hex-02",
+    "title": "Puertos Primarios vs. Puertos Secundarios",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "🔌",
+    "question": "¿Cuál es la diferencia entre Puertos Primarios (Driving) y Secundarios (Driven)?",
+    "definition": "1) Puertos Primarios / Conducentes (Driving / Inbound): Definen QUÉ puede hacer el sistema. Son las interfaces de los Casos de Uso que el mundo exterior llama para accionar el dominio (ej: CrearPedidoUseCase). Son invocados por Adaptadores Primarios (Controlador REST, Consola CLI, evento Kafka).\n2) Puertos Secundarios / Conducidos (Driven / Outbound): Definen QUÉ necesita el dominio del exterior para completar su labor (ej: Guardar en BD, Enviar Email, Consultar Pasarela de Pagos). El dominio define la interfaz y los Adaptadores Secundarios (PostgresAdapter, StripeAdapter) la implementan.",
+    "analogy": "El Puerto Primario es el volante y los pedales del automóvil (tú como conductor/actor conduces el auto a través de ellos). El Puerto Secundario es el tubo de escape o el inyector de combustible (el motor los usa para interactuar con el tanque de gasolina y el exterior).",
+    "code_example": "# PUERTO PRIMARIO (Entrada): Define qué acciones expone el negocio\nclass RegistrarUsuarioUseCase(ABC):\n    @abstractmethod\n    def ejecutar(self, comando: RegistrarUsuarioDto): pass\n\n# PUERTO SECUNDARIO (Salida): Define qué servicio externo necesita el negocio\nclass NotificadorEmailPort(ABC):\n    @abstractmethod\n    def enviar_bienvenida(self, email: str): pass",
+    "quiz_question": "Un repositorio de PostgreSQL en Arquitectura Hexagonal es un:",
+    "quiz_options": [
+      "Puerto Primario (Inbound)",
+      "Adaptador Secundario (Driven / Outbound)",
+      "Entidad de Dominio",
+      "Caso de Uso Conducente"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Primarios (Inbound): Conducen al Dominio. | Secundarios (Outbound): Son conducidos por el Dominio."
+  },
+  {
+    "id": "hex-03",
+    "title": "Inversión de Dependencias (DIP) en Hexagonal",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "🔄",
+    "question": "¿Cómo logra la Arquitectura Hexagonal que la Base de Datos dependa del Dominio y no al revés?",
+    "definition": "En la arquitectura tradicional en 3 capas, el negocio depende de la capa de datos. En la Arquitectura Hexagonal se aplica el Principio de Inversión de Dependencias (DIP de SOLID): El Núcleo de Dominio declara una INTERFAZ (Puerto de Salida) con los métodos que necesita. El Adaptador de Base de Datos (en la capa externa de infraestructura) IMPLEMENTA esa interfaz. Así, la flecha de dependencia del código fuente apunta hacia ADENTRO (hacia el Dominio), protegiéndolo de cambios tecnológicos.",
+    "analogy": "Una empresa contratante define los requisitos del puesto (la Interfaz/Puerto). Los candidatos (los Adaptadores de base de datos) deben adaptarse a los requisitos de la empresa; la empresa no cambia su modelo de negocio para adaptarse a cada candidato.",
+    "code_example": "# Capa Dominio: Declara la interfaz que él gobierna\nclass PagoGatewayPort(ABC):\n    def procesar_cobro(self, monto: float) -> bool: pass\n\n# Capa Infraestructura: Depende del Dominio implementando su puerto\nclass PaypalAdapter(PagoGatewayPort):\n    def procesar_cobro(self, monto: float) -> bool:\n        return api_paypal.charge(monto)",
+    "quiz_question": "¿Hacia dónde apuntan las dependencias en la Arquitectura Hexagonal?",
+    "quiz_options": [
+      "Desde el Dominio hacia la base de datos SQL",
+      "Desde el exterior (infraestructura/controladores) hacia el centro (Dominio)",
+      "Desde los puertos hacia los frameworks externos",
+      "En ciclos bidireccionales entre todas las capas"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "La regla de dependencia: Las capas externas conocen a las internas; el Dominio no conoce a nadie."
+  },
+  {
+    "id": "solid-01",
+    "title": "Single Responsibility Principle (SRP)",
+    "category": "Principios SOLID",
+    "difficulty": "Principiante",
+    "icon": "🎯",
+    "question": "¿Qué establece el Principio de Responsabilidad Única (SRP)?",
+    "definition": "Formalizado por Robert C. Martin: 'Una clase debe tener una, y solo una, razón para cambiar'. Esto significa que una clase o módulo debe estar dedicado a una única responsabilidad o actor del negocio. Si una clase maneja el cálculo de nómina, la persistencia en base de datos y la generación del PDF de reporte, tiene 3 razones para cambiar y viola gravemente el SRP.",
+    "analogy": "Una navaja suiza tiene muchas herramientas, pero un chef profesional usa un cuchillo de chef para cortar, un batidor para batir y una sartén para cocinar. Si se desafila el batidor, no tienes que cambiar toda la sartén.",
+    "code_example": "# MAL (3 razones para cambiar):\nclass Factura:\n    def calcular_total(self): pass\n    def guardar_en_db(self): pass\n    def imprimir_pdf(self): pass\n\n# BIEN (SRP):\nclass Factura: # Solo lógica contable\n    def calcular_total(self): pass\nclass FacturaRepository: # Solo persistencia\n    def guardar(self, factura): pass\nclass FacturaPdfPrinter: # Solo formato\n    def generar_pdf(self, factura): pass",
+    "quiz_question": "¿Cuál de estas clases cumple mejor el principio SRP?",
+    "quiz_options": [
+      "UserManager: valida usuarios, genera tokens JWT, escribe en PostgreSQL y envía SMS",
+      "PasswordHasher: únicamente genera y valida hashes seguros de contraseñas",
+      "ReportMaster: procesa datos, crea gráficos 3D y despacha correos masivos",
+      "DataHandler: ejecuta cualquier consulta SQL que reciba por parámetro"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "1 Clase = 1 Responsabilidad = 1 Razón para cambiar."
+  },
+  {
+    "id": "algo-01",
+    "title": "Complejidad Algorítmica y Notación Big O",
+    "category": "Algoritmos y Big O",
+    "difficulty": "Intermedio",
+    "icon": "📈",
+    "question": "¿Qué mide la Notación Big O y cuál es la escala de eficiencia típica?",
+    "definition": "La Notación Big O describe el comportamiento asintótico y el peor caso (worst-case scenario) del crecimiento en tiempo o memoria de un algoritmo a medida que el tamaño de entrada N tiende a infinito. No mide segundos de reloj (que varían según el procesador), sino la cantidad de operaciones elementales ejecutadas en función de N.",
+    "analogy": "Buscar un libro en una estantería: si sabes que está en el estante 4 posición 2 es O(1) tiempo constante. Si tienes que leer lomo por lomo desde el inicio hasta hallarlo es O(n) tiempo lineal. Si para cada libro tienes que compararlo con todos los demás libros de la biblioteca es O(n^2) tiempo cuadrático.",
+    "code_example": "# O(1) Constante: el tiempo no cambia aunque la lista tenga 10 millones de items\ndef primer_elemento(lista): return lista[0]\n\n# O(n) Lineal: recorre los N elementos una vez\ndef buscar_lineal(lista, objetivo):\n    for item in lista:\n        if item == objetivo: return True\n    return False\n\n# O(n^2) Cuadrático: bucle anidado peligroso para grandes N\ndef comparar_todos(lista):\n    for i in lista:\n        for j in lista: pass",
+    "quiz_question": "Ordena de MÁS EFICIENTE a MENOS EFICIENTE en tiempo:",
+    "quiz_options": [
+      "O(n^2) -> O(n) -> O(log n) -> O(1)",
+      "O(1) -> O(log n) -> O(n) -> O(n log n) -> O(n^2)",
+      "O(n!) -> O(n) -> O(1) -> O(log n)",
+      "O(log n) -> O(1) -> O(n^2) -> O(n)"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "O(1) Excelente < O(log n) Muy Bueno < O(n) Aceptable < O(n^2) Peligroso < O(2^n) Inviable."
+  },
+  {
+    "id": "poo-04",
+    "title": "Herencia (Inheritance)",
+    "category": "POO",
+    "difficulty": "Principiante",
+    "icon": "🧬",
+    "question": "¿Qué es la Herencia y qué riesgo acarrea su sobreuso?",
+    "definition": "Mecanismo por el cual una clase hija (subclase) adquiere los atributos y métodos de una clase padre (superclase), permitiendo la reutilización de código mediante una relación 'ES UN' (un Perro es un Animal). Su abuso genera acoplamiento rígido, jerarquías frágiles y violación de encapsulamiento.",
+    "analogy": "Heredar los rasgos faciales de tus padres. Tienes sus ojos y estatura sin tener que construirlos desde cero, pero si la clase padre cambia drásticamente, todos los hijos se ven afectados.",
+    "code_example": "class Animal:\n    def comer(self): print('Comiendo...')\n\nclass Perro(Animal): # Herencia 'ES UN'\n    def ladrar(self): print('Guau!')",
+    "quiz_question": "¿Cuál es la regla de oro moderna respecto a la herencia?",
+    "quiz_options": [
+      "Heredar de al menos 10 clases para maximizar reutilización",
+      "Favorecer la composición de objetos sobre la herencia de clases (Favor composition over inheritance)",
+      "Nunca crear métodos en clases hijas",
+      "Reemplazar siempre las interfaces por clases abstractas con herencia profunda"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Reutiliza código con relación 'ES UN'. Evita jerarquías profundas; prefiere composición."
+  },
+  {
+    "id": "poo-05",
+    "title": "Abstracción",
+    "category": "POO",
+    "difficulty": "Principiante",
+    "icon": "🌫️",
+    "question": "¿En qué consiste la Abstracción en desarrollo de software?",
+    "definition": "Proceso de aislar y destacar las características esenciales de un objeto o concepto para el contexto de la aplicación, eliminando u ocultando los detalles irrelevantes o accidentales de implementación. Permite manejar la complejidad mental de grandes sistemas modelando interfaces limpias.",
+    "analogy": "El tablero de mandos de un automóvil. Solo necesitas ver el velocímetro, el nivel de gasolina y el volante. No necesitas ver los 50 sensores inyectando microsegundos de gasolina en los pistones del motor.",
+    "code_example": "from abc import ABC, abstractmethod\n\nclass ProcesadorPagos(ABC):\n    @abstractmethod\n    def cobrar(self, monto: float) -> bool:\n        '''Detalles de sockets, TLS o tarjetas ocultos tras la abstracción'''\n        pass",
+    "quiz_question": "La abstracción en software busca principalmente:",
+    "quiz_options": [
+      "Aumentar el número de líneas de código fuente",
+      "Reducir la complejidad ocultando detalles innecesarios y exponiendo solo lo esencial",
+      "Compilar el código a lenguaje ensamblador binario",
+      "Eliminar el uso de tipos de datos primitivos"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Enfócate en el 'QUÉ' hace el objeto y abstrae el 'CÓMO' lo hace."
+  },
+  {
+    "id": "ds-07",
+    "title": "Lista Doblemente Enlazada",
+    "category": "Estructuras de Datos",
+    "difficulty": "Intermedio",
+    "icon": "↔️",
+    "question": "¿Qué ventaja y costo tiene una Lista Doblemente Enlazada frente a una Simple?",
+    "definition": "En una lista doblemente enlazada, cada nodo tiene DOS punteros: uno hacia el nodo siguiente ('next') y otro hacia el nodo anterior ('prev'). Esto permite recorrer la lista en ambas direcciones (hacia adelante y hacia atrás) y eliminar un nodo en O(1) si ya se tiene la referencia a él. El costo es mayor consumo de memoria por almacenar dos punteros por nodo.",
+    "analogy": "Una cadena humana donde cada persona toma la mano de la persona de la derecha y también de la persona de la izquierda. Puedes pasar un mensaje en cualquier dirección.",
+    "code_example": "class NodoDoble:\n    def __init__(self, valor):\n        self.valor = valor\n        self.siguiente = None  # Puntero next\n        self.anterior = None   # Puntero prev",
+    "quiz_question": "¿Cuál es la principal ventaja de una lista doblemente enlazada?",
+    "quiz_options": [
+      "Requiere la mitad de memoria que un arreglo",
+      "Permite navegación bidireccional y eliminación en O(1) conociendo el nodo",
+      "Permite indexación binaria instantánea O(1)",
+      "Ordena automáticamente sus elementos al insertar"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Doble puntero = Navegación bidireccional O(1) a cambio de un costo extra de memoria."
+  },
+  {
+    "id": "ds-08",
+    "title": "Grafos (Graphs: Vértices y Aristas)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Avanzado",
+    "icon": "🕸️",
+    "question": "¿Cómo se compone un Grafo y para qué problemas se utiliza?",
+    "definition": "Un Grafo G = (V, E) es una estructura de datos no lineal compuesta por un conjunto de Vértices (o Nodos) que almacenan datos, y un conjunto de Aristas (Edges) que representan las relaciones o conexiones entre ellos. Pueden ser dirigidos o no dirigidos, ponderados (con pesos/costos) o no ponderados. Modela redes sociales, mapas de navegación GPS, redes de telecomunicaciones y grafos de conocimiento (OKF).",
+    "analogy": "Un mapa de vuelos comerciales: las ciudades con aeropuerto son los Vértices y las rutas aéreas directas entre ciudades son las Aristas. Si el vuelo toma 2 horas, la arista tiene un peso de 2.",
+    "code_example": "# Representación de Grafo mediante Lista de Adyacencia en Python\ngrafo = {\n    'Bogotá': ['Medellín', 'Cali'],\n    'Medellín': ['Bogotá', 'Cartagena'],\n    'Cali': ['Bogotá'],\n    'Cartagena': ['Medellín']\n}",
+    "quiz_question": "En un grafo de red social como Facebook, ¿qué representan los usuarios y sus amistades?",
+    "quiz_options": [
+      "Los usuarios son aristas y las amistades son vértices",
+      "Los usuarios son vértices (nodos) y las amistades son aristas (conexiones)",
+      "Son tablas hash con colisiones cuadráticas",
+      "Son pilas LIFO con operaciones de push"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Grafo = Nodos (Entidades) + Aristas (Relaciones). Modela cualquier red compleja."
+  },
+  {
+    "id": "hex-04",
+    "title": "El Núcleo de Dominio (Domain Core)",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "💎",
+    "question": "¿Qué debe y qué NO debe contener el Núcleo de Dominio en Arquitectura Hexagonal?",
+    "definition": "El Núcleo de Dominio es el corazón del hexágono. Contiene exclusivamente Entidades de Negocio, Objetos de Valor (Value Objects), Agregados y Reglas de Negocio Puras. NO DEBE contener dependencias de Spring, Angular, Hibernate, SQL, JSON, HTTP ni librerías de infraestructura externa. Si cambias de base de datos relacional a MongoDB, o de REST a GraphQL, el Dominio no sufre ni un solo cambio.",
+    "analogy": "Las reglas del ajedrez (el Dominio). Las reglas de cómo se mueve el caballo o el rey son las mismas si juegas en un tablero de madera, en una app de celular o por correspondencia postal (los Adaptadores).",
+    "code_example": "# Dominio puro: solo lenguaje de programación estándar\nclass Prestamo:\n    def __init__(self, monto: float, tasa: float):\n        if monto <= 0: raise ValueError('Monto debe ser positivo')\n        self.monto = monto\n        self.tasa = tasa\n\n    def calcular_interes(self) -> float:\n        return self.monto * (self.tasa / 100)",
+    "quiz_question": "¿Cuál de estas importaciones NUNCA debería aparecer en una clase del Dominio puro?",
+    "quiz_options": [
+      "from dataclasses import dataclass",
+      "import org.springframework.web.bind.annotation.RestController;",
+      "from typing import List, Optional",
+      "import datetime"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Dominio Puro = Reglas de negocio independientes de frameworks, bases de datos o UI."
+  },
+  {
+    "id": "hex-05",
+    "title": "Adaptador Primario vs. Adaptador Secundario",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "⚙️",
+    "question": "¿Cómo se diferencian los Adaptadores Primarios de los Secundarios?",
+    "definition": "1) Adaptador Primario (Driving/Inbound): Es el que INICIA la comunicación. Traduce la petición externa (HTTP Request, evento de cola, comando de consola) a una llamada a un Puerto Primario del dominio (ej: AuthRestController -> RegistrarUsuarioUseCase).\n2) Adaptador Secundario (Driven/Outbound): Es el que RESPONDE a una llamada del dominio. Traduce la llamada del Puerto Secundario al lenguaje específico de la tecnología externa (ej: PostgresRepositoryAdapter ejecuta sentencias SQL cuando el Dominio llama al puerto GuardarUsuarioPort).",
+    "analogy": "Adaptador Primario: El teclado de una computadora (un actor humano lo presiona para darle órdenes a la máquina). Adaptador Secundario: La impresora (la máquina le envía datos para imprimir en papel).",
+    "code_example": "# ADAPTADOR PRIMARIO (Controlador FastAPI)\n@app.post('/pedidos')\ndef crear_pedido(dto: PedidoRequest, use_case: CrearPedidoPort):\n    return use_case.ejecutar(dto.to_command())\n\n# ADAPTADOR SECUNDARIO (Persistencia Postgres)\nclass PedidoPostgresAdapter(GuardarPedidoPort):\n    def guardar(self, pedido: Pedido):\n        db_session.add(PedidoModel.from_domain(pedido))\n        db_session.commit()",
+    "quiz_question": "Un controlador REST de FastAPI o Spring Boot que recibe peticiones HTTP de usuarios es un:",
+    "quiz_options": [
+      "Adaptador Secundario (Driven / Outbound)",
+      "Adaptador Primario (Driving / Inbound)",
+      "Objeto de Valor (Value Object)",
+      "Puerto de Base de Datos"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Primario: Traduce del exterior al Dominio. | Secundario: Traduce del Dominio a la infraestructura."
+  },
+  {
+    "id": "solid-02",
+    "title": "Open/Closed Principle (OCP)",
+    "category": "Principios SOLID",
+    "difficulty": "Intermedio",
+    "icon": "🚪",
+    "question": "¿Cómo se logra que el código esté 'Abierto para extensión pero cerrado para modificación'?",
+    "definition": "El principio OCP establece que las entidades de software (clases, módulos, funciones) deben estar abiertas para extender su comportamiento, pero cerradas para modificar su código fuente original ya probado. Se logra mediante el uso de abstracciones, interfaces y polimorfismo, evitando cadenas interminables de 'if/else' o 'switch' cuando se añade un nuevo requerimiento.",
+    "analogy": "Un teléfono móvil y las aplicaciones de la tienda. Puedes extender las capacidades de tu teléfono instalando nuevas aplicaciones sin tener que abrir el teléfono con destornillador y modificar los chips de la placa madre.",
+    "code_example": "# MAL: Si agregamos 'Bitcoin', hay que modificar esta función (violación OCP)\ndef cobrar(monto, metodo):\n    if metodo == 'tarjeta': ...\n    elif metodo == 'paypal': ...\n\n# BIEN (OCP): Abierto a nuevos métodos mediante interfaz\nclass MetodoPago(ABC):\n    @abstractmethod\n    def pagar(self, monto): pass\n\nclass BitcoinPago(MetodoPago):\n    def pagar(self, monto): ... # Nueva extensión sin tocar código previo",
+    "quiz_question": "Para cumplir el principio Open/Closed al agregar un nuevo tipo de descuento:",
+    "quiz_options": [
+      "Se añade otro bloque 'elif' a la función de cálculo existente",
+      "Se crea una nueva clase que implemente la interfaz de estrategia de descuento",
+      "Se modifica el modelo de base de datos para agregar más columnas booleanas",
+      "Se eliminan las clases anteriores y se reescribe el módulo completo"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Añade nuevo comportamiento creando nuevas clases, no rompiendo el código existente."
+  },
+  {
+    "id": "solid-03",
+    "title": "Liskov Substitution Principle (LSP)",
+    "category": "Principios SOLID",
+    "difficulty": "Avanzado",
+    "icon": "🦆",
+    "question": "¿Qué regla impone el Principio de Sustitución de Liskov (LSP)?",
+    "definition": "Formulado por Barbara Liskov en 1987: 'Los subtipos deben ser sustituibles por sus tipos base sin alterar el correcto funcionamiento del programa'. Si una clase hija hereda de una clase padre pero lanza excepciones inesperadas en los métodos heredados o cambia los contratos preestablecidos, viola el LSP.",
+    "analogy": "El clásico dilema: 'Si parece un pato y grazna como un pato, pero necesita baterías, probablemente tienes una mala abstracción'. Un pato de plástico a pilas no puede sustituir a un pato real si el programa espera que nade en un lago sin electrocutarse.",
+    "code_example": "# VIOLACIÓN CLÁSICA DE LISKOV:\nclass Ave:\n    def volar(self): print('Volando...')\n\nclass Pinguino(Ave):\n    def volar(self): raise NotImplementedError('Los pingüinos no vuelan!')\n# El cliente que espera un Ave falla al recibir un Pinguino!",
+    "quiz_question": "El principio de Liskov se viola cuando una clase derivada:",
+    "quiz_options": [
+      "Sobrescribe un método para implementar lógica específica compatible",
+      "Lanza una excepción de 'No Implementado' en un método de su clase padre o debilita sus condiciones",
+      "Implementa más de dos interfaces",
+      "Tiene atributos privados con getters y setters"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Una subclase debe cumplir todas las promesas y contratos de su superclase."
+  },
+  {
+    "id": "pat-01",
+    "title": "Patrón Singleton",
+    "category": "Patrones de Diseño",
+    "difficulty": "Principiante",
+    "icon": "👤",
+    "question": "¿Qué problema resuelve el Patrón Singleton y cuándo debe evitarse?",
+    "definition": "Patrón creacional que garantiza que una clase tenga una ÚNICA instancia en todo el ciclo de vida de la aplicación y proporciona un punto de acceso global a ella. Se utiliza para recursos compartidos costosos como el Pool de conexiones a Base de Datos, el Logger central o el Administrador de Configuración. Debe usarse con precaución porque puede actuar como una variable global oculta y dificultar las pruebas unitarias.",
+    "analogy": "El gobierno de un país. Solo puede haber un presidente oficial gobernando al mismo tiempo; cualquier solicitud ciudadana a nivel de presidencia se dirige a la misma persona/entidad institucional.",
+    "code_example": "class DatabaseConnection:\n    _instancia = None\n\n    def __new__(cls):\n        if cls._instancia is None:\n            cls._instancia = super().__new__(cls)\n            cls._instancia.conectado = True\n        return cls._instancia\n\n# db1 y db2 apuntan exactamente al mismo objeto en memoria\ndb1 = DatabaseConnection()\ndb2 = DatabaseConnection()\nassert db1 is db2  # True",
+    "quiz_question": "¿Cuál es el propósito esencial del patrón Singleton?",
+    "quiz_options": [
+      "Permitir la clonación masiva de objetos en memoria",
+      "Garantizar que una clase tenga exactamente una sola instancia y proveer acceso global a ella",
+      "Convertir métodos asíncronos en síncronos",
+      "Dividir una clase en múltiples microservicios"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Garantiza 1 sola instancia en memoria. Útil para loggers o pools de conexiones."
+  },
+  {
+    "id": "pat-02",
+    "title": "Patrón Strategy",
+    "category": "Patrones de Diseño",
+    "difficulty": "Intermedio",
+    "icon": "♟️",
+    "question": "¿Cómo permite el Patrón Strategy cambiar algoritmos en tiempo de ejecución?",
+    "definition": "Patrón de diseño del comportamiento que define una familia de algoritmos intercambiables, encapsula cada uno en una clase independiente y los hace intercambiables. Permite que el algoritmo varíe de forma dinámica e independiente de los clientes que lo utilizan, eliminando estructuras complejas de 'if/else' o 'switch'.",
+    "analogy": "Una aplicación de navegación GPS (Google Maps / Waze). Para ir de un punto A a un punto B puedes elegir la estrategia: 'En Automóvil', 'En Transporte Público' o 'Caminando'. El destino es el mismo, pero el algoritmo de cálculo de ruta cambia según la estrategia elegida.",
+    "code_example": "class EstrategiaEnvio(ABC):\n    @abstractmethod\n    def calcular(self, peso: float) -> float: pass\n\nclass EnvioEstandar(EstrategiaEnvio):\n    def calcular(self, peso): return peso * 5.0\n\nclass EnvioExpress(EstrategiaEnvio):\n    def calcular(self, peso): return peso * 12.0\n\nclass CarritoCompra:\n    def __init__(self, estrategia: EstrategiaEnvio):\n        self.estrategia = estrategia # Inyectable en tiempo de ejecución",
+    "quiz_question": "El patrón Strategy se utiliza principalmente para:",
+    "quiz_options": [
+      "Crear una base de datos relacional",
+      "Intercambiar familias de algoritmos encapsulados en tiempo de ejecución sin alterar el contexto",
+      "Evitar la creación de objetos en el heap",
+      "Garantizar que una clase solo tenga métodos estáticos"
+    ],
+    "quiz_answer": 1,
+    "key_takeaway": "Encapsula algoritmos intercambiables en clases separadas e inyéctalos donde se necesiten."
+  },
+  {
+    "id": "poo-06",
+    "title": "Clases Abstractas vs. Interfaces",
+    "category": "POO",
+    "difficulty": "Intermedio",
+    "icon": "🎭",
+    "question": "¿Cuál es la diferencia arquitectónica fundamental entre una Clase Abstracta y una Interfaz?",
+    "definition": "Una Clase Abstracta define una identidad compartida ('es un') y puede contener código implementado y estado; no se puede instanciar directamente. Una Interfaz define un contrato o capacidad pura ('puede hacer'); no almacena estado de instancia.",
+    "analogy": "Una Clase Abstracta es 'Mamífero' (todos respiran y tienen sangre caliente, código base compartido). Una Interfaz es 'Nadador' (un perro, un humano o un submarino pueden implementar Nadador sin ser de la misma especie).",
+    "code_example": "// Java / TypeScript\ninterface Volador { void volar(); }\nabstract class Ave { String pico; void comer() { ... } }\nclass Aguila extends Ave implements Volador { public void volar() { ... } }",
+    "quiz_question": "¿Cuándo debes preferir una Interfaz sobre una Clase Abstracta?",
+    "quiz_options": [
+      "Cuando necesitas herencia múltiple de comportamiento o contratos entre clases no relacionadas",
+      "Cuando necesitas instanciar directamente la clase",
+      "Cuando necesitas almacenar variables de instancia privadas con lógica base",
+      "Nunca, las clases abstractas siempre son superiores"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Clase abstracta = QUÉ ES + código compartido. Interfaz = QUÉ PUEDE HACER (contrato puro)."
+  },
+  {
+    "id": "poo-07",
+    "title": "Composición sobre Herencia",
+    "category": "POO",
+    "difficulty": "Intermedio",
+    "icon": "🧩",
+    "question": "¿Por qué el principio 'Composición sobre Herencia' es una de las reglas de oro de la POO?",
+    "definition": "La herencia genera un acoplamiento rígido en tiempo de compilación (caja blanca, cambios en la clase padre rompen las hijas). La composición ensambla comportamientos en tiempo de ejecución conteniendo referencias a otras clases ('tiene un' en vez de 'es un').",
+    "analogy": "Herencia es nacer con alas cosidas al cuerpo (si cambian tus genes, todo falla). Composición es ponerte una mochila propulsora cuando necesitas volar y quitártela cuando quieras bucear.",
+    "code_example": "# Composición flexible\nclass MotorGasolina:\n    def encender(self): return 'Brum brum'\n\nclass Auto:\n    def __init__(self, motor):\n        self.motor = motor  # Inyectado por composición\n\nauto = Auto(MotorGasolina())",
+    "quiz_question": "¿Cuál es el principal riesgo de abusar de la herencia jerárquica profunda?",
+    "quiz_options": [
+      "Fragilidad del software y jerarquías rígidas donde una modificación en la raíz rompe todas las subclases",
+      "Las clases hijas se vuelven demasiado rápidas en ejecución",
+      "No se puede usar polimorfismo con herencia",
+      "El recolector de basura de la máquina virtual no funciona"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Favorece 'tiene un' frente a 'es un'. La composición otorga flexibilidad y evita la fragilidad jerárquica."
+  },
+  {
+    "id": "poo-08",
+    "title": "Inmutabilidad y Value Objects",
+    "category": "POO",
+    "difficulty": "Intermedio",
+    "icon": "🔒",
+    "question": "¿Qué es un Objeto Inmutable y qué rol cumple como Value Object en el Dominio?",
+    "definition": "Un objeto inmutable es aquel cuyo estado no puede alterarse tras su creación. En Domain-Driven Design (DDD), un Value Object representa una medida o concepto sin identidad propia (como Dinero, Email o Coordenadas) definido únicamente por sus atributos.",
+    "analogy": "Un billete de 20 dólares roto no se 'edita' para volverlo de 50. Si quieres 50 dólares, obtienes un nuevo billete de 50. Su valor es inmutable.",
+    "code_example": "from dataclasses import dataclass\n\n@dataclass(frozen=True)\nclass Dinero:\n    monto: float\n    moneda: str\n    \n    def sumar(self, otro: 'Dinero') -> 'Dinero':\n        if self.moneda != otro.moneda: raise ValueError()\n        return Dinero(self.monto + otro.monto, self.moneda)",
+    "quiz_question": "¿Qué propiedad define a dos Value Objects como iguales?",
+    "quiz_options": [
+      "Que todos sus valores internos sean idénticos, independientemente de su dirección de memoria",
+      "Que tengan el mismo UUID generado por la base de datos",
+      "Que pertenezcan a la misma clase abstracta",
+      "Que se hayan creado en el mismo milisegundo"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Los Value Objects son inmutables y se comparan por sus valores, no por un ID."
+  },
+  {
+    "id": "ds-09",
+    "title": "Árbol Balanceado (AVL y Red-Black Tree)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Avanzado",
+    "icon": "⚖️",
+    "question": "¿Por qué un Árbol Binario de Búsqueda simple puede degradarse y cómo lo resuelven los árboles balanceados?",
+    "definition": "Si insertas elementos ordenados (1, 2, 3, 4, 5) en un BST simple, el árbol se convierte en una lista enlazada degradando la búsqueda a O(n). Los árboles AVL y Red-Black realizan rotaciones automáticas para mantener la altura en O(log n).",
+    "analogy": "Una balanza de dos platillos: si pones demasiado peso en la derecha, el sistema gira mecánicamente las ramas para que ambos lados queden con peso equilibrado.",
+    "code_example": "// Rotación Simple a la Derecha (Rotación AVL)\nNodo rotarDerecha(Nodo y) {\n    Nodo x = y.izquierdo;\n    y.izquierdo = x.derecho;\n    x.derecho = y;\n    return x;\n}",
+    "quiz_question": "¿Qué problema grave evita un árbol balanceado (AVL/Red-Black)?",
+    "quiz_options": [
+      "Evita que el árbol se degenere en una lista lineal de búsqueda O(n) ante datos ya ordenados",
+      "Evita el consumo de memoria RAM",
+      "Evita que se guarden números negativos",
+      "Permite eliminar el nodo raíz sin costo"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "El balanceo automático garantiza que la altura sea logarítmica O(log n) en el peor escenario."
+  },
+  {
+    "id": "ds-10",
+    "title": "Colisiones en Tablas Hash (Chaining vs Open Addressing)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Avanzado",
+    "icon": "💥",
+    "question": "¿Qué es una colisión hash y cuáles son los dos métodos canónicos para resolverla?",
+    "definition": "Una colisión ocurre cuando dos claves distintas producen exactamente el mismo índice en el arreglo tras pasar por la función hash. Se resuelve con 'Separate Chaining' (cada casilla es una lista enlazada) o 'Open Addressing' (buscar la siguiente casilla libre: Linear Probing o Cuckoo Hashing).",
+    "analogy": "Dos personas reservan casilleros en un gimnasio y les asignan el casillero 15 por error. Chaining: ponen las dos mochilas en el casillero 15 una tras otra. Open Addressing: la segunda persona camina hasta encontrar el casillero 16 vacío.",
+    "code_example": "# Separate Chaining simplificado\ntabla = [[] for _ in range(10)]\ndef insertar(clave, valor):\n    idx = hash(clave) % 10\n    tabla[idx].append((clave, valor))  # Lista de colisiones",
+    "quiz_question": "¿Qué sucede con el rendimiento de una Tabla Hash si el 100% de las claves colisionan en la misma casilla?",
+    "quiz_options": [
+      "Se degrada a O(n), comportándose como una lista enlazada ordinaria",
+      "El sistema arroja un StackOverflowError",
+      "Sigue siendo O(1) de manera mágica",
+      "La tabla duplica su tamaño instantáneamente"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Chaining guarda listas por casilla; Open Addressing busca el siguiente hueco disponible."
+  },
+  {
+    "id": "ds-11",
+    "title": "Búsqueda en Amplitud (BFS - Breadth-First Search)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Avanzado",
+    "icon": "🌊",
+    "question": "¿Cómo funciona el algoritmo BFS y qué estructura de datos utiliza internamente?",
+    "definition": "BFS explora un grafo o árbol nivel por nivel, visitando primero todos los vecinos inmediatos de la raíz antes de pasar a los nietos. Utiliza obligatoriamente una **Cola (Queue FIFO)** para recordar los nodos pendientes de explorar.",
+    "analogy": "Tirar una piedra en un estanque quieto: las ondas concéntricas se expanden hacia afuera en círculos crecientes nivel por nivel.",
+    "code_example": "from collections import deque\n\ndef bfs(grafo, inicio):\n    visitados = set([inicio])\n    cola = deque([inicio])\n    while cola:\n        nodo = cola.popleft()\n        for vecino in grafo[nodo]:\n            if vecino not in visitados:\n                visitados.add(vecino)\n                cola.append(vecino)",
+    "quiz_question": "¿Para qué problema clásico es óptimo el algoritmo BFS en un grafo no ponderado?",
+    "quiz_options": [
+      "Encontrar el camino más corto (menor número de aristas) entre dos nodos",
+      "Calcular el árbol de expansión mínimo en grafos pesados",
+      "Ordenar alfabéticamente las palabras de un texto",
+      "Calcular el determinante de una matriz"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "BFS recorre por niveles concéntricos usando una COLA (FIFO) y halla caminos más cortos no ponderados."
+  },
+  {
+    "id": "ds-12",
+    "title": "Búsqueda en Profundidad (DFS - Depth-First Search)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Avanzado",
+    "icon": "🧗",
+    "question": "¿Cómo opera el algoritmo DFS y qué estructura de datos lo sostiene?",
+    "definition": "DFS explora un grafo adentrándose lo más profundo posible por cada rama antes de retroceder (backtracking). Utiliza internamente una **Pila (Stack LIFO)**, frecuentemente mediante recursión de llamadas del sistema.",
+    "analogy": "Explorar un laberinto con un hilo: caminas hacia adelante hasta topar con pared, marcas el callejón sin salida y retrocedes hasta la última bifurcación para probar el otro camino.",
+    "code_example": "def dfs(grafo, nodo, visitados=None):\n    if visitados is None: visitados = set()\n    visitados.add(nodo)\n    for vecino in grafo[nodo]:\n        if vecino not in visitados:\n            dfs(grafo, vecino, visitados)\n    return visitados",
+    "quiz_question": "¿Qué estructura de datos permite el retroceso (backtracking) característico de DFS?",
+    "quiz_options": [
+      "Una Pila (Stack / Pila de llamadas de recursión)",
+      "Una Cola de Doble Extremo",
+      "Un Árbol AVL",
+      "Una Tabla de Hash con Linear Probing"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "DFS se sumerge hasta el fondo de cada rama usando una PILA o recursión antes de hacer backtracking."
+  },
+  {
+    "id": "hex-06",
+    "title": "DTOs vs. Entidades de Dominio",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Intermedio",
+    "icon": "📦",
+    "question": "¿Por qué es un error grave exponer Entidades de Dominio directamente en los endpoints REST o controladores?",
+    "definition": "Las Entidades de Dominio contienen lógica de negocio e invariantes críticas. Los DTOs (Data Transfer Objects) son estructuras anémicas creadas exclusivamente para transportar datos hacia y desde el exterior (JSON, gRPC). Exponer entidades acopla la API externa al modelo interno y genera fallos de seguridad (mass assignment).",
+    "analogy": "Un DTO es el menú del restaurante con foto y precio que le entregas al cliente; la Entidad de Dominio es la receta secreta del chef con inventario de costos y temperaturas que jamás sale de la cocina.",
+    "code_example": "# DTO para entrada web\nclass CrearUsuarioDTO(BaseModel):\n    email: EmailStr\n    password: str\n\n# Entidad de Dominio pura\nclass Usuario:\n    def __init__(self, id, email, password_hash):\n        self.id = id\n        self.email = email\n        self._validar_invariantes()",
+    "quiz_question": "¿Cuál es la principal ventaja de desacoplar los DTOs de las Entidades de Dominio?",
+    "quiz_options": [
+      "Permite evolucionar el contrato JSON de la API sin alterar las reglas de negocio del negocio",
+      "Reduce el tamaño de la base de datos a la mitad",
+      "Elimina la necesidad de usar PostgreSQL",
+      "Hace que Python ejecute código a la velocidad de C++"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "DTO = contrato externo de transporte. Entidad = modelo rico interno con reglas de negocio."
+  },
+  {
+    "id": "hex-07",
+    "title": "Casos de Uso (Interactors / Application Services)",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "🎬",
+    "question": "¿Qué responsabilidad exacta tiene la Capa de Aplicación (Casos de Uso) en Arquitectura Hexagonal?",
+    "definition": "Orquesta el flujo de información: recibe los datos desde los Puertos Primarios, coordina a las Entidades de Dominio y delega la persistencia o notificaciones a los Puertos Secundarios. No contiene reglas de negocio de entidad ni detalles de infraestructura.",
+    "analogy": "El director de una orquesta: él no toca el violín (Dominio) ni construye el teatro (Infraestructura), pero indica cuándo entra cada músico para que la obra suceda.",
+    "code_example": "class TransferirDineroUseCase:\n    def __init__(self, repo_cuentas: CuentasPort, notificador: NotificadorPort):\n        self.repo = repo_cuentas\n        self.notificador = notificador\n        \n    def ejecutar(self, origen_id, destino_id, monto):\n        origen = self.repo.obtener(origen_id)\n        destino = self.repo.obtener(destino_id)\n        origen.debitar(monto)  # Lógica de dominio\n        destino.acreditar(monto)\n        self.repo.guardar(origen)\n        self.repo.guardar(destino)",
+    "quiz_question": "¿Dónde reside la regla: 'Un usuario no puede transferir más de $10,000 en su primer día'?",
+    "quiz_options": [
+      "En la Capa de Dominio (Entidad o Servicio de Dominio)",
+      "En el Controlador FastAPI",
+      "En la base de datos como un trigger SQL",
+      "En el DTO de entrada"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "El Caso de Uso orquesta el flujo de negocio llamando a entidades y puertos sin acoplarse a tecnologías."
+  },
+  {
+    "id": "hex-08",
+    "title": "Arquitectura Hexagonal vs. Capas Tradicional (N-Tier)",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "🏛️",
+    "question": "¿En qué se diferencia el flujo de dependencias entre la arquitectura N-Capas clásica y la Hexagonal?",
+    "definition": "En N-Capas clásica, todo depende de la Base de Datos (UI -> Negocio -> Acceso a Datos -> DB). En Hexagonal, la flecha de dependencia se invierte: la Base de Datos es un detalle exterior que depende de las interfaces (puertos) del Dominio.",
+    "analogy": "N-Capas es una torre de naipes donde la base de datos es la mesa: si mueves la mesa, se cae todo. Hexagonal es una estación espacial con esclusas universales: puedes cambiar el módulo de combustible sin alterar el centro de comando.",
+    "code_example": "/* N-Capas Tradicional (Acoplado):\n   ServicioNegocio -> importa -> PostgresDAO\n\n   Arquitectura Hexagonal (Desacoplado):\n   ServicioNegocio -> implementa/usa -> RepositorioPort (Interface)\n   PostgresAdapter -> implementa -> RepositorioPort */",
+    "quiz_question": "¿Quién tiene el control de las dependencias en Arquitectura Hexagonal?",
+    "quiz_options": [
+      "El Dominio de Negocio: nada externo entra a él sin pasar por un puerto definido por él mismo",
+      "La base de datos relacional PostgreSQL",
+      "El framework web Spring Boot / FastAPI",
+      "El archivo docker-compose.yml"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "En Hexagonal las dependencias apuntan HACIA ADENTRO (hacia el Dominio), nunca hacia la base de datos."
+  },
+  {
+    "id": "solid-04",
+    "title": "Interface Segregation Principle (ISP)",
+    "category": "Principios SOLID",
+    "difficulty": "Intermedio",
+    "icon": "✂️",
+    "question": "¿Qué establece el Principio de Segregación de Interfaces (la 'I' de SOLID)?",
+    "definition": "Los clientes de código no deben ser forzados a depender de interfaces o métodos que no utilizan. Es infinitamente mejor tener muchas interfaces pequeñas y específicas que una interfaz 'gorda' o monolítica.",
+    "analogy": "Un control remoto con 150 botones para controlar un ventilador. Tú solo quieres encender y apagar; forzarte a cargar con botones de 'cambiar canal' o 'grabar cassette' es violar ISP.",
+    "code_example": "# Mal: Interfaz gorda\nclass TrabajadorMonolitico:\n    def trabajar(self): pass\n    def comer(self): pass  # Un robot no come!\n\n# Bien: Interfaces segregadas\nclass Trabajable:\n    def trabajar(self): pass\n\nclass Comible:\n    def comer(self): pass",
+    "quiz_question": "¿Cómo se detecta una violación común del principio ISP?",
+    "quiz_options": [
+      "Cuando una clase implementa una interfaz y deja métodos vacíos o lanza 'NotImplementedError' porque no le aplican",
+      "Cuando se utilizan más de 3 clases en un mismo archivo",
+      "Cuando se utiliza herencia múltiple de interfaces",
+      "Cuando una función tiene más de 10 líneas de código"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Muchas interfaces específicas y cohesivas son mejores que una sola interfaz pesada."
+  },
+  {
+    "id": "solid-05",
+    "title": "Dependency Inversion Principle (DIP)",
+    "category": "Principios SOLID",
+    "difficulty": "Avanzado",
+    "icon": "🔌",
+    "question": "¿Cuáles son las dos reglas fundamentales del Principio de Inversión de Dependencias (la 'D' de SOLID)?",
+    "definition": "1. Los módulos de alto nivel no deben depender de módulos de bajo nivel; ambos deben depender de abstracciones. 2. Las abstracciones no deben depender de los detalles; los detalles deben depender de las abstracciones.",
+    "analogy": "La toma eléctrica de la pared de tu habitación: está diseñada como un enchufe estándar (abstracción). Si conectas una lámpara o una nevera (detalles), la pared no cambia.",
+    "code_example": "# Mal: Alto nivel depende de detalle concreto MySQL\nclass ServicioFactura:\n    def __init__(self):\n        self.db = MySQLDatabase()\n\n# Bien: Alto nivel depende de abstracción\nclass ServicioFactura:\n    def __init__(self, db: DatabasePort):\n        self.db = db",
+    "quiz_question": "¿Qué técnica de diseño se utiliza comúnmente para aplicar el Principio de Inversión de Dependencias?",
+    "quiz_options": [
+      "Inyección de Dependencias (Dependency Injection) pasando interfaces en el constructor",
+      "Instanciación directa con 'new' dentro de los métodos privados",
+      "Creación de variables globales en la memoria del programa",
+      "Uso exclusivo de métodos estáticos"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Depende de abstracciones (interfaces), nunca de implementaciones concretas."
+  },
+  {
+    "id": "pat-03",
+    "title": "Patrón Adapter (Adaptador)",
+    "category": "Patrones de Diseño",
+    "difficulty": "Intermedio",
+    "icon": "🔌",
+    "question": "¿Cuándo y por qué se utiliza el Patrón de Diseño Adapter (GoF Estructural)?",
+    "definition": "Permite que colaboren objetos con interfaces incompatibles. Convierte la interfaz de una clase existente en la interfaz esperada por los clientes sin alterar el código fuente original.",
+    "analogy": "Un adaptador de viaje para enchufes: tienes una laptop con clavija redonda europea y estás en un hotel con tomacorrientes planos de Estados Unidos. El adaptador hace de puente sin que rompas la pared ni cambies tu laptop.",
+    "code_example": "class ServicioStripeExistente:\n    def send_charge(self, cents): pass\n\nclass PasarelaPagoPort:\n    def cobrar(self, monto_dolares): pass\n\nclass StripeAdapter(PasarelaPagoPort):\n    def __init__(self, stripe: ServicioStripeExistente):\n        self.stripe = stripe\n    def cobrar(self, monto_dolares):\n        self.stripe.send_charge(int(monto_dolares * 100))",
+    "quiz_question": "¿En qué capa de la Arquitectura Hexagonal reside exactamente la implementación del Patrón Adapter?",
+    "quiz_options": [
+      "En la Capa de Adaptadores de Infraestructura (Capa Exterior)",
+      "En el Núcleo del Dominio dentro de las Entidades",
+      "En la firma de los Casos de Uso",
+      "En el Value Object"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Adapter traduce una interfaz incompatible hacia el contrato esperado por tu aplicación."
+  },
+  {
+    "id": "pat-04",
+    "title": "Patrón Observer (Publicador - Suscriptor)",
+    "category": "Patrones de Diseño",
+    "difficulty": "Intermedio",
+    "icon": "📡",
+    "question": "¿Cómo opera el Patrón Observer y qué problema de acoplamiento resuelve?",
+    "definition": "Define un mecanismo de suscripción para notificar a múltiples objetos sobre cualquier evento que le suceda al objeto que están observando, sin que el publicador conozca las clases concretas de los suscriptores.",
+    "analogy": "La suscripción a un canal de YouTube: el creador (sujeto) no te llama por teléfono; simplemente publica un video y todos los suscriptores reciben una notificación automáticamente.",
+    "code_example": "class CanalYoutube:\n    def __init__(self):\n        self._suscriptores = []\n    def suscribir(self, obs): self._suscriptores.append(obs)\n    def publicar_video(self, titulo):\n        for s in self._suscriptores:\n            s.notificar(titulo)",
+    "quiz_question": "¿Cuál es la principal ventaja arquitectónica del Patrón Observer?",
+    "quiz_options": [
+      "Desacopla el emisor del evento de los receptores, permitiendo añadir suscriptores dinámicamente en tiempo de ejecución",
+      "Reduce el uso de memoria RAM a cero",
+      "Ejecuta las llamadas en una GPU",
+      "Evita el uso de sockets de red"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Observer permite comunicación uno-a-muchos totalmente desacoplada impulsada por eventos."
+  },
+  {
+    "id": "pat-05",
+    "title": "Patrón Factory Method (Método Fábrica)",
+    "category": "Patrones de Diseño",
+    "difficulty": "Intermedio",
+    "icon": "🏭",
+    "question": "¿Qué problema resuelve el Patrón Creacional Factory Method?",
+    "definition": "Proporciona una interfaz para crear objetos en una superclase, permitiendo a las subclases o métodos delegados decidir el tipo exacto de objeto que se creará. Evita acoplar el código al constructor concreto con `new`.",
+    "analogy": "Una empresa de logística que despacha paquetes: la central pide un 'Transporte'. Si el envío es por mar, la fábrica crea un 'Barco'; si es terrestre, crea un 'Camión'. El cliente solo sabe que su paquete viaja.",
+    "code_example": "class Logistica:\n    def crear_transporte(self):\n        raise NotImplementedError()\n    def planificar_entrega(self):\n        transporte = self.crear_transporte()\n        return transporte.entregar()\n\nclass LogisticaMarina(Logistica):\n    def crear_transporte(self): return Barco()",
+    "quiz_question": "¿Por qué es mala práctica hacer 'new ServicioConcreto()' directamente en las clases de negocio?",
+    "quiz_options": [
+      "Porque acopla el código a una implementación específica, impidiendo mockearla en pruebas o cambiarla en el futuro",
+      "Porque 'new' consume el doble de memoria que una función normal",
+      "Porque los constructores no admiten parámetros",
+      "Porque 'new' está deprecado en todos los lenguajes modernos"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Factory Method delega la instanciación para desacoplar el cliente de las clases concretas."
+  },
+  {
+    "id": "pat-06",
+    "title": "Patrón Decorator (Decorador)",
+    "category": "Patrones de Diseño",
+    "difficulty": "Intermedio",
+    "icon": "🎁",
+    "question": "¿Cómo permite el Patrón Decorator añadir responsabilidades dinámicamente sin usar herencia?",
+    "definition": "Permite añadir funcionalidades a objetos colocando estos objetos dentro de objetos encapsuladores especiales ('wrappers') que contienen estos comportamientos. Ambos comparten la misma interfaz.",
+    "analogy": "Vestirse en capas en un día frío: te pones una camiseta (base), encima un suéter (decorador 1 que da abrigo), encima un impermeable (decorador 2 que protege del agua). Sigues siendo tú, pero con nuevas capacidades apiladas.",
+    "code_example": "class CafeSimple:\n    def costo(self): return 5\n\nclass ConLeche:\n    def __init__(self, cafe):\n        self._cafe = cafe\n    def costo(self):\n        return self._cafe.costo() + 2  # Añade comportamiento\n\ncafe = ConLeche(CafeSimple()) # Costo 7",
+    "quiz_question": "¿Cuál es un ejemplo ubicuo del Patrón Decorator en la vida real de un programador?",
+    "quiz_options": [
+      "Los flujos de I/O en Java (e.g., `new BufferedReader(new FileReader('file.txt'))`) y los decoradores `@login_required` de Python",
+      "Las tablas relacionales con claves foráneas",
+      "El comando `git commit`",
+      "La compilación de código fuente a bytecode"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Decorator envuelve un objeto para extender sus capacidades en tiempo de ejecución de forma acumulativa."
+  },
+  {
+    "id": "algo-02",
+    "title": "Complejidad Temporal vs. Complejidad Espacial",
+    "category": "Algoritmos y Big O",
+    "difficulty": "Intermedio",
+    "icon": "⏳",
+    "question": "¿Cuál es la diferencia entre Complejidad Temporal y Espacial en el análisis algorítmico?",
+    "definition": "La Complejidad Temporal mide el número de operaciones elementales en función del tamaño de entrada $n$. La Complejidad Espacial mide la cantidad de memoria auxiliar (RAM) adicional requerida durante la ejecución.",
+    "analogy": "Cocinar para 1,000 personas: la complejidad temporal es cuántas horas te toma cortar y cocinar. La complejidad espacial es cuántas mesas y refrigeradores necesitas para almacenar los ingredientes mientras cocinas.",
+    "code_example": "# Temporal: O(n) | Espacial: O(1) [Solo 1 variable acumuladora]\ndef suma(n):\n    total = 0\n    for i in range(n): total += i\n    return total\n\n# Temporal: O(n) | Espacial: O(n) [Crea lista de n elementos]\ndef duplicar(lista):\n    return [x * 2 for x in lista]",
+    "quiz_question": "¿Qué compensación clásica (trade-off) ocurre frecuentemente en optimización de software?",
+    "quiz_options": [
+      "Sacrificar espacio en memoria (usando cachés o tablas hash) para ganar tiempo de ejecución mucho más veloz",
+      "Aumentar el tiempo para reducir el número de funciones",
+      "Reemplazar arrays por listas enlazadas siempre reduce ambos factores",
+      "El hardware moderno hace irrelevante el análisis de espacio"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Tiempo = operaciones CPU. Espacio = memoria RAM auxiliar. A menudo cambias memoria por velocidad (caching)."
+  },
+  {
+    "id": "algo-03",
+    "title": "Búsqueda Binaria y Complejidad O(log n)",
+    "category": "Algoritmos y Big O",
+    "difficulty": "Principiante",
+    "icon": "🔍",
+    "question": "¿Por qué la Búsqueda Binaria es tan drásticamente más rápida que la Búsqueda Lineal y cuál es su requisito indispensable?",
+    "definition": "En cada paso, divide el espacio de búsqueda a la mitad descartando el 50% de los elementos restantes. Para 1,000,000 de datos, requiere solo ~20 comparaciones. Requisito estricto: los datos deben estar previamente **ORDENADOS**.",
+    "analogy": "Buscar una palabra en un diccionario impreso: abres por la mitad ('M'). Si tu palabra empieza por 'S', descartas toda la mitad izquierda ('A' a 'M') de un solo golpe y repites.",
+    "code_example": "def busqueda_binaria(arr, x):\n    izq, der = 0, len(arr) - 1\n    while izq <= der:\n        medio = (izq + der) // 2\n        if arr[medio] == x: return medio\n        elif arr[medio] < x: izq = medio + 1\n        else: der = medio - 1\n    return -1",
+    "quiz_question": "¿Aproximadamente cuántas comparaciones como máximo necesita la Búsqueda Binaria para encontrar un elemento en un arreglo de 4,000,000,000 (4 mil millones) de datos ordenados?",
+    "quiz_options": [
+      "Aproximadamente 32 comparaciones (log2 de 4 mil millones)",
+      "4 millones de comparaciones",
+      "2 mil millones de comparaciones",
+      "Depende de la velocidad de la tarjeta gráfica"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "O(log n) divide el problema a la mitad en cada paso: para 4 mil millones de datos solo necesita 32 pasos."
+  },
+  {
+    "id": "algo-04",
+    "title": "QuickSort y Algoritmos Divide y Vencerás",
+    "category": "Algoritmos y Big O",
+    "difficulty": "Intermedio",
+    "icon": "⚡",
+    "question": "¿Cómo funciona QuickSort y cuál es su complejidad promedio versus su peor caso?",
+    "definition": "Selecciona un elemento como 'pivote' y particiona el arreglo en dos mitades: los menores al pivote y los mayores. Se aplica recursivamente. Promedio: O(n log n). Peor caso: O(n^2) si el pivote elegido es siempre el mínimo o máximo.",
+    "analogy": "Organizar personas por estatura: pides a alguien de estatura promedio pararse al centro (pivote). Los más bajos van a la izquierda, los más altos a la derecha. Repites el proceso con cada grupo.",
+    "code_example": "def quicksort(arr):\n    if len(arr) <= 1: return arr\n    pivote = arr[len(arr) // 2]\n    izq = [x for x in arr if x < pivote]\n    centro = [x for x in arr if x == pivote]\n    der = [x for x in arr if x > pivote]\n    return quicksort(izq) + centro + quicksort(der)",
+    "quiz_question": "¿Cuál es la complejidad temporal promedio de QuickSort?",
+    "quiz_options": [
+      "O(n log n)",
+      "O(n^2)",
+      "O(n)",
+      "O(1)"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Divide y vencerás con pivote: O(n log n) promedio en la mayoría de implementaciones reales."
+  },
+  {
+    "id": "poo-09",
+    "title": "Polimorfismo Paramétrico (Genéricos / Generics)",
+    "category": "POO",
+    "difficulty": "Intermedio",
+    "icon": "🧬",
+    "question": "¿Qué son los Genéricos (`<T>`) y qué problema de seguridad de tipos resuelven?",
+    "definition": "Permite escribir clases, interfaces y métodos que operan sobre tipos especificados como parámetros. Garantiza 'Type Safety' en tiempo de compilación sin requerir conversiones manuales de tipo (casting) inseguras a `Object`.",
+    "analogy": "Un pastillero con compartimentos idénticos: puedes guardar pastillas para la presión o vitaminas. El pastillero no cambia de forma, pero sabes exactamente qué medicina hay en cada casilla sin confundirte.",
+    "code_example": "// Java / TypeScript\nclass Caja<T> {\n    private T contenido;\n    public void guardar(T valor) { this.contenido = valor; }\n    public T obtener() { return this.contenido; }\n}\n\nCaja<String> cajaTexto = new Caja<>();\ncajaTexto.guardar('Hola'); // Seguro en compilación",
+    "quiz_question": "¿Cuál es la principal ventaja de usar Generics en lugar de tipos genéricos no seguros (como `Object` o `any`)?",
+    "quiz_options": [
+      "Detección de errores de tipo en tiempo de compilación y eliminación de casteos manuales",
+      "Hace que el código se ejecute en hilos paralelos automáticamente",
+      "Duplica la velocidad de acceso al disco duro",
+      "Reduce el tamaño del archivo ejecutable"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Generics `<T>` brindan flexibilidad y máxima seguridad de tipos en tiempo de compilación."
+  },
+  {
+    "id": "ds-circular",
+    "title": "Lista Enlazada Circular",
+    "category": "Estructuras de Datos",
+    "difficulty": "Intermedio",
+    "icon": "🔄",
+    "question": "¿Qué caracteriza a una Lista Enlazada Circular y en qué sistemas se utiliza?",
+    "definition": "Es una variante de lista enlazada donde el puntero 'siguiente' del último nodo no apunta a null, sino que apunta de regreso al nodo cabeza (head), formando un anillo continuo sin fin.",
+    "analogy": "Una ronda de niños jugando al 'teléfono roto' agarrados de las manos en círculo: no hay un primero ni un último absoluto, la ronda continúa indefinidamente.",
+    "code_example": "class NodoCircular:\n    def __init__(self, valor):\n        self.valor = valor\n        self.siguiente = self  # Al inicio se apunta a sí mismo",
+    "quiz_question": "¿Cuál es un caso de uso clásico para una Lista Enlazada Circular?",
+    "quiz_options": [
+      "Planificación de procesos por turnos (Round-Robin en Sistemas Operativos) y listas de reproducción en bucle",
+      "Indexación de bases de datos B-Tree",
+      "Búsqueda binaria de cadenas alfabéticas",
+      "Ordenamiento por inserción de enteros"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "El último nodo referencia al primero: ideal para ciclos continuos y Round-Robin."
+  },
+  {
+    "id": "ds-heap",
+    "title": "Cola de Prioridad (Priority Queue y Heap)",
+    "category": "Estructuras de Datos",
+    "difficulty": "Avanzado",
+    "icon": "🚨",
+    "question": "¿Cómo funciona una Cola de Prioridad y por qué se implementa eficientemente con un Heap?",
+    "definition": "Es una estructura donde cada elemento posee un nivel de prioridad. Al extraer un elemento, siempre sale el de mayor (o menor) prioridad, no necesariamente el que llegó primero. Con un Binary Heap se logran inserciones y extracciones en tiempo logarítmico O(log n).",
+    "analogy": "La sala de urgencias de un hospital: no atienden por orden de llegada (FIFO), sino por la gravedad del paciente (Prioridad crítica).",
+    "code_example": "import heapq\n\npq = []\nheapq.heappush(pq, (1, 'Infarto urgente'))   # Prioridad 1 (más alta)\nheapq.heappush(pq, (3, 'Dolor de rodilla'))\nheapq.heappush(pq, (2, 'Fiebre moderada'))\n\nprioridad, tarea = heapq.heappop(pq)  # Sale 'Infarto urgente'",
+    "quiz_question": "¿Cuál es la complejidad temporal de extraer el elemento mínimo/máximo en un Binary Heap?",
+    "quiz_options": [
+      "O(log n) porque requiere rebalancear el árbol (heapify)",
+      "O(n^2) porque revisa toda la lista",
+      "O(1) incondicionalmente sin costo de reestructuración",
+      "O(n log n) por ordenar el arreglo"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "La prioridad manda sobre el orden de llegada. Heap garantiza O(log n) en inserción y remoción."
+  }
+]

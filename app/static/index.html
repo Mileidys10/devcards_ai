@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevCards AI &mdash; Nemotecnia y Aprendizaje para Programadores</title>
+  <meta name="description" content="Plataforma de aprendizaje activo y tarjetas nemotécnicas (Flashcards) con IA para dominar POO, Estructuras de Datos, Nodos y Arquitectura Hexagonal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Barra Superior -->
+  <header class="app-header">
+    <div class="logo-group">
+      <div class="logo-icon">⬡</div>
+      <div>
+        <h1 class="logo-title">DevCards <span class="badge-ai">AI</span></h1>
+        <p class="logo-sub">Nemotecnia Activa para Ingenieros de Software</p>
+      </div>
+    </div>
+
+    <!-- Navegación de Modos -->
+    <nav class="mode-nav">
+      <button class="nav-btn active" id="btn-mode-cards" onclick="setAppMode('cards')">
+        <span class="icon">🎴</span> Flashcards 3D
+      </button>
+      <button class="nav-btn" id="btn-mode-hex" onclick="setAppMode('hexagonal')">
+        <span class="icon">⬡</span> Arquitectura Hexagonal
+      </button>
+      <button class="nav-btn" id="btn-mode-quiz" onclick="setAppMode('quiz')">
+        <span class="icon">🎯</span> Modo Quiz
+      </button>
+      <button class="nav-btn" id="btn-mode-leitner" onclick="setAppMode('leitner')">
+        <span class="icon">📊</span> Progreso Leitner
+      </button>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-secondary" id="btn-export-deck" onclick="exportDeck()" title="Exportar mazo a archivo JSON (RF-11)">
+        <span>📥</span> Exportar
+      </button>
+      <button class="btn-secondary" id="btn-import-deck" onclick="triggerImport()" title="Importar tarjetas desde JSON (RF-11)">
+        <span>📤</span> Importar
+      </button>
+      <input type="file" id="file-import-input" accept=".json" style="display:none" onchange="handleImportFile(event)">
+      <button class="btn-primary" onclick="openCreateModal()">
+        <span>✨</span> Crear con IA
+      </button>
+      <div class="status-indicator" id="server-status" title="Estado de Ollama / Motor IA">
+        <span class="status-dot"></span> <span id="status-label">Conectando...</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-container">
+
+    <!-- SECCIÓN FLASHCARDS -->
+    <section id="section-cards" class="view-section active">
+      
+      <!-- Barra de Filtros y Búsqueda -->
+      <div class="toolbar-panel">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="search-input" placeholder="Buscar concepto (ej: Objeto, Nodo, Hexagonal, SOLID, Big O)..." oninput="onSearchInput()">
+        </div>
+
+        <div class="category-tabs" id="category-tabs-container">
+          <!-- Renderizado dinámico de categorías -->
+        </div>
+      </div>
+
+      <!-- Barra de Estado de Estudio -->
+      <div class="study-stats-bar">
+        <div class="stat-pill">
+          <span class="stat-label">Tarjeta:</span>
+          <span class="stat-value" id="current-card-idx">1 / 44</span>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="study-progress-fill" style="width: 5%;"></div>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Racha:</span>
+          <span class="stat-value text-accent" id="streak-counter">🔥 1 día</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Dominio:</span>
+          <span class="stat-value text-success" id="mastery-counter">📈 0%</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-label">Sesión:</span>
+          <span class="stat-value" id="session-counter">🎯 0 leídas</span>
+        </div>
+      </div>
+
+      <!-- ESCENARIO 3D DE LA TARJETA -->
+      <div class="card-stage">
+        <div class="flip-card" id="main-flip-card" onclick="toggleCardFlip()">
+          <div class="flip-card-inner" id="card-inner">
+            
+            <!-- ANVERSO (Front) -->
+            <div class="flip-card-face flip-card-front">
+              <div class="card-header">
+                <span class="card-category-badge" id="card-front-cat">POO</span>
+                <span class="card-difficulty" id="card-front-diff">Principiante</span>
+              </div>
+
+              <div class="card-center">
+                <div class="card-icon-hero" id="card-front-icon">📦</div>
+                <h2 class="card-concept-title" id="card-front-title">Objeto vs. Instancia</h2>
+                <p class="card-question-text" id="card-front-question">¿Cuál es la diferencia exacta entre un Objeto y una Instancia?</p>
+              </div>
+
+              <div class="card-footer">
+                <span class="card-hint">💡 Clic o pulsa <b>[Espacio]</b> para voltear</span>
+                <button class="btn-icon" onclick="event.stopPropagation(); speakCurrentCard();" title="Escuchar">🔊</button>
+              </div>
+            </div>
+
+            <!-- REVERSO (Back) -->
+            <div class="flip-card-face flip-card-back">
+              <div class="card-header">
+                <span class="card-category-badge" id="card-back-cat">POO</span>
+                <h3 class="card-back-title" id="card-back-title">Definición & Comprensión</h3>
+                <button class="btn-icon" onclick="event.stopPropagation(); speakCurrentCard();" title="Escuchar">🔊</button>
+              </div>
+
+              <div class="card-back-body">
+                <!-- Definición Técnica -->
+                <div class="definition-box">
+                  <h4 class="box-title">📖 Definición Técnica</h4>
+                  <p id="card-back-definition">Texto de la definición...</p>
+                </div>
+
+                <!-- Analogía de la Vida Real -->
+                <div class="analogy-box">
+                  <h4 class="box-title">🌟 Analogía de la Vida Real (Para Nunca Olvidarlo)</h4>
+                  <p id="card-back-analogy">Texto de la analogía...</p>
+                </div>
+
+                <!-- Código Canónico -->
+                <div class="code-box" id="code-box-container">
+                  <div class="code-header">
+                    <span>💻 Código Canónico Demostrativo</span>
+                    <button class="btn-copy" onclick="event.stopPropagation(); copyCodeSnippet();">Copiar</button>
+                  </div>
+                  <pre><code id="card-back-code"># Código de ejemplo</code></pre>
+                </div>
+
+                <!-- Regla de Oro -->
+                <div class="takeaway-banner" id="card-back-takeaway">
+                  💡 <b>Regla de Oro:</b> <span id="takeaway-text">...</span>
+                </div>
+              </div>
+
+              <!-- Calificación Leitner -->
+              <div class="card-rating-footer" onclick="event.stopPropagation();">
+                <span class="rating-prompt">¿Qué tal te fue con este concepto?</span>
+                <div class="rating-buttons">
+                  <button class="btn-rate btn-rate-hard" onclick="rateCard('dificil')">
+                    🔴 Difícil (1)
+                  </button>
+                  <button class="btn-rate btn-rate-medium" onclick="rateCard('dudoso')">
+                    🟡 Dudoso (2)
+                  </button>
+                  <button class="btn-rate btn-rate-easy" onclick="rateCard('facil')">
+                    🟢 Dominado (3)
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Controles de Navegación -->
+      <div class="deck-controls">
+        <button class="btn-nav" onclick="prevCard()" title="Anterior (Flecha Izquierda)">
+          <span>◀</span> Anterior
+        </button>
+        <button class="btn-flip-action" onclick="toggleCardFlip()">
+          <span>🔄</span> Voltear Tarjeta [Espacio]
+        </button>
+        <button class="btn-nav" onclick="nextCard()" title="Siguiente (Flecha Derecha)">
+          Siguiente <span>▶</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- SECCIÓN VISUALIZADOR DE ARQUITECTURA HEXAGONAL -->
+    <section id="section-hexagonal" class="view-section">
+      <div class="section-hero">
+        <span class="hero-badge">Alistair Cockburn (2005)</span>
+        <h2 class="hero-title">⬡ Guía Visual Interactiva de Arquitectura Hexagonal</h2>
+        <p class="hero-sub">Puertos y Adaptadores: Entiende de una vez por todas cómo desacoplar el Dominio de las bases de datos y frameworks.</p>
+      </div>
+
+      <div class="hex-explorer-layout">
+        <!-- Diagrama SVG / Interactivo -->
+        <div class="hex-diagram-card">
+          <svg class="hex-svg" viewBox="0 0 600 500">
+            <!-- Capa Externa: Adaptadores -->
+            <polygon class="hex-layer hex-adapters" points="300,30 540,150 540,350 300,470 60,350 60,150" onclick="selectHexLayer('adapters')"></polygon>
+            <text x="300" y="65" class="hex-label">CAPA EXTERIOR: ADAPTADORES (Infraestructura / Frameworks)</text>
+
+            <!-- Capa Intermedia: Puertos -->
+            <polygon class="hex-layer hex-ports" points="300,90 480,185 480,315 300,410 120,315 120,185" onclick="selectHexLayer('ports')"></polygon>
+            <text x="300" y="125" class="hex-label hex-label-ports">CAPA INTERMEDIA: PUERTOS (Interfaces / Contratos)</text>
+
+            <!-- Capa Interna: Núcleo Dominio -->
+            <polygon class="hex-layer hex-domain" points="300,160 410,225 410,275 300,340 190,275 190,225" onclick="selectHexLayer('domain')"></polygon>
+            <text x="300" y="245" class="hex-label hex-label-domain">💎 NÚCLEO</text>
+            <text x="300" y="265" class="hex-label hex-label-sub">DOMINIO PURO</text>
+
+            <!-- Flechas de Dependencia (Siempre hacia ADENTRO) -->
+            <path d="M 90,130 L 150,170" class="hex-arrow" marker-end="url(#arrow)"></path>
+            <path d="M 510,130 L 450,170" class="hex-arrow" marker-end="url(#arrow)"></path>
+            <path d="M 300,450 L 300,380" class="hex-arrow" marker-end="url(#arrow)"></path>
+
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#06b6d4"></path>
+              </marker>
+            </defs>
+          </svg>
+
+          <div class="hex-legend">
+            <span class="legend-item" onclick="selectHexLayer('domain')"><span class="dot dot-domain"></span> 1. Dominio (Reglas Puras)</span>
+            <span class="legend-item" onclick="selectHexLayer('ports')"><span class="dot dot-ports"></span> 2. Puertos (Interfaces de Entrada/Salida)</span>
+            <span class="legend-item" onclick="selectHexLayer('adapters')"><span class="dot dot-adapters"></span> 3. Adaptadores (Postgres, REST, Kafka)</span>
+          </div>
+        </div>
+
+        <!-- Panel de Detalle de la Capa Seleccionada -->
+        <div class="hex-detail-panel" id="hex-detail-content">
+          <div class="detail-header">
+            <span class="detail-icon" id="hex-info-icon">💎</span>
+            <div>
+              <h3 class="detail-title" id="hex-info-title">Núcleo de Dominio (Domain Core)</h3>
+              <p class="detail-tag" id="hex-info-tag">El corazón del negocio</p>
+            </div>
+          </div>
+          <div class="detail-body">
+            <p id="hex-info-desc" class="detail-desc">El Dominio contiene exclusivamente Entidades de Negocio, Objetos de Valor (Value Objects) y Reglas de Negocio Puras. Es completamente agnóstico a la tecnología: NO importa Spring, ni Angular, ni Hibernate, ni SQL.</p>
+            
+            <h4 class="box-title">🔑 Ejemplos Concretos de esta Capa:</h4>
+            <ul class="detail-list" id="hex-info-list">
+              <li>Entidad CuentaBancaria con método debitar()</li>
+              <li>Objeto de Valor Dinero(monto, moneda)</li>
+              <li>Regla: "No se puede transferir un monto negativo"</li>
+            </ul>
+
+            <div class="takeaway-banner mt-4">
+              💡 <b>Regla Sagrada:</b> Las capas externas conocen a las internas. El Dominio NUNCA conoce a la base de datos ni a la interfaz web.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN MODO QUIZ -->
+    <section id="section-quiz" class="view-section">
+      <div class="quiz-container">
+        <div class="quiz-card">
+          <div class="quiz-header">
+            <span class="quiz-badge" id="quiz-cat">POO</span>
+            <span class="quiz-score-badge">Puntuación: <span id="quiz-score">0</span> / <span id="quiz-total">0</span></span>
+          </div>
+          <h2 class="quiz-question-title" id="quiz-question-text">¿Cuál es la diferencia entre un objeto y una instancia?</h2>
+
+          <div class="quiz-options-grid" id="quiz-options-container">
+            <!-- Opciones renderizadas dinámicamente -->
+          </div>
+
+          <div class="quiz-feedback" id="quiz-feedback" style="display: none;">
+            <p id="quiz-feedback-text"></p>
+            <button class="btn-primary" onclick="nextQuizQuestion()">Siguiente Pregunta ➔</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PROGRESO LEITNER -->
+    <section id="section-leitner" class="view-section">
+      <div class="section-hero">
+        <h2 class="hero-title">📊 Sistema de Repaso Espaciado Leitner</h2>
+        <p class="hero-sub">Técnica científica de memorización: las tarjetas que dominas se repasan menos, y las difíciles se repiten con frecuencia.</p>
+      </div>
+
+      <div class="leitner-boxes-grid">
+        <div class="leitner-box box-1">
+          <div class="box-header">
+            <h3>🔴 Caja 1: Por Aprender / Difíciles</h3>
+            <span class="box-count" id="count-box-1">0</span>
+          </div>
+          <p class="box-desc">Conceptos que fallaste o marcaste como difíciles. Se repasan en cada sesión diaria.</p>
+          <div class="box-cards-list" id="list-box-1"></div>
+        </div>
+
+        <div class="leitner-box box-2">
+          <div class="box-header">
+            <h3>🟡 Caja 2: En Proceso / Dudosos</h3>
+            <span class="box-count" id="count-box-2">0</span>
+          </div>
+          <p class="box-desc">Conceptos que recuerdas parcialmente. Se repasan cada 2 o 3 días.</p>
+          <div class="box-cards-list" id="list-box-2"></div>
+        </div>
+
+        <div class="leitner-box box-3">
+          <div class="box-header">
+            <h3>🟢 Caja 3: Dominados / Memoria a Largo Plazo</h3>
+            <span class="box-count" id="count-box-3">0</span>
+          </div>
+          <p class="box-desc">Conceptos que dominas con seguridad. Se repasan semanalmente para consolidación.</p>
+          <div class="box-cards-list" id="list-box-3"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: CREAR TARJETA CON IA -->
+  <div class="modal-backdrop" id="modal-create" style="display: none;">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 class="modal-title">✨ Generar Flashcard Inteligente con IA</h3>
+        <button class="modal-close" onclick="closeCreateModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="form-label">¿Qué tema o concepto deseas aprender o recordar?</label>
+        <input type="text" id="ai-topic-input" class="form-input" placeholder="Ej: Recursividad, Árboles AVL, Inyección de Dependencias, Algoritmo Dijkstra...">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Categoría</label>
+            <select id="ai-category-select" class="form-input">
+              <option value="POO">POO</option>
+              <option value="Estructuras de Datos">Estructuras de Datos</option>
+              <option value="Arquitectura Hexagonal">Arquitectura Hexagonal</option>
+              <option value="Principios SOLID">Principios SOLID</option>
+              <option value="Patrones de Diseño">Patrones de Diseño</option>
+              <option value="Algoritmos y Big O">Algoritmos y Big O</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nivel de Dificultad</label>
+            <select id="ai-level-select" class="form-input">
+              <option value="Principiante">Principiante</option>
+              <option value="Intermedio" selected>Intermedio</option>
+              <option value="Avanzado">Avanzado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ai-status-note" id="ai-modal-note">
+          🤖 Conectado al motor de Inteligencia Artificial (Ollama Local / Asistente Semántico).
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-nav" onclick="closeCreateModal()">Cancelar</button>
+        <button class="btn-primary" id="btn-generate-ai" onclick="submitAIGeneration()">
+          <span>⚡</span> Generar Tarjeta
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
