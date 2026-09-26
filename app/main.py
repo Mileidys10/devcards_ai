@@ -153,7 +153,20 @@ def get_categories():
         "Java 8 Funcional": "λ"
     }
 
-    result = [{"name": "Todos", "count": len(cards), "icon": "🌐"}]
+    java_categories = {
+        "Java Core y JVM", "POO Avanzada en Java", "Colecciones y Generics",
+        "Hilos y Concurrencia", "Sockets Avanzados en Java", "Redes y Protocolos TCP/IP",
+        "Networking y Sockets", "Java RMI", "Acceso a Datos y JDBC",
+        "Java I/O y Compresión", "Java NIO y Alta Concurrencia", "Sistemas Distribuidos",
+        "CORBA y RMI-IIOP", "Persistencia y JPA", "Inversión de Control y Spring",
+        "Java 8 Funcional", "Reflexión e Introspección", "Entrada/Salida y Serialización"
+    }
+    java_count = sum(1 for c in cards if c.get("category") in java_categories or "java" in c.get("category", "").lower() or c.get("id", "").startswith(("java-", "net-", "rmi-", "corba-")))
+
+    result = [
+        {"name": "Todos", "count": len(cards), "icon": "🌐"},
+        {"name": "Java (Completo)", "count": java_count, "icon": "☕"}
+    ]
 
     preferred_order = [
         "Java Core y JVM",
@@ -197,14 +210,29 @@ def get_cards(
     """Devuelve la lista de tarjetas con filtros opcionales."""
     cards = load_all_cards()
     
-    if category and category.lower() != "todos":
-        cards = [c for c in cards if c.get("category", "").lower() == category.lower()]
+    cat_val = category if isinstance(category, str) else None
+    diff_val = difficulty if isinstance(difficulty, str) else None
+    search_val = search if isinstance(search, str) else None
+    
+    if cat_val and cat_val.lower() != "todos":
+        if cat_val.lower() in ["java (completo)", "java", "ecosistema java"]:
+            java_categories = {
+                "java core y jvm", "poo avanzada en java", "colecciones y generics",
+                "hilos y concurrencia", "sockets avanzados en java", "redes y protocolos tcp/ip",
+                "networking y sockets", "java rmi", "acceso a datos y jdbc",
+                "java i/o y compresión", "java nio y alta concurrencia", "sistemas distribuidos",
+                "corba y rmi-iiop", "persistencia y jpa", "inversión de control y spring",
+                "java 8 funcional", "reflexión e introspección", "entrada/salida y serialización"
+            }
+            cards = [c for c in cards if (c.get("category", "").lower() in java_categories) or ("java" in c.get("category", "").lower()) or c.get("id", "").startswith(("java-", "net-", "rmi-", "corba-"))]
+        else:
+            cards = [c for c in cards if c.get("category", "").lower() == cat_val.lower()]
 
-    if difficulty:
-        cards = [c for c in cards if c.get("difficulty", "").lower() == difficulty.lower()]
+    if diff_val:
+        cards = [c for c in cards if c.get("difficulty", "").lower() == diff_val.lower()]
 
-    if search:
-        s = search.lower().strip()
+    if search_val:
+        s = search_val.lower().strip()
         cards = [
             c for c in cards
             if s in c.get("title", "").lower()

@@ -160,7 +160,24 @@ function renderCategoryTabs() {
     "Java 8 Funcional": "λ"
   };
 
-  const categories = [{ name: "Todos", count: state.allCards.length, icon: "🌐" }];
+  const javaCategories = new Set([
+    "java core y jvm", "poo avanzada en java", "colecciones y generics",
+    "hilos y concurrencia", "sockets avanzados en java", "redes y protocolos tcp/ip",
+    "networking y sockets", "java rmi", "acceso a datos y jdbc",
+    "java i/o y compresión", "java nio y alta concurrencia", "sistemas distribuidos",
+    "corba y rmi-iiop", "persistencia y jpa", "inversión de control y spring",
+    "java 8 funcional", "reflexión e introspección", "entrada/salida y serialización"
+  ]);
+  const javaCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return javaCategories.has(cat) || cat.includes("java") || id.startsWith("java-") || id.startsWith("net-") || id.startsWith("rmi-") || id.startsWith("corba-");
+  }).length;
+
+  const categories = [
+    { name: "Todos", count: state.allCards.length, icon: "🌐" },
+    { name: "Java (Completo)", count: javaCount, icon: "☕" }
+  ];
   
   // Orden prioritario sugerido
   const order = [
@@ -231,7 +248,21 @@ function onSearchInput() {
 function applyFilters() {
   let list = [...state.allCards];
 
-  if (state.activeCategory !== "Todos") {
+  if (state.activeCategory === "Java (Completo)" || state.activeCategory === "Java") {
+    const javaCategories = new Set([
+      "java core y jvm", "poo avanzada en java", "colecciones y generics",
+      "hilos y concurrencia", "sockets avanzados en java", "redes y protocolos tcp/ip",
+      "networking y sockets", "java rmi", "acceso a datos y jdbc",
+      "java i/o y compresión", "java nio y alta concurrencia", "sistemas distribuidos",
+      "corba y rmi-iiop", "persistencia y jpa", "inversión de control y spring",
+      "java 8 funcional", "reflexión e introspección", "entrada/salida y serialización"
+    ]);
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return javaCategories.has(cat) || cat.includes("java") || id.startsWith("java-") || id.startsWith("net-") || id.startsWith("rmi-") || id.startsWith("corba-");
+    });
+  } else if (state.activeCategory !== "Todos") {
     list = list.filter(c => (c.category || "").toLowerCase() === state.activeCategory.toLowerCase());
   }
 
