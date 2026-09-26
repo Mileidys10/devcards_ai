@@ -131,15 +131,75 @@ function renderCategoryTabs() {
     counts[cat] = (counts[cat] || 0) + 1;
   });
 
-  const categories = [
-    { name: "Todos", count: state.allCards.length, icon: "🌐" },
-    { name: "POO", count: counts["POO"] || 0, icon: "📦" },
-    { name: "Estructuras de Datos", count: counts["Estructuras de Datos"] || 0, icon: "⛓️" },
-    { name: "Arquitectura Hexagonal", count: counts["Arquitectura Hexagonal"] || 0, icon: "⬡" },
-    { name: "Principios SOLID", count: counts["Principios SOLID"] || 0, icon: "🎯" },
-    { name: "Patrones de Diseño", count: counts["Patrones de Diseño"] || 0, icon: "♟️" },
-    { name: "Algoritmos y Big O", count: counts["Algoritmos y Big O"] || 0, icon: "📈" }
+    // Categorias dinamicas generadas a partir de las tarjetas reales
+  const categoryIcons = {
+    "Todos": "🌐",
+    "POO": "📦",
+    "Estructuras de Datos": "⛓️",
+    "Arquitectura Hexagonal": "⬡",
+    "Principios SOLID": "🎯",
+    "Patrones de Diseño": "♟️",
+    "Algoritmos y Big O": "📈",
+    "Java Core y JVM": "☕",
+    "POO Avanzada en Java": "💎",
+    "Colecciones y Generics": "📚",
+    "Hilos y Concurrencia": "⚡",
+    "Entrada/Salida y Serialización": "💾",
+    "Networking y Sockets": "🔌",
+    "Java RMI": "📡",
+    "Acceso a Datos y JDBC": "🗄️",
+    "Reflexión e Introspección": "🔍",
+    "Persistencia y JPA": "🏛️",
+    "Inversión de Control y Spring": "🌱",
+    "Java 8 Funcional": "λ"
+  };
+
+  const categories = [{ name: "Todos", count: state.allCards.length, icon: "🌐" }];
+  
+  // Orden prioritario sugerido
+  const order = [
+    "Java Core y JVM",
+    "POO Avanzada en Java",
+    "Colecciones y Generics",
+    "Hilos y Concurrencia",
+    "Networking y Sockets",
+    "Java RMI",
+    "Acceso a Datos y JDBC",
+    "Entrada/Salida y Serialización",
+    "Reflexión e Introspección",
+    "Persistencia y JPA",
+    "Inversión de Control y Spring",
+    "Java 8 Funcional",
+    "POO",
+    "Estructuras de Datos",
+    "Arquitectura Hexagonal",
+    "Principios SOLID",
+    "Patrones de Diseño",
+    "Algoritmos y Big O"
   ];
+
+  const added = new Set(["Todos"]);
+  order.forEach(cat => {
+    if (counts[cat]) {
+      categories.push({
+        name: cat,
+        count: counts[cat],
+        icon: categoryIcons[cat] || "🏷️"
+      });
+      added.add(cat);
+    }
+  });
+
+  // Cualquier otra categoria adicional
+  Object.keys(counts).sort().forEach(cat => {
+    if (!added.has(cat)) {
+      categories.push({
+        name: cat,
+        count: counts[cat],
+        icon: categoryIcons[cat] || "🏷️"
+      });
+    }
+  });
 
   container.innerHTML = categories.map(cat => `
     <button class="cat-tab ${state.activeCategory === cat.name ? 'active' : ''}" onclick="selectCategory('${cat.name}')">

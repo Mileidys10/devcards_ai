@@ -118,22 +118,68 @@ def get_system_status():
 
 @app.get("/api/categories")
 def get_categories():
-    """Devuelve el inventario de categorías con conteo de tarjetas."""
+    """Devuelve el inventario dinámico de todas las categorías con conteo de tarjetas."""
     cards = load_all_cards()
     counts = {}
     for c in cards:
         cat = c.get("category", "Otros")
         counts[cat] = counts.get(cat, 0) + 1
 
-    return [
-        {"name": "Todos", "count": len(cards), "icon": "🌐"},
-        {"name": "POO", "count": counts.get("POO", 0), "icon": "📦"},
-        {"name": "Estructuras de Datos", "count": counts.get("Estructuras de Datos", 0), "icon": "⛓️"},
-        {"name": "Arquitectura Hexagonal", "count": counts.get("Arquitectura Hexagonal", 0), "icon": "⬡"},
-        {"name": "Principios SOLID", "count": counts.get("Principios SOLID", 0), "icon": "🎯"},
-        {"name": "Patrones de Diseño", "count": counts.get("Patrones de Diseño", 0), "icon": "♟️"},
-        {"name": "Algoritmos y Big O", "count": counts.get("Algoritmos y Big O", 0), "icon": "📈"}
+    category_icons = {
+        "Todos": "🌐",
+        "POO": "📦",
+        "Estructuras de Datos": "⛓️",
+        "Arquitectura Hexagonal": "⬡",
+        "Principios SOLID": "🎯",
+        "Patrones de Diseño": "♟️",
+        "Algoritmos y Big O": "📈",
+        "Java Core y JVM": "☕",
+        "POO Avanzada en Java": "💎",
+        "Colecciones y Generics": "📚",
+        "Hilos y Concurrencia": "⚡",
+        "Entrada/Salida y Serialización": "💾",
+        "Networking y Sockets": "🔌",
+        "Java RMI": "📡",
+        "Acceso a Datos y JDBC": "🗄️",
+        "Reflexión e Introspección": "🔍",
+        "Persistencia y JPA": "🏛️",
+        "Inversión de Control y Spring": "🌱",
+        "Java 8 Funcional": "λ"
+    }
+
+    result = [{"name": "Todos", "count": len(cards), "icon": "🌐"}]
+
+    preferred_order = [
+        "Java Core y JVM",
+        "POO Avanzada en Java",
+        "Colecciones y Generics",
+        "Hilos y Concurrencia",
+        "Networking y Sockets",
+        "Java RMI",
+        "Acceso a Datos y JDBC",
+        "Entrada/Salida y Serialización",
+        "Reflexión e Introspección",
+        "Persistencia y JPA",
+        "Inversión de Control y Spring",
+        "Java 8 Funcional",
+        "POO",
+        "Estructuras de Datos",
+        "Arquitectura Hexagonal",
+        "Principios SOLID",
+        "Patrones de Diseño",
+        "Algoritmos y Big O"
     ]
+    added = {"Todos"}
+    for cat in preferred_order:
+        if cat in counts:
+            result.append({"name": cat, "count": counts[cat], "icon": category_icons.get(cat, "🏷️")})
+            added.add(cat)
+
+    for cat in sorted(counts.keys()):
+        if cat not in added:
+            result.append({"name": cat, "count": counts[cat], "icon": category_icons.get(cat, "🏷️")})
+
+    return result
 
 
 @app.get("/api/cards")
