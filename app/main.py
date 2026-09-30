@@ -160,7 +160,17 @@ def get_categories():
         "Reflexión e Introspección": "🔍",
         "Persistencia y JPA": "🏛️",
         "Inversión de Control y Spring": "🌱",
-        "Java 8 Funcional": "λ"
+                "Java 8 Funcional": "λ",
+        "Inglés (Completo)": "🇬🇧",
+        "Inglés: Grammar Refresher": "📖",
+        "Inglés: Departamentos y Gobierno": "🏛️",
+        "Inglés: Asistencia Social y Beneficios": "🍞",
+        "Inglés: Atención al Cliente y Facturación": "🎧",
+        "Inglés: Salud y Médico (L2/L3)": "🩺",
+        "Inglés: Seguros y Finanzas (L2/L3)": "🛡️",
+        "Inglés: Emergencias, 911 y Legal (L2/L3)": "🚨",
+        "Inglés: Educación y Academia": "🎓",
+        "Inglés: Falsos Amigos & Interpretación": "⚠️"
     }
 
     java_categories = {
@@ -173,8 +183,18 @@ def get_categories():
     }
     java_count = sum(1 for c in cards if c.get("category") in java_categories or "java" in c.get("category", "").lower() or c.get("id", "").startswith(("java-", "net-", "rmi-", "corba-")))
 
+    english_categories = {
+        "Inglés: Grammar Refresher", "Inglés: Departamentos y Gobierno",
+        "Inglés: Asistencia Social y Beneficios", "Inglés: Atención al Cliente y Facturación",
+        "Inglés: Salud y Médico (L2/L3)", "Inglés: Seguros y Finanzas (L2/L3)",
+        "Inglés: Emergencias, 911 y Legal (L2/L3)", "Inglés: Educación y Academia",
+        "Inglés: Falsos Amigos & Interpretación"
+    }
+    english_count = sum(1 for c in cards if c.get("category") in english_categories or c.get("is_english") or "inglés" in c.get("category", "").lower() or c.get("id", "").startswith("eng-"))
+
     result = [
         {"name": "Todos", "count": len(cards), "icon": "🌐"},
+        {"name": "Inglés (Completo)", "count": english_count, "icon": "🇬🇧"},
         {"name": "Java (Completo)", "count": java_count, "icon": "☕"},
         {"name": "Inteligencia Artificial", "count": counts.get("Inteligencia Artificial", 0), "icon": "🤖"},
         {"name": "Python y Backend", "count": counts.get("Python y Backend", 0), "icon": "🐍"},
@@ -208,7 +228,7 @@ def get_categories():
         "Algoritmos y Big O"
     ]
     added = {
-        "Todos", "Java (Completo)", "Inteligencia Artificial", "Python y Backend",
+        "Todos", "Inglés (Completo)", "Java (Completo)", "Inteligencia Artificial", "Python y Backend",
         "Bases de Datos y SQL", "Angular", "TypeScript", "HTML y Web",
         "DevOps y Cloud", "Seguridad y OWASP", "Git y Control de Versiones"
     }
@@ -239,7 +259,9 @@ def get_cards(
     
     if cat_val and cat_val.lower() != "todos":
         c_lower = cat_val.lower()
-        if c_lower in ["java (completo)", "java", "ecosistema java"]:
+        if c_lower in ["inglés (completo)", "ingles (completo)", "inglés", "ingles", "english", "todo en inglés", "todos en inglés"]:
+            cards = [c for c in cards if c.get("is_english") or "inglés" in c.get("category", "").lower() or c.get("id", "").startswith("eng-")]
+        elif c_lower in ["java (completo)", "java", "ecosistema java"]:
             java_categories = {
                 "java core y jvm", "poo avanzada en java", "colecciones y generics",
                 "hilos y concurrencia", "sockets avanzados en java", "redes y protocolos tcp/ip",

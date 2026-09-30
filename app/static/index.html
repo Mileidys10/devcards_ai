@@ -64,7 +64,20 @@
       <div class="toolbar-panel">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="search-input" placeholder="Buscar concepto (ej: Objeto, Nodo, Hexagonal, SOLID, Big O)..." oninput="onSearchInput()">
+          <input type="text" id="search-input" placeholder="Buscar concepto o término en inglés o programación (ej: SNAP, Warranty, Objeto, Hexagonal)..." oninput="onSearchInput()">
+        </div>
+
+                <!-- Selector de Eje de Conocimiento -->
+        <div class="domain-selector-bar" id="domain-selector-bar">
+          <button class="domain-pill active" id="pill-domain-all" onclick="selectDomain('all')">
+            <span class="domain-icon">🌐</span> Todo el Conocimiento <span class="domain-count" id="count-domain-all">(0)</span>
+          </button>
+          <button class="domain-pill" id="pill-domain-dev" onclick="selectDomain('dev')">
+            <span class="domain-icon">💻</span> Programación & Software <span class="domain-count" id="count-domain-dev">(0)</span>
+          </button>
+          <button class="domain-pill domain-pill-english" id="pill-domain-eng" onclick="selectDomain('eng')">
+            <span class="domain-icon">🇬🇧</span> Inglés Profesional & Interpretación <span class="domain-count" id="count-domain-eng">(0)</span>
+          </button>
         </div>
 
         <div class="category-tabs" id="category-tabs-container">
@@ -130,20 +143,20 @@
               <div class="card-back-body">
                 <!-- Definición Técnica -->
                 <div class="definition-box">
-                  <h4 class="box-title">📖 Definición Técnica</h4>
+                  <h4 class="box-title" id="card-back-def-title">📖 Definición Técnica</h4>
                   <p id="card-back-definition">Texto de la definición...</p>
                 </div>
 
                 <!-- Analogía de la Vida Real -->
                 <div class="analogy-box">
-                  <h4 class="box-title">🌟 Analogía de la Vida Real (Para Nunca Olvidarlo)</h4>
+                  <h4 class="box-title" id="card-back-analogy-title">🌟 Analogía de la Vida Real (Para Nunca Olvidarlo)</h4>
                   <p id="card-back-analogy">Texto de la analogía...</p>
                 </div>
 
                 <!-- Código Canónico -->
                 <div class="code-box" id="code-box-container">
                   <div class="code-header">
-                    <span>💻 Código Canónico Demostrativo</span>
+                    <span id="code-box-header-title">💻 Código Canónico Demostrativo</span>
                     <button class="btn-copy" onclick="event.stopPropagation(); copyCodeSnippet();">Copiar</button>
                   </div>
                   <pre><code id="card-back-code"># Código de ejemplo</code></pre>
@@ -151,7 +164,7 @@
 
                 <!-- Regla de Oro -->
                 <div class="takeaway-banner" id="card-back-takeaway">
-                  💡 <b>Regla de Oro:</b> <span id="takeaway-text">...</span>
+                  <span id="takeaway-label">💡 <b>Regla de Oro:</b></span> <span id="takeaway-text">...</span>
                 </div>
               </div>
 
@@ -339,7 +352,16 @@
           <div class="form-group">
             <label class="form-label">Categoría</label>
             <select id="ai-category-select" class="form-input">
-              <option value="Inteligencia Artificial">Inteligencia Artificial (IA)</option>
+                            <option value="Inteligencia Artificial">Inteligencia Artificial (IA)</option>
+              <option value="Inglés: Grammar Refresher">🇬🇧 Inglés: Grammar Refresher</option>
+              <option value="Inglés: Departamentos y Gobierno">🇬🇧 Inglés: Departamentos y Gobierno</option>
+              <option value="Inglés: Asistencia Social y Beneficios">🇬🇧 Inglés: Asistencia Social y Beneficios</option>
+              <option value="Inglés: Atención al Cliente y Facturación">🇬🇧 Inglés: Atención al Cliente y Facturación</option>
+              <option value="Inglés: Salud y Médico (L2/L3)">🇬🇧 Inglés: Salud y Médico (L2/L3)</option>
+              <option value="Inglés: Seguros y Finanzas (L2/L3)">🇬🇧 Inglés: Seguros y Finanzas (L2/L3)</option>
+              <option value="Inglés: Emergencias, 911 y Legal (L2/L3)">🇬🇧 Inglés: Emergencias, 911 y Legal</option>
+              <option value="Inglés: Educación y Academia">🇬🇧 Inglés: Educación y Academia</option>
+              <option value="Inglés: Falsos Amigos & Interpretación">🇬🇧 Inglés: Falsos Amigos & Interpretación</option>
               <option value="Python y Backend">Python y Backend Moderno</option>
               <option value="Bases de Datos y SQL">Bases de Datos y SQL (PostgreSQL/NoSQL)</option>
               <option value="Angular">Angular (Framework Web)</option>

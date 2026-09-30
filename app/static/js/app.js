@@ -9,6 +9,8 @@ const state = {
   currentIndex: 0,
   isFlipped: false,
   activeCategory: "Todos",
+  activeDomain: "all", // "all", "dev", "eng"
+  quizFilter: "all",   // "all", "dev", "eng"
   searchQuery: "",
   appMode: "cards", // 'cards', 'hexagonal', 'quiz', 'leitner'
   ratings: {},      // { [cardId]: 1 | 2 | 3 } (Cajas Leitner)
@@ -121,9 +123,54 @@ async function fetchCards() {
 // FILTROS Y CATEGORÍAS
 // ==============================================================================
 
+
+// ==============================================================================
+// GESTIÓN DE DOMINIO: PROGRAMACIÓN VS. INGLÉS PROFESIONAL
+// ==============================================================================
+
+function selectDomain(domain) {
+  state.activeDomain = domain;
+  document.querySelectorAll(".domain-pill").forEach(p => p.classList.remove("active"));
+  const activeBtn = document.getElementById(`pill-domain-${domain}`);
+  if (activeBtn) activeBtn.classList.add("active");
+
+  if (domain === "eng") {
+    state.activeCategory = "Inglés (Completo)";
+  } else if (domain === "dev") {
+    state.activeCategory = "Todos";
+  } else {
+    state.activeCategory = "Todos";
+  }
+
+  state.currentIndex = 0;
+  applyFilters();
+  renderCategoryTabs();
+}
+
+function setQuizFilter(filter) {
+  state.quizFilter = filter;
+  document.querySelectorAll(".quiz-domain-btn").forEach(btn => btn.classList.remove("active"));
+  const b = document.getElementById(`quiz-filter-${filter}`);
+  if (b) b.classList.add("active");
+  startQuiz();
+}
+
 function renderCategoryTabs() {
   const container = document.getElementById("category-tabs-container");
   if (!container) return;
+
+  // Actualizar contadores del selector de dominios
+  const allCount = state.allCards.length;
+  const engCards = state.allCards.filter(c => c.is_english || (c.category || "").toLowerCase().includes("inglés") || (c.id || "").startsWith("eng-"));
+  const engCount = engCards.length;
+  const devCount = allCount - engCount;
+
+  const cAll = document.getElementById("count-domain-all");
+  if (cAll) cAll.textContent = `(${allCount.toLocaleString()})`;
+  const cDev = document.getElementById("count-domain-dev");
+  if (cDev) cDev.textContent = `(${devCount.toLocaleString()})`;
+  const cEng = document.getElementById("count-domain-eng");
+  if (cEng) cEng.textContent = `(${engCount.toLocaleString()})`;
 
   const counts = {};
   state.allCards.forEach(c => {
@@ -131,9 +178,9 @@ function renderCategoryTabs() {
     counts[cat] = (counts[cat] || 0) + 1;
   });
 
-    // Categorias dinamicas generadas a partir de las tarjetas reales
   const categoryIcons = {
     "Todos": "🌐",
+    "Inglés (Completo)": "🇬🇧",
     "Java (Completo)": "☕",
     "Inteligencia Artificial": "🤖",
     "Python y Backend": "🐍",
@@ -150,24 +197,15 @@ function renderCategoryTabs() {
     "Principios SOLID": "🎯",
     "Patrones de Diseño": "♟️",
     "Algoritmos y Big O": "📈",
-    "Redes y Protocolos TCP/IP": "🌐",
-    "Sockets Avanzados en Java": "🔌",
-    "Java NIO y Alta Concurrencia": "⚡",
-    "Sistemas Distribuidos": "🌍",
-    "CORBA y RMI-IIOP": "🏛️",
-    "Java I/O y Compresión": "💾",
-    "Java Core y JVM": "☕",
-    "POO Avanzada en Java": "💎",
-    "Colecciones y Generics": "📚",
-    "Hilos y Concurrencia": "⚡",
-    "Entrada/Salida y Serialización": "💾",
-    "Networking y Sockets": "🔌",
-    "Java RMI": "📡",
-    "Acceso a Datos y JDBC": "🗄️",
-    "Reflexión e Introspección": "🔍",
-    "Persistencia y JPA": "🏛️",
-    "Inversión de Control y Spring": "🌱",
-    "Java 8 Funcional": "λ"
+    "Inglés: Grammar Refresher": "📖",
+    "Inglés: Departamentos y Gobierno": "🏛️",
+    "Inglés: Asistencia Social y Beneficios": "🍞",
+    "Inglés: Atención al Cliente y Facturación": "🎧",
+    "Inglés: Salud y Médico (L2/L3)": "🩺",
+    "Inglés: Seguros y Finanzas (L2/L3)": "🛡️",
+    "Inglés: Emergencias, 911 y Legal (L2/L3)": "🚨",
+    "Inglés: Educación y Academia": "🎓",
+    "Inglés: Falsos Amigos & Interpretación": "⚠️"
   };
 
   const javaCategories = new Set([
@@ -184,122 +222,72 @@ function renderCategoryTabs() {
     return javaCategories.has(cat) || cat.includes("java") || id.startsWith("java-") || id.startsWith("net-") || id.startsWith("rmi-") || id.startsWith("corba-");
   }).length;
 
-  const iaCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "inteligencia artificial" || cat.includes("ia") || id.startsWith("ia-");
-  }).length;
+  let categories = [];
 
-  const ngCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "angular" || id.startsWith("ng-");
-  }).length;
+  if (state.activeDomain === "eng") {
+    // Modo Específico de Inglés Profesional
+    categories = [
+      { name: "Inglés (Completo)", count: engCount, icon: "🇬🇧", isMateria: true },
+      { name: "Inglés: Grammar Refresher", count: counts["Inglés: Grammar Refresher"] || 0, icon: "📖", isMateria: true },
+      { name: "Inglés: Departamentos y Gobierno", count: counts["Inglés: Departamentos y Gobierno"] || 0, icon: "🏛️", isMateria: true },
+      { name: "Inglés: Asistencia Social y Beneficios", count: counts["Inglés: Asistencia Social y Beneficios"] || 0, icon: "🍞", isMateria: true },
+      { name: "Inglés: Atención al Cliente y Facturación", count: counts["Inglés: Atención al Cliente y Facturación"] || 0, icon: "🎧", isMateria: true },
+      { name: "Inglés: Salud y Médico (L2/L3)", count: counts["Inglés: Salud y Médico (L2/L3)"] || 0, icon: "🩺", isMateria: true },
+      { name: "Inglés: Seguros y Finanzas (L2/L3)", count: counts["Inglés: Seguros y Finanzas (L2/L3)"] || 0, icon: "🛡️", isMateria: true },
+      { name: "Inglés: Emergencias, 911 y Legal (L2/L3)", count: counts["Inglés: Emergencias, 911 y Legal (L2/L3)"] || 0, icon: "🚨", isMateria: true },
+      { name: "Inglés: Educación y Academia", count: counts["Inglés: Educación y Academia"] || 0, icon: "🎓", isMateria: true },
+      { name: "Inglés: Falsos Amigos & Interpretación", count: counts["Inglés: Falsos Amigos & Interpretación"] || 0, icon: "⚠️", isMateria: true }
+    ];
+  } else if (state.activeDomain === "dev") {
+    // Modo Específico de Programación
+    categories = [
+      { name: "Todos", count: devCount, icon: "🌐", isMateria: true },
+      { name: "Java (Completo)", count: javaCount, icon: "☕", isMateria: true },
+      { name: "Inteligencia Artificial", count: counts["Inteligencia Artificial"] || 0, icon: "🤖", isMateria: true },
+      { name: "Python y Backend", count: counts["Python y Backend"] || 0, icon: "🐍", isMateria: true },
+      { name: "Bases de Datos y SQL", count: counts["Bases de Datos y SQL"] || 0, icon: "🗄️", isMateria: true },
+      { name: "Angular", count: counts["Angular"] || 0, icon: "🅰️", isMateria: true },
+      { name: "TypeScript", count: counts["TypeScript"] || 0, icon: "🔷", isMateria: true },
+      { name: "HTML y Web", count: counts["HTML y Web"] || 0, icon: "🌐", isMateria: true },
+      { name: "DevOps y Cloud", count: counts["DevOps y Cloud"] || 0, icon: "🐳", isMateria: true },
+      { name: "Seguridad y OWASP", count: counts["Seguridad y OWASP"] || 0, icon: "🛡️", isMateria: true },
+      { name: "Git y Control de Versiones", count: counts["Git y Control de Versiones"] || 0, icon: "🌿", isMateria: true },
+      { name: "POO", count: counts["POO"] || 0, icon: "📦" },
+      { name: "Estructuras de Datos", count: counts["Estructuras de Datos"] || 0, icon: "⛓️" },
+      { name: "Arquitectura Hexagonal", count: counts["Arquitectura Hexagonal"] || 0, icon: "⬡" },
+      { name: "Principios SOLID", count: counts["Principios SOLID"] || 0, icon: "🎯" },
+      { name: "Patrones de Diseño", count: counts["Patrones de Diseño"] || 0, icon: "♟️" },
+      { name: "Algoritmos y Big O", count: counts["Algoritmos y Big O"] || 0, icon: "📈" }
+    ];
+  } else {
+    // Modo Global (Todos)
+    categories = [
+      { name: "Todos", count: allCount, icon: "🌐", isMateria: true },
+      { name: "Inglés (Completo)", count: engCount, icon: "🇬🇧", isMateria: true },
+      { name: "Java (Completo)", count: javaCount, icon: "☕", isMateria: true },
+      { name: "Inteligencia Artificial", count: counts["Inteligencia Artificial"] || 0, icon: "🤖", isMateria: true },
+      { name: "Python y Backend", count: counts["Python y Backend"] || 0, icon: "🐍", isMateria: true },
+      { name: "Bases de Datos y SQL", count: counts["Bases de Datos y SQL"] || 0, icon: "🗄️", isMateria: true },
+      { name: "Angular", count: counts["Angular"] || 0, icon: "🅰️", isMateria: true },
+      { name: "TypeScript", count: counts["TypeScript"] || 0, icon: "🔷", isMateria: true },
+      { name: "HTML y Web", count: counts["HTML y Web"] || 0, icon: "🌐", isMateria: true },
+      { name: "DevOps y Cloud", count: counts["DevOps y Cloud"] || 0, icon: "🐳", isMateria: true },
+      { name: "Seguridad y OWASP", count: counts["Seguridad y OWASP"] || 0, icon: "🛡️", isMateria: true },
+      { name: "Git y Control de Versiones", count: counts["Git y Control de Versiones"] || 0, icon: "🌿", isMateria: true }
+    ];
 
-  const tsCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "typescript" || id.startsWith("ts-");
-  }).length;
-
-  const htmlCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "html y web" || cat === "html" || id.startsWith("html-");
-  }).length;
-
-  const pyCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "python y backend" || cat.includes("python") || id.startsWith("py-");
-  }).length;
-
-  const dbCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "bases de datos y sql" || cat.includes("sql") || id.startsWith("db-");
-  }).length;
-
-  const opsCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "devops y cloud" || cat.includes("devops") || id.startsWith("ops-");
-  }).length;
-
-  const secCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "seguridad y owasp" || cat.includes("seguridad") || id.startsWith("sec-");
-  }).length;
-
-  const gitCount = state.allCards.filter(c => {
-    const cat = (c.category || "").toLowerCase();
-    const id = (c.id || "").toLowerCase();
-    return cat === "git y control de versiones" || cat.includes("git") || id.startsWith("git-");
-  }).length;
-
-  const categories = [
-    { name: "Todos", count: state.allCards.length, icon: "🌐", isMateria: true },
-    { name: "Java (Completo)", count: javaCount, icon: "☕", isMateria: true },
-    { name: "Inteligencia Artificial", count: iaCount, icon: "🤖", isMateria: true },
-    { name: "Python y Backend", count: pyCount, icon: "🐍", isMateria: true },
-    { name: "Bases de Datos y SQL", count: dbCount, icon: "🗄️", isMateria: true },
-    { name: "Angular", count: ngCount, icon: "🅰️", isMateria: true },
-    { name: "TypeScript", count: tsCount, icon: "🔷", isMateria: true },
-    { name: "HTML y Web", count: htmlCount, icon: "🌐", isMateria: true },
-    { name: "DevOps y Cloud", count: opsCount, icon: "🐳", isMateria: true },
-    { name: "Seguridad y OWASP", count: secCount, icon: "🛡️", isMateria: true },
-    { name: "Git y Control de Versiones", count: gitCount, icon: "🌿", isMateria: true }
-  ];
-  
-  // Orden prioritario sugerido
-  const order = [
-    "Java Core y JVM",
-    "POO Avanzada en Java",
-    "Colecciones y Generics",
-    "Hilos y Concurrencia",
-    "Networking y Sockets",
-    "Java RMI",
-    "Acceso a Datos y JDBC",
-    "Entrada/Salida y Serialización",
-    "Reflexión e Introspección",
-    "Persistencia y JPA",
-    "Inversión de Control y Spring",
-    "Java 8 Funcional",
-    "POO",
-    "Estructuras de Datos",
-    "Arquitectura Hexagonal",
-    "Principios SOLID",
-    "Patrones de Diseño",
-    "Algoritmos y Big O"
-  ];
-
-  const added = new Set([
-    "Todos", "Java (Completo)", "Inteligencia Artificial", "Python y Backend",
-    "Bases de Datos y SQL", "Angular", "TypeScript", "HTML y Web",
-    "DevOps y Cloud", "Seguridad y OWASP", "Git y Control de Versiones"
-  ]);
-  order.forEach(cat => {
-    if (counts[cat]) {
-      categories.push({
-        name: cat,
-        count: counts[cat],
-        icon: categoryIcons[cat] || "🏷️"
-      });
-      added.add(cat);
-    }
-  });
-
-  // Cualquier otra categoria adicional
-  Object.keys(counts).sort().forEach(cat => {
-    if (!added.has(cat)) {
-      categories.push({
-        name: cat,
-        count: counts[cat],
-        icon: categoryIcons[cat] || "🏷️"
-      });
-    }
-  });
+    // Agregar otras categorías con tarjetas
+    const existingNames = new Set(categories.map(c => c.name));
+    Object.keys(counts).sort().forEach(cat => {
+      if (!existingNames.has(cat)) {
+        categories.push({
+          name: cat,
+          count: counts[cat],
+          icon: categoryIcons[cat] || "🏷️"
+        });
+      }
+    });
+  }
 
   container.innerHTML = categories.map(cat => `
     <button class="cat-tab ${cat.isMateria ? 'cat-tab-materia' : ''} ${state.activeCategory === cat.name ? 'active' : ''}" onclick="selectCategory('${cat.name}')">
@@ -324,7 +312,19 @@ function onSearchInput() {
 
 function applyFilters() {
   let list = [...state.allCards];
+
+  // Filtro de Dominio de Alto Nivel
+  if (state.activeDomain === "dev") {
+    list = list.filter(c => !c.is_english && !(c.category || "").toLowerCase().includes("inglés") && !(c.id || "").startsWith("eng-"));
+  } else if (state.activeDomain === "eng") {
+    list = list.filter(c => c.is_english || (c.category || "").toLowerCase().includes("inglés") || (c.id || "").startsWith("eng-"));
+  }
+
   const catActive = (state.activeCategory || "").toLowerCase();
+
+  if (catActive === "inglés (completo)" || catActive === "ingles (completo)" || catActive === "inglés" || catActive === "ingles" || catActive === "english") {
+    list = list.filter(c => c.is_english || (c.category || "").toLowerCase().includes("inglés") || (c.id || "").startsWith("eng-"));
+  } else
 
   if (catActive === "java (completo)" || catActive === "java") {
     const javaCategories = new Set([
@@ -443,20 +443,56 @@ function renderCurrentCard() {
   state.isFlipped = false;
   cardElem.classList.remove("flipped");
 
+  const isEnglishCard = Boolean(c.is_english || (c.category || "").toLowerCase().includes("inglés") || (c.id || "").startsWith("eng-"));
+
   // Actualizar Anverso
-  document.getElementById("card-front-cat").textContent = c.category || "General";
+  const frontCat = document.getElementById("card-front-cat");
+  if (frontCat) {
+    frontCat.textContent = c.category || "General";
+    frontCat.classList.toggle("badge-english", isEnglishCard);
+  }
   document.getElementById("card-front-diff").textContent = c.difficulty || "Intermedio";
-  document.getElementById("card-front-icon").textContent = c.icon || "💡";
+  document.getElementById("card-front-icon").textContent = c.icon || (isEnglishCard ? "🗣️" : "💡");
   document.getElementById("card-front-title").textContent = c.title;
   document.getElementById("card-front-question").textContent = c.question;
 
   // Actualizar Reverso
-  document.getElementById("card-back-cat").textContent = c.category || "General";
-  document.getElementById("card-back-title").textContent = c.title;
+  const backCat = document.getElementById("card-back-cat");
+  if (backCat) {
+    backCat.textContent = c.category || "General";
+    backCat.classList.toggle("badge-english", isEnglishCard);
+  }
+
+  // Título dinámico según dominio
+  const backTitle = document.getElementById("card-back-title");
+  if (backTitle) {
+    backTitle.textContent = isEnglishCard ? "Significado, Traducción & Guión de Uso" : "Definición & Comprensión";
+  }
+
+  const defTitle = document.getElementById("card-back-def-title");
+  if (defTitle) {
+    defTitle.innerHTML = isEnglishCard ? "📖 Significado & Equivalente en Español" : "📖 Definición Técnica";
+  }
+
+  const analogyTitle = document.getElementById("card-back-analogy-title");
+  if (analogyTitle) {
+    analogyTitle.innerHTML = isEnglishCard ? "🌟 Contexto de Interpretación & Registro Profesional" : "🌟 Analogía de la Vida Real (Para Nunca Olvidarlo)";
+  }
+
+  const codeBoxTitle = document.getElementById("code-box-header-title");
+  if (codeBoxTitle) {
+    codeBoxTitle.innerHTML = isEnglishCard ? "🗣️ Diálogo en Contexto Real / Guión de Interpretación" : "💻 Código Canónico Demostrativo";
+  }
+
+  const takeawayLabel = document.getElementById("takeaway-label");
+  if (takeawayLabel) {
+    takeawayLabel.innerHTML = isEnglishCard ? "💡 <b>Tip de Interpretación:</b>" : "💡 <b>Regla de Oro:</b>";
+  }
+
   document.getElementById("card-back-definition").textContent = c.definition;
   document.getElementById("card-back-analogy").textContent = c.analogy;
-  document.getElementById("card-back-code").textContent = c.code_example || "# Sin código necesario";
-  document.getElementById("takeaway-text").textContent = c.key_takeaway || "Practica este concepto con frecuencia.";
+  document.getElementById("card-back-code").textContent = c.code_example || (isEnglishCard ? "# Guión en preparación" : "# Sin código necesario");
+  document.getElementById("takeaway-text").textContent = c.key_takeaway || (isEnglishCard ? "Mantén la precisión terminológica en interpretación." : "Practica este concepto con frecuencia.");
 
   // Actualizar barra de progreso
   const total = state.filteredCards.length;
@@ -659,7 +695,15 @@ function selectHexLayer(layerId) {
 // ==============================================================================
 
 function startQuiz() {
-  state.quiz.cards = state.allCards.filter(c => c.quiz_question && c.quiz_options && c.quiz_options.length > 0);
+  let pool = state.allCards.filter(c => c.quiz_question && c.quiz_options && c.quiz_options.length > 0);
+
+  if (state.quizFilter === "dev") {
+    pool = pool.filter(c => !c.is_english && !(c.category || "").toLowerCase().includes("inglés") && !(c.id || "").startsWith("eng-"));
+  } else if (state.quizFilter === "eng") {
+    pool = pool.filter(c => c.is_english || (c.category || "").toLowerCase().includes("inglés") || (c.id || "").startsWith("eng-"));
+  }
+
+  state.quiz.cards = pool;
   state.quiz.currentIndex = 0;
   state.quiz.score = 0;
   state.quiz.answered = false;

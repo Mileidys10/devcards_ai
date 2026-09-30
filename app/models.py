@@ -21,6 +21,7 @@ class Flashcard(BaseModel):
     key_takeaway: Optional[str] = None
     box: int = 1  # Caja Leitner (1: Difícil, 2: Dudoso, 3: Dominado)
     user_created: bool = False
+    is_english: Optional[bool] = False
 
 
 class CardCreateRequest(BaseModel):
