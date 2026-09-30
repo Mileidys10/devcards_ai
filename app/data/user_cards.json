@@ -205,5 +205,43 @@
     "quiz_answer": 0,
     "key_takeaway": "Dominar Microservicios Vs Monolito fortalece el pensamiento computacional y la arquitectura limpia.",
     "user_created": true
+  },
+  {
+    "title": "Clean Architecture de Robert C. Martin",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Avanzado",
+    "icon": "💡",
+    "question": "¿Cuál es la Regla de Dependencia en Clean Architecture?",
+    "definition": "Las dependencias de código fuente solo pueden apuntar hacia adentro, hacia las políticas de nivel superior.",
+    "analogy": "Una cebolla: puedes quitar las capas exteriores sin dañar el centro.",
+    "code_example": "# Dependencia hacia adentro\nfrom domain.entities import User",
+    "quiz_question": null,
+    "quiz_options": null,
+    "quiz_answer": null,
+    "key_takeaway": "El código externo depende del interno; el centro nunca conoce el exterior.",
+    "id": "usr-d53575",
+    "user_created": true,
+    "box": 1
+  },
+  {
+    "id": "ai-4039c5",
+    "title": "Microservicios Vs Monolito",
+    "category": "Arquitectura Hexagonal",
+    "difficulty": "Intermedio",
+    "icon": "🧠",
+    "question": "¿Cómo opera y para qué sirve 'Microservicios Vs Monolito' en ingeniería de software?",
+    "definition": "'Microservicios Vs Monolito' es un concepto clave en el desarrollo de software que permite organizar la lógica, estructurar la información y optimizar el mantenimiento y escalabilidad de los programas informáticos.",
+    "analogy": "Imagina 'Microservicios Vs Monolito' como una herramienta especializada en un taller mecánico: en vez de forzar una tuerca con la mano, utilizas la llave exacta diseñada para esa función específica sin dañar las demás piezas.",
+    "code_example": "# Demostración canónica de Microservicios Vs Monolito\ndef ejemplo_microservicios_vs_monolito():\n    '''Aplica el concepto de Microservicios vs Monolito'''\n    resultado = 'Implementación exitosa'\n    return resultado",
+    "quiz_question": "¿Cuál es el beneficio primordial de comprender 'Microservicios Vs Monolito'?",
+    "quiz_options": [
+      "Escribir código más mantenible, desacoplado y comprensible",
+      "Evitar el uso de computadoras",
+      "Reemplazar la memoria RAM por almacenamiento USB",
+      "Hacer que el compilador ignore los errores de sintaxis"
+    ],
+    "quiz_answer": 0,
+    "key_takeaway": "Dominar Microservicios Vs Monolito fortalece el pensamiento computacional y la arquitectura limpia.",
+    "user_created": true
   }
 ]

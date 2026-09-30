@@ -1,249 +1,32 @@
-# 🧠 DevCards AI &mdash; Plataforma de Repaso Conceptual y Arquitectura con IA
+# DevCards AI &mdash; Plataforma de Repaso Nemotécnico & Arquitectura Hexagonal
 
-> **Proyecto Oficial de la Fábrica de Software Agéntica OKF v0.2**  
-> Identificador OKF: `urn:factory:project:devcards_ai`  
-> Roles: `FullStackEngineer`, `AIIntegrationSpecialist`, `SoftwareFactoryArchitect`
-
----
-
-## 🌟 ¿Qué es DevCards AI?
-
-**DevCards AI** es una plataforma web interactiva de alto rendimiento visual diseñada para desarrolladores que desean dominar, recordar y clarificar conceptos fundamentales de programación y arquitectura de software que frecuentemente se olvidan o malinterpretan.
-
-Utiliza el método científico de **Repetición Espaciada de Leitner**, explicaciones basadas en **analogías cotidianas**, visualizaciones arquitectónicas interactivas y asistencia de **IA local con Ollama** (o generador sintético experto fuera de línea).
+> **1,295 Flashcards Interactivas** para dominar Arquitectura Hexagonal, POO, Estructuras de Datos, Principios SOLID, Big O e Inglés Profesional.
+> Gobernado bajo el Estándar de Fábrica de Software **Google Cloud OKF v0.2**.
 
 ---
 
-## 🎯 Conceptos Clave Cubiertos (284+ Tarjetas Pedagógicas en 10 Materias)
+## Acceso Rápido: 3 Formas de Usar y Compartir
 
-La plataforma cuenta con un mazo enciclopédico y categorizado de **más de 284 tarjetas pedagógicas** organizadas en 10 materias de vanguardia con filtros reactivos dedicados:
+Para instrucciones detalladas paso a paso, consulta [COMO_COMPARTIR.md](COMO_COMPARTIR.md).
 
-1. **🤖 Inteligencia Artificial (IA)**:
-   - *LLMs y Parámetros*: Matrices de pesos, arquitectura Transformer, pre-entrenamiento vs inferencia.
-   - *Vector Embeddings & Espacio Semántico*: Similitud coseno, búsqueda vectorial, modelos de embedding.
-   - *RAG (Retrieval-Augmented Generation)*: Conexión con bases de conocimiento privadas, grounding y fuentes.
-   - *Bases Vectoriales & HNSW*: Grafos jerárquicos de proximidad y búsqueda aproximada O(log N).
-   - *Self-Attention & Transformers*: Matrices Query (Q), Key (K), Value (V), procesamiento paralelo.
-   - *Agentes Autónomos & Patrón ReAct*: Thought, Action, Observation, invocación iterativa de herramientas.
-   - *Fine-Tuning con LoRA*: Adaptación de bajo rango con matrices delta B*A y reducción drástica de VRAM.
-   - *Protocolo MCP (Model Context Protocol)*: Estandarización de Tools, Resources y Prompts para LLMs.
-   - *Prompt Engineering*: Zero-Shot, Few-Shot demostrativo y Chain-of-Thought (pensar paso a paso).
-   - *Tokenización, BPE y Ventana de Contexto*: Fragmentos atómicos, tarificación y memoria de atención.
-   - *Hiperparámetros de Muestreo*: Temperatura (determinismo vs creatividad) y Top-P (Nucleus Sampling).
-   - *Function Calling & Tool Use*: Esquemas JSON Schema, estructuración y delegación de ejecución al backend.
-   - *Alucinaciones & Grounding*: Causas probabilísticas, mitigación y verificación con fuentes.
-   - *Alineación con RLHF y DPO*: Modelos de recompensa, utilidad, honestidad y seguridad inofensiva.
-   - *Redes Neuronales & Backpropagation*: Forward pass, cálculo de pérdida y regla de la cadena.
-   - *Modelos Multimodales Nativos*: Espacio latente unificado para texto, visión, audio y video.
+### 1. En Línea sin Instalar Nada (GitHub Pages)
+Puedes probar la versión web en vivo sin descargar nada ni instalar Python:
+👉 **`https://TU_USUARIO.github.io/devcards_ai/`** *(Ver activación en [COMO_COMPARTIR.md](COMO_COMPARTIR.md))*.
 
-2. **🅰️ Angular (Framework Web Moderno)**:
-   - *Signals*: Reactividad atómica granular con `signal()`, `computed()` perezoso y `effect()`.
-   - *Standalone Components*: Arquitectura autosuficiente sin NgModules con imports directos.
-   - *Nuevo Control Flow*: Bloques declarativos `@if`, `@else`, `@switch` y `@for` con `track` obligatorio.
-   - *Inyección de Dependencias Moderna*: Función `inject()` en contexto de inicialización sin super().
-   - *Estrategias de Change Detection*: `OnPush` reactivo y el nuevo modo experimental `Zoneless`.
-   - *Angular Router*: Lazy loading por componente (`loadComponent`) y Functional Guards declarativos.
-   - *RxJS & Gestión de Ciclo de Vida*: Operadores reactivos, Subjects y prevención de memory leaks con `takeUntilDestroyed()`.
-   - *HttpClient & Functional Interceptors*: Intercepción centralizada de tokens JWT y errores con `HttpInterceptorFn`.
-   - *Directivas & Host Directives*: Directivas de atributo y composición de comportamientos sin herencia.
-   - *Pipes Puros vs Impuros*: Transformación idempotente con memoización y `AsyncPipe`.
-   - *Signal Queries*: `viewChild()`, `viewChildren()` y `contentChildren()` reactivos.
-   - *Strictly Typed Reactive Forms*: `FormGroup` y `FormControl` fuertemente tipados en compilación.
-   - *Ciclo de Vida*: Diferencia entre `ngOnInit` (lógica de datos) y `afterNextRender` (DOM seguro en SSR).
-   - *Input y Output Signals*: `input()`, `input.required()` y `output()` nativos.
-   - *Deferrable Views (`@defer`)*: Carga diferida con triggers (`on viewport`, `interaction`, `@placeholder`, `@loading`).
-   - *Hydration & SSR*: Hidratación no destructiva con preservación de DOM para Core Web Vitals.
+### 2. Descargar y Abrir de Inmediato (1 Clic)
+1. Descarga o clona este repositorio.
+2. Haz doble clic en **`ABRIR_DIRECTO_EN_NAVEGADOR.bat`** (o abre directamente `docs/index.html`).
+3. ¡Listo! Se abrirá en tu navegador con las 1,295 tarjetas cargadas y todas las funcionalidades interactivas activas.
 
-3. **🔷 TypeScript (Tipado Estricto)**:
-   - *Interfaces vs Type Aliases*: Declaration Merging en interfaces vs versatilidad de tipos y uniones.
-   - *Generics & Restricciones*: Parametrización con `<T extends Restriccion>` y preservación de tipos.
-   - *Union (|) vs Intersection (&)*: Alternativas válidas vs conjunción estricta de contratos.
-   - *Type Narrowing & Discriminant Unions*: Estrechamiento con guardas `typeof`/`instanceof` y propiedades literales.
-   - *Utility Types Básicos*: `Partial<T>`, `Required<T>`, `Readonly<T>`.
-   - *Utility Types de Selección*: `Pick<T, K>`, `Omit<T, K>`, `Record<K, T>`.
-   - *Operadores de Compilación*: `keyof` (extracción de claves) y `typeof` (inferencia desde objetos existentes).
-   - *Jerarquía de Tipos*: `unknown` (top-type seguro), `any` (inseguro) y `never` (estado imposible/exhaustividad).
-   - *Mapped Types*: Transformación sistemática de propiedades con `[P in keyof T]`.
-   - *Const Assertions (`as const`)*: Sellado de tipos literales y tuplas de solo lectura sin widening.
-   - *Conditional Types & infer*: Lógica ternaria en tipos y deducción de tipos anidados con `infer`.
-   - *Enums vs Const Objects*: Por qué la comunidad moderna prefiere objetos con `as const`.
-   - *Operadores Seguros*: Non-Null assertion (`!`) vs Optional Chaining (`?.`) y Coalescencia Nula (`??`).
-   - *Configuración tsconfig*: Modo `strict: true`, `strictNullChecks` y `noImplicitAny`.
-   - *Template Literal Types*: Tipado dinámico de nombres de métodos y eventos con sintaxis de template string.
-
-4. **🌐 HTML y Plataforma Web**:
-   - *HTML5 Semántico*: Landmark elements (`<main>`, `<article>`, `<section>`, `<nav>`, `<aside>`) para SEO y accesibilidad.
-   - *Accesibilidad Web (a11y) & WAI-ARIA*: Primera regla de ARIA, `role`, `aria-label`, `aria-live`.
-   - *Formularios & Constraint Validation API*: Validación nativa con `pattern`, `required` y `checkValidity()`.
-   - *Web Storage API*: Comparativa de ciclo de vida entre `localStorage`, `sessionStorage`, `Cookies` e `IndexedDB`.
-   - *DOM Event Flow*: Capturing, Target, Bubbling y el patrón de Delegación de Eventos.
-   - *Web Components*: Custom Elements, Shadow DOM para aislamiento de CSS y `<template>`.
-   - *Meta Tags Esenciales*: Viewport responsivo móvil, Charset UTF-8, SEO y tarjetas Open Graph.
-   - *Gráficos Nativos*: SVG vectorial escalable con nodos DOM vs Canvas 2D rasterizado por píxeles a 60fps.
-   - *Progressive Web Apps (PWA)*: Service Workers para modo Offline-First, Cache Storage y Push.
-   - *Web Workers*: Ejecución multihilo en segundo plano sin congelar la interfaz de usuario (UI Freezing).
-   - *Critical Rendering Path*: DOM -> CSSOM -> Render Tree -> Reflow (Layout) -> Repaint -> Composite.
-   - *Carga de Scripts*: Atributos `defer` (orden preservado sin bloqueo) vs `async` (ejecución inmediata).
-   - *Multimedia Nativa*: `<picture>` y `srcset` para imágenes responsivas y formatos AVIF/WebP con lazy loading.
-   - *Seguridad Web*: Content Security Policy (CSP) contra XSS y Cross-Origin Resource Sharing (CORS).
-   - *Tiempo Real*: WebSockets bidireccional full-duplex vs Server-Sent Events (SSE) para streaming de tokens.
-
-5. **🐍 Python & Backend Moderno (14 Tarjetas)**:
-   - *Mutabilidad & Referencias*: `id()`, comparación por identidad (`is`) vs valor (`==`), tipos mutables vs inmutables.
-   - *Generadores e Iteradores*: `yield`, `next()`, evaluación perezosa y consumo de RAM O(1).
-   - *Decoradores & Closures*: Envoltorios de funciones, preservación de metadatos con `@functools.wraps`.
-   - *Type Hinting & Pydantic*: Validación de datos en tiempo de ejecución, coerción y `BaseModel`.
-   - *Asyncio & Concurrencia I/O*: `async def`, `await`, Event Loop cooperativo y `asyncio.gather`.
-   - *El GIL de CPython*: Limitaciones multinúcleo en CPU, cuándo usar `multiprocessing` vs `threading`.
-   - *Context Managers*: Protocolo con `with`, adquisición y liberación garantizada en `__exit__`.
-   - *FastAPI & Inyección de Dependencias*: `Depends()`, modularización de auth y testing con overrides.
-   - *Comprehensions Avanzadas*: List, Dict y Set comprehensions optimizadas a nivel C.
-   - *Métodos Dunder*: Sobrecarga de operadores, `__repr__` (depuración) vs `__str__` (usuario).
-   - *Manejo Robusto de Errores*: Tracebacks limpios y encadenamiento de causas con `raise ... from`.
-   - *Empaquetado Moderno*: Entornos virtuales (`.venv`), `pyproject.toml` y herramientas ultra-rápidas (`uv`).
-   - *Parámetros Dinámicos*: Empaquetado posicional (`*args`) y nominal (`**kwargs`).
-   - *Data Classes*: `@dataclass(frozen=True)` para modelos internos ligeros frente a Pydantic.
-
-6. **🗄️ Bases de Datos, SQL & Persistencia (14 Tarjetas)**:
-   - *Índices B-Tree vs Hash vs GIN*: Búsqueda en rangos O(log N), índices exactos y campos JSONB/Full-text.
-   - *Transacciones ACID*: Atomicidad, Consistencia, Aislamiento y Durabilidad con Write-Ahead Logging (WAL).
-   - *Niveles de Aislamiento SQL*: Read Committed, Repeatable Read y Serializable; prevención de Dirty Reads.
-   - *Tipos de JOINs*: INNER, LEFT, RIGHT, FULL OUTER y CROSS JOIN (producto cartesiano).
-   - *Normalización (1NF a 3NF) vs Desnormalización*: Integridad en OLTP vs lectura ultra-rápida en OLAP.
-   - *Optimización con EXPLAIN ANALYZE*: Costos, tiempos reales y detección de Seq Scans costosos.
-   - *Particionamiento vs Sharding*: Poda de particiones local en un nodo vs distribución horizontal en clusters.
-   - *Replicación Master-Replica*: Streaming de WAL, escalado de lecturas y tolerancia a fallos con failover.
-   - *El Teorema CAP*: Compromiso ineludible entre Consistencia Estricta (CP) y Alta Disponibilidad (AP).
-   - *Bases NoSQL*: Modelos Documentales (MongoDB), Clave-Valor en memoria RAM (Redis) y Columnar.
-   - *Patrón Cache-Aside*: Reducción de carga en BD con TTL y políticas de desalojo LRU.
-   - *Integridad Referencial*: Claves Foráneas y mitigación de riesgos con `ON DELETE RESTRICT` vs `CASCADE`.
-   - *Migraciones Automatizadas*: Versionado de esquema como código con Alembic y Flyway.
-   - *Connection Pooling*: Reutilización de sockets con HikariCP/pgBouncer para miles de conexiones concurrentes.
-
-7. **🐳 DevOps, Docker & CI/CD (14 Tarjetas)**:
-   - *Imágenes vs Contenedores*: Capas inmutables de solo lectura (UnionFS) vs capa efímera Read-Write.
-   - *Dockerfile*: Directivas fundamentales, ejecutable base con `ENTRYPOINT` vs flags por defecto en `CMD`.
-   - *Multi-Stage Builds*: Reducción de imágenes de 1GB a 25MB y eliminación de superficies de ataque CVE.
-   - *Persistencia de Datos*: Named Volumes seguros gestionados por Docker vs Bind Mounts para desarrollo.
-   - *Redes de Contenedores*: Driver Bridge por defecto, modo Host sin aislamiento y Overlay distribuido.
-   - *Docker Compose*: Orquestación declarativa multicontenedor con resolución DNS automática por nombre.
-   - *Kubernetes Pods & Deployments*: Unidad mínima compartida, ReplicaSets y autorreparación continua (Self-Healing).
-   - *Servicios e Ingress*: ClusterIP interno, NodePort, balanceadores de nube y enrutamiento L7 con Ingress.
-   - *Pipelines CI/CD*: Automatización de pruebas, análisis estático, empaquetado y despliegues con GitHub Actions.
-   - *The Twelve-Factor App*: Configuración exclusiva en variables de entorno y procesos sin estado (Stateless).
-   - *Infraestructura como Código (IaC)*: Enfoque declarativo con Terraform y gestión de archivos de estado.
-   - *Observabilidad*: Los 3 pilares indispensables (Métricas en series temporales, Logs estructurados y Trazas OpenTelemetry).
-   - *Estrategias de Despliegue*: Blue/Green para rollback instantáneo con cero downtime vs despliegues Canary.
-   - *Gestión de Secretos*: Secret Managers empresariales (Vault, AWS Secrets Manager) vs archivos `.env`.
-
-8. **🛡️ Seguridad del Software & OWASP Top 10 (12 Tarjetas)**:
-   - *Inyección SQL (SQLi)*: Ataques por concatenación y mitigación definitiva mediante Prepared Statements.
-   - *Cross-Site Scripting (XSS)*: Inyección de JavaScript en el cliente (Stored, Reflected, DOM) y escape de salidas.
-   - *Cross-Site Request Forgery (CSRF)*: Suplantación de peticiones, tokens Anti-CSRF y cookies con `SameSite`.
-   - *JSON Web Tokens (JWT)*: Header, Payload (público) y Firma criptográfica; rotación con Access y Refresh Tokens.
-   - *Hashing de Contraseñas*: Derivación lenta y costosa con Argon2id y bcrypt con salt vs hashes rápidos inseguros.
-   - *Principio de Menor Privilegio (PoLP)*: Cuentas de servicio restringidas y control de acceso por roles (RBAC).
-   - *Cifrado en Tránsito vs Reposo*: Protocolo TLS 1.3 / HTTPS contra MitM vs cifrado de bloques AES-256 en disco.
-   - *Rate Limiting*: Algoritmos Token Bucket y Leaky Bucket para frenar ataques de fuerza bruta y DoS (HTTP 429).
-   - *Cabeceras de Seguridad HTTP*: CSP estricto, HSTS contra downgrades y prevención de Clickjacking con X-Frame-Options.
-   - *Server-Side Request Forgery (SSRF)*: Blindaje de endpoints que descargan URLs bloqueando IPs privadas y metadatos de cloud.
-   - *Autenticación Multifactor (MFA/2FA)*: Algoritmo TOTP (RFC 6238) basado en HMAC y tiempo Unix fuera de línea.
-   - *Análisis de Composición de Software (SCA)*: Detección y mitigación automática de vulnerabilidades en dependencias (CVEs).
-
-9. **🌿 Git & Control de Versiones Profesional (12 Tarjetas)**:
-   - *Modelo de Objetos de Git*: Blobs inmutables, Trees jerárquicos, Commits firmados y Grafo Acíclico Dirigido (DAG).
-   - *Las 3 Zonas de Git*: Working Directory (disco), Staging Area / Index (preparación) y Repositorio permanente.
-   - *Git Merge vs Git Rebase*: Historial cronológico con commits de fusión vs historial lineal continuo.
-   - *Git Cherry-Pick*: Aplicación selectiva de parches de commits específicos entre ramas.
-   - *Git Bisect*: Búsqueda binaria logarítmica O(log N) para aislar el commit exacto que introdujo una regresión.
-   - *Git Stash*: Almacenamiento temporal de cambios incompletos para alternar contextos limpiamente.
-   - *Resolución de Conflictos*: Interpretación de marcadores `<<<<<<<` y confirmación atómica con `git add`.
-   - *Git Reset vs Git Revert*: Deshacer commits locales reescribiendo la historia vs commits de compensación seguros en ramas públicas.
-   - *Estrategias de Ramas*: Trunk-Based Development con Feature Flags frente a la sobrecarga de GitFlow.
-   - *Git Hooks*: Automatización local con pre-commit (bloqueo de credenciales y linters) y commit-msg.
-   - *Submódulos vs Monorepos*: Dependencias externas ancladas a hashes vs repositorios unificados.
-   - *Firmado Criptográfico*: Verificación de autenticidad e identidad del autor con claves GPG / SSH en GitHub.
-
-10. **☕ Ecosistema Java Completo (105+ Tarjetas)**:
-   - Java Core, JVM (JIT, Garbage Collector), Colecciones, Concurrencia multihilo, Sockets, Java RMI, NIO, JPA y Spring.
-
-6. **📦 POO y Fundamentos de Arquitectura**:
-   - *Objeto vs. Instancia*: La diferencia precisa en memoria y concepto (plano vs. casa construida).
-   - Encapsulamiento, Polimorfismo, Herencia vs. Composición, Clases Abstractas vs. Interfaces.
-2. **Nodos y Estructuras de Datos**:
-   - *El concepto de Nodo*: Contenedor con `dato` + `puntero/referencia`.
-   - Listas Enlazadas (Simple y Doblemente Enlazada), Árboles Binarios (BST), Pilas (LIFO), Colas (FIFO), Tablas Hash y Grafos.
-3. **Arquitectura Hexagonal (Ports & Adapters)**:
-   - Explorador visual interactivo de capas:
-     - **💎 Núcleo de Dominio**: Entidades puras y reglas de negocio sin frameworks ni SQL.
-     - **🔌 Capa de Puertos**: Interfaces Driving/Inbound (Casos de Uso) y Driven/Outbound (SPI).
-     - **⚙️ Capa de Adaptadores**: Implementaciones concretas (REST Controllers, Postgres, Repositorios, Stripe, etc.).
-   - Regla de oro de dependencia y Desacoplamiento.
-4. **Principios SOLID**:
-   - SRP (Responsabilidad Única), OCP (Abierto/Cerrado), LSP (Sustitución de Liskov), ISP (Segregación de Interfaces), DIP (Inversión de Dependencias).
-5. **Patrones de Diseño GoF**:
-   - Patrón Adapter, Patrón Strategy, Patrón Observer, Patrón Factory.
-6. **Algoritmos y Notación Big O**:
-   - $O(1)$, $O(\log n)$, $O(n)$, $O(n \log n)$, $O(n^2)$.
+### 3. Servidor Local con Backend FastAPI e IA
+1. Clona el repositorio y haz doble clic en **`INSTALAR_Y_EJECUTAR.bat`** (prepara el entorno virtual e instala dependencias automáticamente).
+2. O ejecuta manualmente:
+   ```bash
+   pip install -r requirements.txt
+   python run_devcards.py
+   ```
+3. Opcionalmente inicia **Ollama** con `ollama run llama3.2` para generación profunda con LLM local.
 
 ---
 
-## 🚀 Inicio Rápido
-
-### Opción 1: Con un solo clic en Windows
-Haz doble clic sobre el archivo:
-```bat
-iniciar_devcards.bat
-```
-
-### Opción 2: Desde terminal (PowerShell o CMD)
-```bash
-cd C:\Users\POWER\Documents\GitHub\devcards_ai
-python run_devcards.py
-```
-El servidor arrancará en `http://localhost:8000` y abrirá automáticamente tu navegador web.
-
----
-
-## 🤖 Integración con Inteligencia Artificial (Ollama)
-
-DevCards AI está preparado para conectarse con **Ollama** de manera local:
-
-1. Si Ollama está ejecutándose en tu PC (`http://localhost:11434`), la aplicación lo detectará en tiempo real.
-2. Puedes usar modelos locales como `llama3.2`, `qwen2.5:1.5b` o `mistral` para:
-   - **Generar nuevas tarjetas a demanda** con definición, analogía, código y preguntas de examen.
-   - **Explicar cualquier concepto con analogías cotidianas** haciendo clic en el botón *"💡 Explicar con analogía cotidiana"*.
-3. **Modo Offline-First**: Si Ollama no está corriendo, la aplicación continúa funcionando al 100% gracias a su catálogo precargado de 24 tarjetas maestras y su **Generador Sintético Experto** integrado.
-
----
-
-## ⌨️ Atajos de Teclado
-
-| Tecla | Acción |
-| :--- | :--- |
-| `Espacio` | Voltear la tarjeta (Frente / Dorso) |
-| `Flecha Derecha` | Tarjeta siguiente |
-| `Flecha Izquierda` | Tarjeta anterior |
-| `1` | Calificar como **Difícil** (Caja Leitner 1) |
-| `2` | Calificar como **Dudoso** (Caja Leitner 2) |
-| `3` | Calificar como **Dominado** (Caja Leitner 3) |
-| `Q` | Activar / Desactivar Modo Quiz |
-
----
-
-## 🧪 Pruebas Automatizadas
-
-El proyecto cuenta con una suite completa de pruebas unitarias con `FastAPI TestClient`:
-```bash
-python tests/test_api.py
-```
-*Cobertura: 8 pruebas completadas con éxito verificando endpoints REST, persistencia, generación sintética y progresión Leitner.*
-
----
-
-## 📂 Gobernanza y Backlog
-
-- Consulta el backlog completo con Casos de Uso, Requisitos y Sprints en:  
-  [BACKLOG.md](BACKLOG.md)
-- Especificación del Agente de Fábrica en:  
-  [AGENTS.md](AGENTS.md)
+\n> **Proyecto Oficial de la Fábrica de Software Agéntica OKF v0.2**  \n> Identificador OKF: `urn:factory:project:devcards_ai`  \n> Roles: `FullStackEngineer`, `AIIntegrationSpecialist`, `SoftwareFactoryArchitect`\n\n---\n\n## 🌟 ¿Qué es DevCards AI?\n\n**DevCards AI** es una plataforma web interactiva de alto rendimiento visual diseñada para desarrolladores que desean dominar, recordar y clarificar conceptos fundamentales de programación y arquitectura de software que frecuentemente se olvidan o malinterpretan.\n\nUtiliza el método científico de **Repetición Espaciada de Leitner**, explicaciones basadas en **analogías cotidianas**, visualizaciones arquitectónicas interactivas y asistencia de **IA local con Ollama** (o generador sintético experto fuera de línea).\n\n---\n\n## 🎯 Conceptos Clave Cubiertos (284+ Tarjetas Pedagógicas en 10 Materias)\n\nLa plataforma cuenta con un mazo enciclopédico y categorizado de **más de 284 tarjetas pedagógicas** organizadas en 10 materias de vanguardia con filtros reactivos dedicados:\n\n1. **🤖 Inteligencia Artificial (IA)**:\n   - *LLMs y Parámetros*: Matrices de pesos, arquitectura Transformer, pre-entrenamiento vs inferencia.\n   - *Vector Embeddings & Espacio Semántico*: Similitud coseno, búsqueda vectorial, modelos de embedding.\n   - *RAG (Retrieval-Augmented Generation)*: Conexión con bases de conocimiento privadas, grounding y fuentes.\n   - *Bases Vectoriales & HNSW*: Grafos jerárquicos de proximidad y búsqueda aproximada O(log N).\n   - *Self-Attention & Transformers*: Matrices Query (Q), Key (K), Value (V), procesamiento paralelo.\n   - *Agentes Autónomos & Patrón ReAct*: Thought, Action, Observation, invocación iterativa de herramientas.\n   - *Fine-Tuning con LoRA*: Adaptación de bajo rango con matrices delta B*A y reducción drástica de VRAM.\n   - *Protocolo MCP (Model Context Protocol)*: Estandarización de Tools, Resources y Prompts para LLMs.\n   - *Prompt Engineering*: Zero-Shot, Few-Shot demostrativo y Chain-of-Thought (pensar paso a paso).\n   - *Tokenización, BPE y Ventana de Contexto*: Fragmentos atómicos, tarificación y memoria de atención.\n   - *Hiperparámetros de Muestreo*: Temperatura (determinismo vs creatividad) y Top-P (Nucleus Sampling).\n   - *Function Calling & Tool Use*: Esquemas JSON Schema, estructuración y delegación de ejecución al backend.\n   - *Alucinaciones & Grounding*: Causas probabilísticas, mitigación y verificación con fuentes.\n   - *Alineación con RLHF y DPO*: Modelos de recompensa, utilidad, honestidad y seguridad inofensiva.\n   - *Redes Neuronales & Backpropagation*: Forward pass, cálculo de pérdida y regla de la cadena.\n   - *Modelos Multimodales Nativos*: Espacio latente unificado para texto, visión, audio y video.\n\n2. **🅰️ Angular (Framework Web Moderno)**:\n   - *Signals*: Reactividad atómica granular con `signal()`, `computed()` perezoso y `effect()`.\n   - *Standalone Components*: Arquitectura autosuficiente sin NgModules con imports directos.\n   - *Nuevo Control Flow*: Bloques declarativos `@if`, `@else`, `@switch` y `@for` con `track` obligatorio.\n   - *Inyección de Dependencias Moderna*: Función `inject()` en contexto de inicialización sin super().\n   - *Estrategias de Change Detection*: `OnPush` reactivo y el nuevo modo experimental `Zoneless`.\n   - *Angular Router*: Lazy loading por componente (`loadComponent`) y Functional Guards declarativos.\n   - *RxJS & Gestión de Ciclo de Vida*: Operadores reactivos, Subjects y prevención de memory leaks con `takeUntilDestroyed()`.\n   - *HttpClient & Functional Interceptors*: Intercepción centralizada de tokens JWT y errores con `HttpInterceptorFn`.\n   - *Directivas & Host Directives*: Directivas de atributo y composición de comportamientos sin herencia.\n   - *Pipes Puros vs Impuros*: Transformación idempotente con memoización y `AsyncPipe`.\n   - *Signal Queries*: `viewChild()`, `viewChildren()` y `contentChildren()` reactivos.\n   - *Strictly Typed Reactive Forms*: `FormGroup` y `FormControl` fuertemente tipados en compilación.\n   - *Ciclo de Vida*: Diferencia entre `ngOnInit` (lógica de datos) y `afterNextRender` (DOM seguro en SSR).\n   - *Input y Output Signals*: `input()`, `input.required()` y `output()` nativos.\n   - *Deferrable Views (`@defer`)*: Carga diferida con triggers (`on viewport`, `interaction`, `@placeholder`, `@loading`).\n   - *Hydration & SSR*: Hidratación no destructiva con preservación de DOM para Core Web Vitals.\n\n3. **🔷 TypeScript (Tipado Estricto)**:\n   - *Interfaces vs Type Aliases*: Declaration Merging en interfaces vs versatilidad de tipos y uniones.\n   - *Generics & Restricciones*: Parametrización con `<T extends Restriccion>` y preservación de tipos.\n   - *Union (|) vs Intersection (&)*: Alternativas válidas vs conjunción estricta de contratos.\n   - *Type Narrowing & Discriminant Unions*: Estrechamiento con guardas `typeof`/`instanceof` y propiedades literales.\n   - *Utility Types Básicos*: `Partial<T>`, `Required<T>`, `Readonly<T>`.\n   - *Utility Types de Selección*: `Pick<T, K>`, `Omit<T, K>`, `Record<K, T>`.\n   - *Operadores de Compilación*: `keyof` (extracción de claves) y `typeof` (inferencia desde objetos existentes).\n   - *Jerarquía de Tipos*: `unknown` (top-type seguro), `any` (inseguro) y `never` (estado imposible/exhaustividad).\n   - *Mapped Types*: Transformación sistemática de propiedades con `[P in keyof T]`.\n   - *Const Assertions (`as const`)*: Sellado de tipos literales y tuplas de solo lectura sin widening.\n   - *Conditional Types & infer*: Lógica ternaria en tipos y deducción de tipos anidados con `infer`.\n   - *Enums vs Const Objects*: Por qué la comunidad moderna prefiere objetos con `as const`.\n   - *Operadores Seguros*: Non-Null assertion (`!`) vs Optional Chaining (`?.`) y Coalescencia Nula (`??`).\n   - *Configuración tsconfig*: Modo `strict: true`, `strictNullChecks` y `noImplicitAny`.\n   - *Template Literal Types*: Tipado dinámico de nombres de métodos y eventos con sintaxis de template string.\n\n4. **🌐 HTML y Plataforma Web**:\n   - *HTML5 Semántico*: Landmark elements (`<main>`, `<article>`, `<section>`, `<nav>`, `<aside>`) para SEO y accesibilidad.\n   - *Accesibilidad Web (a11y) & WAI-ARIA*: Primera regla de ARIA, `role`, `aria-label`, `aria-live`.\n   - *Formularios & Constraint Validation API*: Validación nativa con `pattern`, `required` y `checkValidity()`.\n   - *Web Storage API*: Comparativa de ciclo de vida entre `localStorage`, `sessionStorage`, `Cookies` e `IndexedDB`.\n   - *DOM Event Flow*: Capturing, Target, Bubbling y el patrón de Delegación de Eventos.\n   - *Web Components*: Custom Elements, Shadow DOM para aislamiento de CSS y `<template>`.\n   - *Meta Tags Esenciales*: Viewport responsivo móvil, Charset UTF-8, SEO y tarjetas Open Graph.\n   - *Gráficos Nativos*: SVG vectorial escalable con nodos DOM vs Canvas 2D rasterizado por píxeles a 60fps.\n   - *Progressive Web Apps (PWA)*: Service Workers para modo Offline-First, Cache Storage y Push.\n   - *Web Workers*: Ejecución multihilo en segundo plano sin congelar la interfaz de usuario (UI Freezing).\n   - *Critical Rendering Path*: DOM -> CSSOM -> Render Tree -> Reflow (Layout) -> Repaint -> Composite.\n   - *Carga de Scripts*: Atributos `defer` (orden preservado sin bloqueo) vs `async` (ejecución inmediata).\n   - *Multimedia Nativa*: `<picture>` y `srcset` para imágenes responsivas y formatos AVIF/WebP con lazy loading.\n   - *Seguridad Web*: Content Security Policy (CSP) contra XSS y Cross-Origin Resource Sharing (CORS).\n   - *Tiempo Real*: WebSockets bidireccional full-duplex vs Server-Sent Events (SSE) para streaming de tokens.\n\n5. **🐍 Python & Backend Moderno (14 Tarjetas)**:\n   - *Mutabilidad & Referencias*: `id()`, comparación por identidad (`is`) vs valor (`==`), tipos mutables vs inmutables.\n   - *Generadores e Iteradores*: `yield`, `next()`, evaluación perezosa y consumo de RAM O(1).\n   - *Decoradores & Closures*: Envoltorios de funciones, preservación de metadatos con `@functools.wraps`.\n   - *Type Hinting & Pydantic*: Validación de datos en tiempo de ejecución, coerción y `BaseModel`.\n   - *Asyncio & Concurrencia I/O*: `async def`, `await`, Event Loop cooperativo y `asyncio.gather`.\n   - *El GIL de CPython*: Limitaciones multinúcleo en CPU, cuándo usar `multiprocessing` vs `threading`.\n   - *Context Managers*: Protocolo con `with`, adquisición y liberación garantizada en `__exit__`.\n   - *FastAPI & Inyección de Dependencias*: `Depends()`, modularización de auth y testing con overrides.\n   - *Comprehensions Avanzadas*: List, Dict y Set comprehensions optimizadas a nivel C.\n   - *Métodos Dunder*: Sobrecarga de operadores, `__repr__` (depuración) vs `__str__` (usuario).\n   - *Manejo Robusto de Errores*: Tracebacks limpios y encadenamiento de causas con `raise ... from`.\n   - *Empaquetado Moderno*: Entornos virtuales (`.venv`), `pyproject.toml` y herramientas ultra-rápidas (`uv`).\n   - *Parámetros Dinámicos*: Empaquetado posicional (`*args`) y nominal (`**kwargs`).\n   - *Data Classes*: `@dataclass(frozen=True)` para modelos internos ligeros frente a Pydantic.\n\n6. **🗄️ Bases de Datos, SQL & Persistencia (14 Tarjetas)**:\n   - *Índices B-Tree vs Hash vs GIN*: Búsqueda en rangos O(log N), índices exactos y campos JSONB/Full-text.\n   - *Transacciones ACID*: Atomicidad, Consistencia, Aislamiento y Durabilidad con Write-Ahead Logging (WAL).\n   - *Niveles de Aislamiento SQL*: Read Committed, Repeatable Read y Serializable; prevención de Dirty Reads.\n   - *Tipos de JOINs*: INNER, LEFT, RIGHT, FULL OUTER y CROSS JOIN (producto cartesiano).\n   - *Normalización (1NF a 3NF) vs Desnormalización*: Integridad en OLTP vs lectura ultra-rápida en OLAP.\n   - *Optimización con EXPLAIN ANALYZE*: Costos, tiempos reales y detección de Seq Scans costosos.\n   - *Particionamiento vs Sharding*: Poda de particiones local en un nodo vs distribución horizontal en clusters.\n   - *Replicación Master-Replica*: Streaming de WAL, escalado de lecturas y tolerancia a fallos con failover.\n   - *El Teorema CAP*: Compromiso ineludible entre Consistencia Estricta (CP) y Alta Disponibilidad (AP).\n   - *Bases NoSQL*: Modelos Documentales (MongoDB), Clave-Valor en memoria RAM (Redis) y Columnar.\n   - *Patrón Cache-Aside*: Reducción de carga en BD con TTL y políticas de desalojo LRU.\n   - *Integridad Referencial*: Claves Foráneas y mitigación de riesgos con `ON DELETE RESTRICT` vs `CASCADE`.\n   - *Migraciones Automatizadas*: Versionado de esquema como código con Alembic y Flyway.\n   - *Connection Pooling*: Reutilización de sockets con HikariCP/pgBouncer para miles de conexiones concurrentes.\n\n7. **🐳 DevOps, Docker & CI/CD (14 Tarjetas)**:\n   - *Imágenes vs Contenedores*: Capas inmutables de solo lectura (UnionFS) vs capa efímera Read-Write.\n   - *Dockerfile*: Directivas fundamentales, ejecutable base con `ENTRYPOINT` vs flags por defecto en `CMD`.\n   - *Multi-Stage Builds*: Reducción de imágenes de 1GB a 25MB y eliminación de superficies de ataque CVE.\n   - *Persistencia de Datos*: Named Volumes seguros gestionados por Docker vs Bind Mounts para desarrollo.\n   - *Redes de Contenedores*: Driver Bridge por defecto, modo Host sin aislamiento y Overlay distribuido.\n   - *Docker Compose*: Orquestación declarativa multicontenedor con resolución DNS automática por nombre.\n   - *Kubernetes Pods & Deployments*: Unidad mínima compartida, ReplicaSets y autorreparación continua (Self-Healing).\n   - *Servicios e Ingress*: ClusterIP interno, NodePort, balanceadores de nube y enrutamiento L7 con Ingress.\n   - *Pipelines CI/CD*: Automatización de pruebas, análisis estático, empaquetado y despliegues con GitHub Actions.\n   - *The Twelve-Factor App*: Configuración exclusiva en variables de entorno y procesos sin estado (Stateless).\n   - *Infraestructura como Código (IaC)*: Enfoque declarativo con Terraform y gestión de archivos de estado.\n   - *Observabilidad*: Los 3 pilares indispensables (Métricas en series temporales, Logs estructurados y Trazas OpenTelemetry).\n   - *Estrategias de Despliegue*: Blue/Green para rollback instantáneo con cero downtime vs despliegues Canary.\n   - *Gestión de Secretos*: Secret Managers empresariales (Vault, AWS Secrets Manager) vs archivos `.env`.\n\n8. **🛡️ Seguridad del Software & OWASP Top 10 (12 Tarjetas)**:\n   - *Inyección SQL (SQLi)*: Ataques por concatenación y mitigación definitiva mediante Prepared Statements.\n   - *Cross-Site Scripting (XSS)*: Inyección de JavaScript en el cliente (Stored, Reflected, DOM) y escape de salidas.\n   - *Cross-Site Request Forgery (CSRF)*: Suplantación de peticiones, tokens Anti-CSRF y cookies con `SameSite`.\n   - *JSON Web Tokens (JWT)*: Header, Payload (público) y Firma criptográfica; rotación con Access y Refresh Tokens.\n   - *Hashing de Contraseñas*: Derivación lenta y costosa con Argon2id y bcrypt con salt vs hashes rápidos inseguros.\n   - *Principio de Menor Privilegio (PoLP)*: Cuentas de servicio restringidas y control de acceso por roles (RBAC).\n   - *Cifrado en Tránsito vs Reposo*: Protocolo TLS 1.3 / HTTPS contra MitM vs cifrado de bloques AES-256 en disco.\n   - *Rate Limiting*: Algoritmos Token Bucket y Leaky Bucket para frenar ataques de fuerza bruta y DoS (HTTP 429).\n   - *Cabeceras de Seguridad HTTP*: CSP estricto, HSTS contra downgrades y prevención de Clickjacking con X-Frame-Options.\n   - *Server-Side Request Forgery (SSRF)*: Blindaje de endpoints que descargan URLs bloqueando IPs privadas y metadatos de cloud.\n   - *Autenticación Multifactor (MFA/2FA)*: Algoritmo TOTP (RFC 6238) basado en HMAC y tiempo Unix fuera de línea.\n   - *Análisis de Composición de Software (SCA)*: Detección y mitigación automática de vulnerabilidades en dependencias (CVEs).\n\n9. **🌿 Git & Control de Versiones Profesional (12 Tarjetas)**:\n   - *Modelo de Objetos de Git*: Blobs inmutables, Trees jerárquicos, Commits firmados y Grafo Acíclico Dirigido (DAG).\n   - *Las 3 Zonas de Git*: Working Directory (disco), Staging Area / Index (preparación) y Repositorio permanente.\n   - *Git Merge vs Git Rebase*: Historial cronológico con commits de fusión vs historial lineal continuo.\n   - *Git Cherry-Pick*: Aplicación selectiva de parches de commits específicos entre ramas.\n   - *Git Bisect*: Búsqueda binaria logarítmica O(log N) para aislar el commit exacto que introdujo una regresión.\n   - *Git Stash*: Almacenamiento temporal de cambios incompletos para alternar contextos limpiamente.\n   - *Resolución de Conflictos*: Interpretación de marcadores `<<<<<<<` y confirmación atómica con `git add`.\n   - *Git Reset vs Git Revert*: Deshacer commits locales reescribiendo la historia vs commits de compensación seguros en ramas públicas.\n   - *Estrategias de Ramas*: Trunk-Based Development con Feature Flags frente a la sobrecarga de GitFlow.\n   - *Git Hooks*: Automatización local con pre-commit (bloqueo de credenciales y linters) y commit-msg.\n   - *Submódulos vs Monorepos*: Dependencias externas ancladas a hashes vs repositorios unificados.\n   - *Firmado Criptográfico*: Verificación de autenticidad e identidad del autor con claves GPG / SSH en GitHub.\n\n10. **☕ Ecosistema Java Completo (105+ Tarjetas)**:\n   - Java Core, JVM (JIT, Garbage Collector), Colecciones, Concurrencia multihilo, Sockets, Java RMI, NIO, JPA y Spring.\n\n6. **📦 POO y Fundamentos de Arquitectura**:\n   - *Objeto vs. Instancia*: La diferencia precisa en memoria y concepto (plano vs. casa construida).\n   - Encapsulamiento, Polimorfismo, Herencia vs. Composición, Clases Abstractas vs. Interfaces.\n2. **Nodos y Estructuras de Datos**:\n   - *El concepto de Nodo*: Contenedor con `dato` + `puntero/referencia`.\n   - Listas Enlazadas (Simple y Doblemente Enlazada), Árboles Binarios (BST), Pilas (LIFO), Colas (FIFO), Tablas Hash y Grafos.\n3. **Arquitectura Hexagonal (Ports & Adapters)**:\n   - Explorador visual interactivo de capas:\n     - **💎 Núcleo de Dominio**: Entidades puras y reglas de negocio sin frameworks ni SQL.\n     - **🔌 Capa de Puertos**: Interfaces Driving/Inbound (Casos de Uso) y Driven/Outbound (SPI).\n     - **⚙️ Capa de Adaptadores**: Implementaciones concretas (REST Controllers, Postgres, Repositorios, Stripe, etc.).\n   - Regla de oro de dependencia y Desacoplamiento.\n4. **Principios SOLID**:\n   - SRP (Responsabilidad Única), OCP (Abierto/Cerrado), LSP (Sustitución de Liskov), ISP (Segregación de Interfaces), DIP (Inversión de Dependencias).\n5. **Patrones de Diseño GoF**:\n   - Patrón Adapter, Patrón Strategy, Patrón Observer, Patrón Factory.\n6. **Algoritmos y Notación Big O**:\n   - $O(1)$, $O(\log n)$, $O(n)$, $O(n \log n)$, $O(n^2)$.\n\n---\n\n## 🚀 Inicio Rápido\n\n### Opción 1: Con un solo clic en Windows\nHaz doble clic sobre el archivo:\n```bat\niniciar_devcards.bat\n```\n\n### Opción 2: Desde terminal (PowerShell o CMD)\n```bash\ncd C:\Users\POWER\Documents\GitHub\devcards_ai\npython run_devcards.py\n```\nEl servidor arrancará en `http://localhost:8000` y abrirá automáticamente tu navegador web.\n\n---\n\n## 🤖 Integración con Inteligencia Artificial (Ollama)\n\nDevCards AI está preparado para conectarse con **Ollama** de manera local:\n\n1. Si Ollama está ejecutándose en tu PC (`http://localhost:11434`), la aplicación lo detectará en tiempo real.\n2. Puedes usar modelos locales como `llama3.2`, `qwen2.5:1.5b` o `mistral` para:\n   - **Generar nuevas tarjetas a demanda** con definición, analogía, código y preguntas de examen.\n   - **Explicar cualquier concepto con analogías cotidianas** haciendo clic en el botón *"💡 Explicar con analogía cotidiana"*.\n3. **Modo Offline-First**: Si Ollama no está corriendo, la aplicación continúa funcionando al 100% gracias a su catálogo precargado de 24 tarjetas maestras y su **Generador Sintético Experto** integrado.\n\n---\n\n## ⌨️ Atajos de Teclado\n\n| Tecla | Acción |\n| :--- | :--- |\n| `Espacio` | Voltear la tarjeta (Frente / Dorso) |\n| `Flecha Derecha` | Tarjeta siguiente |\n| `Flecha Izquierda` | Tarjeta anterior |\n| `1` | Calificar como **Difícil** (Caja Leitner 1) |\n| `2` | Calificar como **Dudoso** (Caja Leitner 2) |\n| `3` | Calificar como **Dominado** (Caja Leitner 3) |\n| `Q` | Activar / Desactivar Modo Quiz |\n\n---\n\n## 🧪 Pruebas Automatizadas\n\nEl proyecto cuenta con una suite completa de pruebas unitarias con `FastAPI TestClient`:\n```bash\npython tests/test_api.py\n```\n*Cobertura: 8 pruebas completadas con éxito verificando endpoints REST, persistencia, generación sintética y progresión Leitner.*\n\n---\n\n## 📂 Gobernanza y Backlog\n\n- Consulta el backlog completo con Casos de Uso, Requisitos y Sprints en:  \n  [BACKLOG.md](BACKLOG.md)\n- Especificación del Agente de Fábrica en:  \n  [AGENTS.md](AGENTS.md)

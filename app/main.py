@@ -497,6 +497,10 @@ def get_hexagonal_info():
 # Montar archivos estáticos para la interfaz web
 if STATIC_DIR.exists():
     app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+    if (STATIC_DIR / "css").exists():
+        app.mount("/css", StaticFiles(directory=str(STATIC_DIR / "css")), name="css")
+    if (STATIC_DIR / "js").exists():
+        app.mount("/js", StaticFiles(directory=str(STATIC_DIR / "js")), name="js")
 
     @app.get("/")
     def serve_index():
