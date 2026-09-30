@@ -14,9 +14,9 @@ Utiliza el método científico de **Repetición Espaciada de Leitner**, explicac
 
 ---
 
-## 🎯 Conceptos Clave Cubiertos (218+ Tarjetas Pedagógicas)
+## 🎯 Conceptos Clave Cubiertos (284+ Tarjetas Pedagógicas en 10 Materias)
 
-La plataforma cuenta con un mazo exhaustivo y categorizado de **más de 218 tarjetas** organizadas en materias fundamentales con filtros dedicados:
+La plataforma cuenta con un mazo enciclopédico y categorizado de **más de 284 tarjetas pedagógicas** organizadas en 10 materias de vanguardia con filtros reactivos dedicados:
 
 1. **🤖 Inteligencia Artificial (IA)**:
    - *LLMs y Parámetros*: Matrices de pesos, arquitectura Transformer, pre-entrenamiento vs inferencia.
@@ -88,7 +88,83 @@ La plataforma cuenta con un mazo exhaustivo y categorizado de **más de 218 tarj
    - *Seguridad Web*: Content Security Policy (CSP) contra XSS y Cross-Origin Resource Sharing (CORS).
    - *Tiempo Real*: WebSockets bidireccional full-duplex vs Server-Sent Events (SSE) para streaming de tokens.
 
-5. **☕ Ecosistema Java Completo (105+ Tarjetas)**:
+5. **🐍 Python & Backend Moderno (14 Tarjetas)**:
+   - *Mutabilidad & Referencias*: `id()`, comparación por identidad (`is`) vs valor (`==`), tipos mutables vs inmutables.
+   - *Generadores e Iteradores*: `yield`, `next()`, evaluación perezosa y consumo de RAM O(1).
+   - *Decoradores & Closures*: Envoltorios de funciones, preservación de metadatos con `@functools.wraps`.
+   - *Type Hinting & Pydantic*: Validación de datos en tiempo de ejecución, coerción y `BaseModel`.
+   - *Asyncio & Concurrencia I/O*: `async def`, `await`, Event Loop cooperativo y `asyncio.gather`.
+   - *El GIL de CPython*: Limitaciones multinúcleo en CPU, cuándo usar `multiprocessing` vs `threading`.
+   - *Context Managers*: Protocolo con `with`, adquisición y liberación garantizada en `__exit__`.
+   - *FastAPI & Inyección de Dependencias*: `Depends()`, modularización de auth y testing con overrides.
+   - *Comprehensions Avanzadas*: List, Dict y Set comprehensions optimizadas a nivel C.
+   - *Métodos Dunder*: Sobrecarga de operadores, `__repr__` (depuración) vs `__str__` (usuario).
+   - *Manejo Robusto de Errores*: Tracebacks limpios y encadenamiento de causas con `raise ... from`.
+   - *Empaquetado Moderno*: Entornos virtuales (`.venv`), `pyproject.toml` y herramientas ultra-rápidas (`uv`).
+   - *Parámetros Dinámicos*: Empaquetado posicional (`*args`) y nominal (`**kwargs`).
+   - *Data Classes*: `@dataclass(frozen=True)` para modelos internos ligeros frente a Pydantic.
+
+6. **🗄️ Bases de Datos, SQL & Persistencia (14 Tarjetas)**:
+   - *Índices B-Tree vs Hash vs GIN*: Búsqueda en rangos O(log N), índices exactos y campos JSONB/Full-text.
+   - *Transacciones ACID*: Atomicidad, Consistencia, Aislamiento y Durabilidad con Write-Ahead Logging (WAL).
+   - *Niveles de Aislamiento SQL*: Read Committed, Repeatable Read y Serializable; prevención de Dirty Reads.
+   - *Tipos de JOINs*: INNER, LEFT, RIGHT, FULL OUTER y CROSS JOIN (producto cartesiano).
+   - *Normalización (1NF a 3NF) vs Desnormalización*: Integridad en OLTP vs lectura ultra-rápida en OLAP.
+   - *Optimización con EXPLAIN ANALYZE*: Costos, tiempos reales y detección de Seq Scans costosos.
+   - *Particionamiento vs Sharding*: Poda de particiones local en un nodo vs distribución horizontal en clusters.
+   - *Replicación Master-Replica*: Streaming de WAL, escalado de lecturas y tolerancia a fallos con failover.
+   - *El Teorema CAP*: Compromiso ineludible entre Consistencia Estricta (CP) y Alta Disponibilidad (AP).
+   - *Bases NoSQL*: Modelos Documentales (MongoDB), Clave-Valor en memoria RAM (Redis) y Columnar.
+   - *Patrón Cache-Aside*: Reducción de carga en BD con TTL y políticas de desalojo LRU.
+   - *Integridad Referencial*: Claves Foráneas y mitigación de riesgos con `ON DELETE RESTRICT` vs `CASCADE`.
+   - *Migraciones Automatizadas*: Versionado de esquema como código con Alembic y Flyway.
+   - *Connection Pooling*: Reutilización de sockets con HikariCP/pgBouncer para miles de conexiones concurrentes.
+
+7. **🐳 DevOps, Docker & CI/CD (14 Tarjetas)**:
+   - *Imágenes vs Contenedores*: Capas inmutables de solo lectura (UnionFS) vs capa efímera Read-Write.
+   - *Dockerfile*: Directivas fundamentales, ejecutable base con `ENTRYPOINT` vs flags por defecto en `CMD`.
+   - *Multi-Stage Builds*: Reducción de imágenes de 1GB a 25MB y eliminación de superficies de ataque CVE.
+   - *Persistencia de Datos*: Named Volumes seguros gestionados por Docker vs Bind Mounts para desarrollo.
+   - *Redes de Contenedores*: Driver Bridge por defecto, modo Host sin aislamiento y Overlay distribuido.
+   - *Docker Compose*: Orquestación declarativa multicontenedor con resolución DNS automática por nombre.
+   - *Kubernetes Pods & Deployments*: Unidad mínima compartida, ReplicaSets y autorreparación continua (Self-Healing).
+   - *Servicios e Ingress*: ClusterIP interno, NodePort, balanceadores de nube y enrutamiento L7 con Ingress.
+   - *Pipelines CI/CD*: Automatización de pruebas, análisis estático, empaquetado y despliegues con GitHub Actions.
+   - *The Twelve-Factor App*: Configuración exclusiva en variables de entorno y procesos sin estado (Stateless).
+   - *Infraestructura como Código (IaC)*: Enfoque declarativo con Terraform y gestión de archivos de estado.
+   - *Observabilidad*: Los 3 pilares indispensables (Métricas en series temporales, Logs estructurados y Trazas OpenTelemetry).
+   - *Estrategias de Despliegue*: Blue/Green para rollback instantáneo con cero downtime vs despliegues Canary.
+   - *Gestión de Secretos*: Secret Managers empresariales (Vault, AWS Secrets Manager) vs archivos `.env`.
+
+8. **🛡️ Seguridad del Software & OWASP Top 10 (12 Tarjetas)**:
+   - *Inyección SQL (SQLi)*: Ataques por concatenación y mitigación definitiva mediante Prepared Statements.
+   - *Cross-Site Scripting (XSS)*: Inyección de JavaScript en el cliente (Stored, Reflected, DOM) y escape de salidas.
+   - *Cross-Site Request Forgery (CSRF)*: Suplantación de peticiones, tokens Anti-CSRF y cookies con `SameSite`.
+   - *JSON Web Tokens (JWT)*: Header, Payload (público) y Firma criptográfica; rotación con Access y Refresh Tokens.
+   - *Hashing de Contraseñas*: Derivación lenta y costosa con Argon2id y bcrypt con salt vs hashes rápidos inseguros.
+   - *Principio de Menor Privilegio (PoLP)*: Cuentas de servicio restringidas y control de acceso por roles (RBAC).
+   - *Cifrado en Tránsito vs Reposo*: Protocolo TLS 1.3 / HTTPS contra MitM vs cifrado de bloques AES-256 en disco.
+   - *Rate Limiting*: Algoritmos Token Bucket y Leaky Bucket para frenar ataques de fuerza bruta y DoS (HTTP 429).
+   - *Cabeceras de Seguridad HTTP*: CSP estricto, HSTS contra downgrades y prevención de Clickjacking con X-Frame-Options.
+   - *Server-Side Request Forgery (SSRF)*: Blindaje de endpoints que descargan URLs bloqueando IPs privadas y metadatos de cloud.
+   - *Autenticación Multifactor (MFA/2FA)*: Algoritmo TOTP (RFC 6238) basado en HMAC y tiempo Unix fuera de línea.
+   - *Análisis de Composición de Software (SCA)*: Detección y mitigación automática de vulnerabilidades en dependencias (CVEs).
+
+9. **🌿 Git & Control de Versiones Profesional (12 Tarjetas)**:
+   - *Modelo de Objetos de Git*: Blobs inmutables, Trees jerárquicos, Commits firmados y Grafo Acíclico Dirigido (DAG).
+   - *Las 3 Zonas de Git*: Working Directory (disco), Staging Area / Index (preparación) y Repositorio permanente.
+   - *Git Merge vs Git Rebase*: Historial cronológico con commits de fusión vs historial lineal continuo.
+   - *Git Cherry-Pick*: Aplicación selectiva de parches de commits específicos entre ramas.
+   - *Git Bisect*: Búsqueda binaria logarítmica O(log N) para aislar el commit exacto que introdujo una regresión.
+   - *Git Stash*: Almacenamiento temporal de cambios incompletos para alternar contextos limpiamente.
+   - *Resolución de Conflictos*: Interpretación de marcadores `<<<<<<<` y confirmación atómica con `git add`.
+   - *Git Reset vs Git Revert*: Deshacer commits locales reescribiendo la historia vs commits de compensación seguros en ramas públicas.
+   - *Estrategias de Ramas*: Trunk-Based Development con Feature Flags frente a la sobrecarga de GitFlow.
+   - *Git Hooks*: Automatización local con pre-commit (bloqueo de credenciales y linters) y commit-msg.
+   - *Submódulos vs Monorepos*: Dependencias externas ancladas a hashes vs repositorios unificados.
+   - *Firmado Criptográfico*: Verificación de autenticidad e identidad del autor con claves GPG / SSH en GitHub.
+
+10. **☕ Ecosistema Java Completo (105+ Tarjetas)**:
    - Java Core, JVM (JIT, Garbage Collector), Colecciones, Concurrencia multihilo, Sockets, Java RMI, NIO, JPA y Spring.
 
 6. **📦 POO y Fundamentos de Arquitectura**:

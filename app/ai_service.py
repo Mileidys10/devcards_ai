@@ -16,6 +16,45 @@ OLLAMA_BASE_URL = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 
 # Banco sintético inteligente para respuestas inmediatas de alta calidad
 SYNTHETIC_TOPICS = {
+    "docker": {
+        "title": "Docker: Multi-Stage Builds",
+        "category": "DevOps y Cloud",
+        "difficulty": "Intermedio",
+        "icon": "🐳",
+        "question": "¿Por qué los Multi-Stage Builds reducen drásticamente el tamaño de los contenedores?",
+        "definition": "Permite usar una imagen pesada con compiladores y SDKs para compilar el proyecto en una etapa builder, y luego copiar únicamente el artefacto final a una imagen base mínima (ej: Alpine o distroless), descartando gigabytes de herramientas de desarrollo.",
+        "analogy": "Un andamio de construcción: lo usas para pintar el edificio y luego lo retiras; no dejas los andamios de acero colgados de la fachada para siempre.",
+        "code_example": "FROM golang:1.22 AS builder\nWORKDIR /app\nCOPY . .\nRUN go build -o servidor\n\nFROM alpine:latest\nCOPY --from=builder /app/servidor /servidor\nCMD ['/servidor']",
+        "quiz_question": "¿Cuál es el beneficio de Multi-Stage Builds en Docker?",
+        "quiz_options": [
+            "Reduce el tamaño de la imagen final y minimiza vulnerabilidades de seguridad",
+            "Duplica la memoria RAM del contenedor",
+            "Hace que la imagen sea compatible con disquetes",
+            "Elimina la necesidad de usar Linux"
+        ],
+        "quiz_answer": 0,
+        "key_takeaway": "Construye con herramientas pesadas en etapa builder; despliega solo el binario en una imagen final mínima."
+    },
+    "sql injection": {
+        "title": "Prevención de Inyección SQL (SQLi)",
+        "category": "Seguridad y OWASP",
+        "difficulty": "Principiante",
+        "icon": "🛡️",
+        "question": "¿Cómo garantizan las consultas parametrizadas la inmunidad frente a SQL Injection?",
+        "definition": "Las consultas parametrizadas pre-compilan la estructura de la consulta en el motor de base de datos antes de enlazar los valores del usuario, tratando la entrada exclusivamente como datos literales y jamás como instrucciones ejecutables.",
+        "analogy": "Un buzón de sugerencias blindado con ranura para papel: el usuario puede meter cartas escritas, pero no puede meter una palanca para abrir la cerradura de la caja.",
+        "code_example": "# Seguro: Parámetros separados de la instrucción\ncursor.execute('SELECT * FROM cuentas WHERE usuario = %s', (input_usuario,))",
+        "quiz_question": "¿Por qué 'SELECT * FROM u WHERE id = ' + user_id es peligroso?",
+        "quiz_options": [
+            "Porque permite que un atacante inyecte sentencias SQL arbitrarias alterando la lógica de la consulta",
+            "Porque consume el doble de memoria RAM",
+            "Porque SQL solo acepta letras minúsculas",
+            "Porque borra el archivo main.py"
+        ],
+        "quiz_answer": 0,
+        "key_takeaway": "Nunca concatenes strings en SQL; usa siempre Prepared Statements o parámetros vinculados."
+    },
+
     "recursividad": {
         "title": "Recursión vs. Iteración",
         "category": "Algoritmos",

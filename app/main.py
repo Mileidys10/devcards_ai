@@ -127,10 +127,16 @@ def get_categories():
 
     category_icons = {
         "Todos": "🌐",
+        "Java (Completo)": "☕",
         "Inteligencia Artificial": "🤖",
+        "Python y Backend": "🐍",
+        "Bases de Datos y SQL": "🗄️",
         "Angular": "🅰️",
         "TypeScript": "🔷",
         "HTML y Web": "🌐",
+        "DevOps y Cloud": "🐳",
+        "Seguridad y OWASP": "🛡️",
+        "Git y Control de Versiones": "🌿",
         "POO": "📦",
         "Estructuras de Datos": "⛓️",
         "Arquitectura Hexagonal": "⬡",
@@ -171,9 +177,14 @@ def get_categories():
         {"name": "Todos", "count": len(cards), "icon": "🌐"},
         {"name": "Java (Completo)", "count": java_count, "icon": "☕"},
         {"name": "Inteligencia Artificial", "count": counts.get("Inteligencia Artificial", 0), "icon": "🤖"},
+        {"name": "Python y Backend", "count": counts.get("Python y Backend", 0), "icon": "🐍"},
+        {"name": "Bases de Datos y SQL", "count": counts.get("Bases de Datos y SQL", 0), "icon": "🗄️"},
         {"name": "Angular", "count": counts.get("Angular", 0), "icon": "🅰️"},
         {"name": "TypeScript", "count": counts.get("TypeScript", 0), "icon": "🔷"},
-        {"name": "HTML y Web", "count": counts.get("HTML y Web", 0), "icon": "🌐"}
+        {"name": "HTML y Web", "count": counts.get("HTML y Web", 0), "icon": "🌐"},
+        {"name": "DevOps y Cloud", "count": counts.get("DevOps y Cloud", 0), "icon": "🐳"},
+        {"name": "Seguridad y OWASP", "count": counts.get("Seguridad y OWASP", 0), "icon": "🛡️"},
+        {"name": "Git y Control de Versiones", "count": counts.get("Git y Control de Versiones", 0), "icon": "🌿"}
     ]
 
     preferred_order = [
@@ -196,7 +207,11 @@ def get_categories():
         "Patrones de Diseño",
         "Algoritmos y Big O"
     ]
-    added = {"Todos", "Inteligencia Artificial", "Angular", "TypeScript", "HTML y Web"}
+    added = {
+        "Todos", "Java (Completo)", "Inteligencia Artificial", "Python y Backend",
+        "Bases de Datos y SQL", "Angular", "TypeScript", "HTML y Web",
+        "DevOps y Cloud", "Seguridad y OWASP", "Git y Control de Versiones"
+    }
     for cat in preferred_order:
         if cat in counts:
             result.append({"name": cat, "count": counts[cat], "icon": category_icons.get(cat, "🏷️")})
@@ -242,6 +257,16 @@ def get_cards(
             cards = [c for c in cards if c.get("category", "").lower() == "typescript" or c.get("id", "").startswith("ts-")]
         elif c_lower in ["html", "html y web", "html5", "html & web", "web", "html y plataforma web"]:
             cards = [c for c in cards if c.get("category", "").lower() in ["html y web", "html"] or c.get("id", "").startswith("html-")]
+        elif c_lower in ["python", "python y backend", "py", "fastapi", "python & backend"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "python y backend" or c.get("id", "").startswith("py-")]
+        elif c_lower in ["bases de datos", "bases de datos y sql", "sql", "postgresql", "db", "database", "bd"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "bases de datos y sql" or c.get("id", "").startswith("db-")]
+        elif c_lower in ["devops", "devops y cloud", "docker", "cloud", "k8s", "kubernetes", "ci/cd"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "devops y cloud" or c.get("id", "").startswith("ops-")]
+        elif c_lower in ["seguridad", "seguridad y owasp", "owasp", "security", "ciberseguridad"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "seguridad y owasp" or c.get("id", "").startswith("sec-")]
+        elif c_lower in ["git", "git y control de versiones", "control de versiones", "versionado"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "git y control de versiones" or c.get("id", "").startswith("git-")]
         else:
             cards = [c for c in cards if c.get("category", "").lower() == cat_val.lower()]
 

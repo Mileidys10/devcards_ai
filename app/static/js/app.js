@@ -136,9 +136,14 @@ function renderCategoryTabs() {
     "Todos": "🌐",
     "Java (Completo)": "☕",
     "Inteligencia Artificial": "🤖",
+    "Python y Backend": "🐍",
+    "Bases de Datos y SQL": "🗄️",
     "Angular": "🅰️",
     "TypeScript": "🔷",
     "HTML y Web": "🌐",
+    "DevOps y Cloud": "🐳",
+    "Seguridad y OWASP": "🛡️",
+    "Git y Control de Versiones": "🌿",
     "POO": "📦",
     "Estructuras de Datos": "⛓️",
     "Arquitectura Hexagonal": "⬡",
@@ -203,13 +208,48 @@ function renderCategoryTabs() {
     return cat === "html y web" || cat === "html" || id.startsWith("html-");
   }).length;
 
+  const pyCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "python y backend" || cat.includes("python") || id.startsWith("py-");
+  }).length;
+
+  const dbCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "bases de datos y sql" || cat.includes("sql") || id.startsWith("db-");
+  }).length;
+
+  const opsCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "devops y cloud" || cat.includes("devops") || id.startsWith("ops-");
+  }).length;
+
+  const secCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "seguridad y owasp" || cat.includes("seguridad") || id.startsWith("sec-");
+  }).length;
+
+  const gitCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "git y control de versiones" || cat.includes("git") || id.startsWith("git-");
+  }).length;
+
   const categories = [
     { name: "Todos", count: state.allCards.length, icon: "🌐", isMateria: true },
     { name: "Java (Completo)", count: javaCount, icon: "☕", isMateria: true },
     { name: "Inteligencia Artificial", count: iaCount, icon: "🤖", isMateria: true },
+    { name: "Python y Backend", count: pyCount, icon: "🐍", isMateria: true },
+    { name: "Bases de Datos y SQL", count: dbCount, icon: "🗄️", isMateria: true },
     { name: "Angular", count: ngCount, icon: "🅰️", isMateria: true },
     { name: "TypeScript", count: tsCount, icon: "🔷", isMateria: true },
-    { name: "HTML y Web", count: htmlCount, icon: "🌐", isMateria: true }
+    { name: "HTML y Web", count: htmlCount, icon: "🌐", isMateria: true },
+    { name: "DevOps y Cloud", count: opsCount, icon: "🐳", isMateria: true },
+    { name: "Seguridad y OWASP", count: secCount, icon: "🛡️", isMateria: true },
+    { name: "Git y Control de Versiones", count: gitCount, icon: "🌿", isMateria: true }
   ];
   
   // Orden prioritario sugerido
@@ -234,7 +274,11 @@ function renderCategoryTabs() {
     "Algoritmos y Big O"
   ];
 
-  const added = new Set(["Todos", "Inteligencia Artificial", "Angular", "TypeScript", "HTML y Web"]);
+  const added = new Set([
+    "Todos", "Java (Completo)", "Inteligencia Artificial", "Python y Backend",
+    "Bases de Datos y SQL", "Angular", "TypeScript", "HTML y Web",
+    "DevOps y Cloud", "Seguridad y OWASP", "Git y Control de Versiones"
+  ]);
   order.forEach(cat => {
     if (counts[cat]) {
       categories.push({
@@ -319,6 +363,36 @@ function applyFilters() {
       const cat = (c.category || "").toLowerCase();
       const id = (c.id || "").toLowerCase();
       return cat === "html y web" || cat === "html" || id.startsWith("html-");
+    });
+  } else if (catActive === "python y backend" || catActive === "python" || catActive === "py") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "python y backend" || id.startsWith("py-");
+    });
+  } else if (catActive === "bases de datos y sql" || catActive === "bases de datos" || catActive === "sql" || catActive === "db") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "bases de datos y sql" || id.startsWith("db-");
+    });
+  } else if (catActive === "devops y cloud" || catActive === "devops" || catActive === "docker" || catActive === "cloud") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "devops y cloud" || id.startsWith("ops-");
+    });
+  } else if (catActive === "seguridad y owasp" || catActive === "seguridad" || catActive === "owasp" || catActive === "security") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "seguridad y owasp" || id.startsWith("sec-");
+    });
+  } else if (catActive === "git y control de versiones" || catActive === "git" || catActive === "control de versiones") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "git y control de versiones" || id.startsWith("git-");
     });
   } else if (catActive !== "todos") {
     list = list.filter(c => (c.category || "").toLowerCase() === catActive);

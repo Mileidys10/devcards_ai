@@ -40,6 +40,11 @@ class TestDevCardsAPI(unittest.TestCase):
         self.assertIn("Angular", cat_names)
         self.assertIn("TypeScript", cat_names)
         self.assertIn("HTML y Web", cat_names)
+        self.assertIn("Python y Backend", cat_names)
+        self.assertIn("Bases de Datos y SQL", cat_names)
+        self.assertIn("DevOps y Cloud", cat_names)
+        self.assertIn("Seguridad y OWASP", cat_names)
+        self.assertIn("Git y Control de Versiones", cat_names)
         # Categorías pedagógicas base
         self.assertIn("POO", cat_names)
         self.assertIn("Estructuras de Datos", cat_names)
@@ -85,6 +90,27 @@ class TestDevCardsAPI(unittest.TestCase):
         self.assertTrue(any("semántico" in t or "html5 semántico" in t for t in titulos), "Falta tarjeta de HTML5 Semántico")
         self.assertTrue(any("accesibilidad" in t or "aria" in t for t in titulos), "Falta tarjeta de Accesibilidad / ARIA")
         self.assertTrue(any("web storage" in t or "localstorage" in t for t in titulos), "Falta tarjeta de Web Storage")
+
+        # 5. Python y Backend
+        self.assertTrue(any("mutabilidad" in t or "operadores 'is'" in t for t in titulos), "Falta tarjeta de Mutabilidad en Python")
+        self.assertTrue(any("yield" in t or "generador" in t for t in titulos), "Falta tarjeta de Generadores en Python")
+        self.assertTrue(any("pydantic" in t for t in titulos), "Falta tarjeta de Pydantic")
+        # 6. Bases de Datos y SQL
+        self.assertTrue(any("b-tree" in t or "índice" in t for t in titulos), "Falta tarjeta de Índices B-Tree")
+        self.assertTrue(any("acid" in t for t in titulos), "Falta tarjeta de ACID")
+        self.assertTrue(any("joins" in t or "join" in t for t in titulos), "Falta tarjeta de JOINs")
+        # 7. DevOps y Cloud
+        self.assertTrue(any("docker" in t for t in titulos), "Falta tarjeta de Docker")
+        self.assertTrue(any("kubernetes" in t or "pod" in t for t in titulos), "Falta tarjeta de Kubernetes")
+        self.assertTrue(any("ci/cd" in t or "pipeline" in t for t in titulos), "Falta tarjeta de CI/CD")
+        # 8. Seguridad y OWASP
+        self.assertTrue(any("inyección sql" in t or "sqli" in t for t in titulos), "Falta tarjeta de SQL Injection")
+        self.assertTrue(any("xss" in t or "cross-site scripting" in t for t in titulos), "Falta tarjeta de XSS")
+        self.assertTrue(any("jwt" in t or "json web token" in t for t in titulos), "Falta tarjeta de JWT")
+        # 9. Git y Control de Versiones
+        self.assertTrue(any("blobs" in t or "dag" in t for t in titulos), "Falta tarjeta de Objetos Git")
+        self.assertTrue(any("cherry-pick" in t for t in titulos), "Falta tarjeta de Git Cherry-Pick")
+        self.assertTrue(any("bisect" in t for t in titulos), "Falta tarjeta de Git Bisect")
 
     def test_04_hexagonal_info(self):
         res = self.client.get("/api/hexagonal-info")
@@ -223,6 +249,46 @@ class TestDevCardsAPI(unittest.TestCase):
         self.assertEqual(res_java.status_code, 200)
         cards_java = res_java.json()
         self.assertGreaterEqual(len(cards_java), 100, "Debe retornar más de 100 tarjetas del ecosistema Java")
+
+        # 6. Filtrado por Python y Backend
+        res_py = self.client.get("/api/cards?category=Python")
+        self.assertEqual(res_py.status_code, 200)
+        cards_py = res_py.json()
+        self.assertGreaterEqual(len(cards_py), 14, "Debe retornar al menos 14 tarjetas de Python")
+        for c in cards_py:
+            self.assertTrue(c.get("category") == "Python y Backend" or c.get("id", "").startswith("py-"))
+
+        # 7. Filtrado por Bases de Datos y SQL
+        res_db = self.client.get("/api/cards?category=Bases de Datos")
+        self.assertEqual(res_db.status_code, 200)
+        cards_db = res_db.json()
+        self.assertGreaterEqual(len(cards_db), 14, "Debe retornar al menos 14 tarjetas de Bases de Datos")
+        for c in cards_db:
+            self.assertTrue(c.get("category") == "Bases de Datos y SQL" or c.get("id", "").startswith("db-"))
+
+        # 8. Filtrado por DevOps y Cloud
+        res_ops = self.client.get("/api/cards?category=DevOps")
+        self.assertEqual(res_ops.status_code, 200)
+        cards_ops = res_ops.json()
+        self.assertGreaterEqual(len(cards_ops), 14, "Debe retornar al menos 14 tarjetas de DevOps")
+        for c in cards_ops:
+            self.assertTrue(c.get("category") == "DevOps y Cloud" or c.get("id", "").startswith("ops-"))
+
+        # 9. Filtrado por Seguridad y OWASP
+        res_sec = self.client.get("/api/cards?category=Seguridad")
+        self.assertEqual(res_sec.status_code, 200)
+        cards_sec = res_sec.json()
+        self.assertGreaterEqual(len(cards_sec), 12, "Debe retornar al menos 12 tarjetas de Seguridad")
+        for c in cards_sec:
+            self.assertTrue(c.get("category") == "Seguridad y OWASP" or c.get("id", "").startswith("sec-"))
+
+        # 10. Filtrado por Git y Control de Versiones
+        res_git = self.client.get("/api/cards?category=Git")
+        self.assertEqual(res_git.status_code, 200)
+        cards_git = res_git.json()
+        self.assertGreaterEqual(len(cards_git), 12, "Debe retornar al menos 12 tarjetas de Git")
+        for c in cards_git:
+            self.assertTrue(c.get("category") == "Git y Control de Versiones" or c.get("id", "").startswith("git-"))
 
 if __name__ == "__main__":
     unittest.main()
