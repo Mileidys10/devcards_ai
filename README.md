@@ -14,9 +14,84 @@ Utiliza el método científico de **Repetición Espaciada de Leitner**, explicac
 
 ---
 
-## 🎯 Conceptos Clave Cubiertos
+## 🎯 Conceptos Clave Cubiertos (218+ Tarjetas Pedagógicas)
 
-1. **Programación Orientada a Objetos (POO)**:
+La plataforma cuenta con un mazo exhaustivo y categorizado de **más de 218 tarjetas** organizadas en materias fundamentales con filtros dedicados:
+
+1. **🤖 Inteligencia Artificial (IA)**:
+   - *LLMs y Parámetros*: Matrices de pesos, arquitectura Transformer, pre-entrenamiento vs inferencia.
+   - *Vector Embeddings & Espacio Semántico*: Similitud coseno, búsqueda vectorial, modelos de embedding.
+   - *RAG (Retrieval-Augmented Generation)*: Conexión con bases de conocimiento privadas, grounding y fuentes.
+   - *Bases Vectoriales & HNSW*: Grafos jerárquicos de proximidad y búsqueda aproximada O(log N).
+   - *Self-Attention & Transformers*: Matrices Query (Q), Key (K), Value (V), procesamiento paralelo.
+   - *Agentes Autónomos & Patrón ReAct*: Thought, Action, Observation, invocación iterativa de herramientas.
+   - *Fine-Tuning con LoRA*: Adaptación de bajo rango con matrices delta B*A y reducción drástica de VRAM.
+   - *Protocolo MCP (Model Context Protocol)*: Estandarización de Tools, Resources y Prompts para LLMs.
+   - *Prompt Engineering*: Zero-Shot, Few-Shot demostrativo y Chain-of-Thought (pensar paso a paso).
+   - *Tokenización, BPE y Ventana de Contexto*: Fragmentos atómicos, tarificación y memoria de atención.
+   - *Hiperparámetros de Muestreo*: Temperatura (determinismo vs creatividad) y Top-P (Nucleus Sampling).
+   - *Function Calling & Tool Use*: Esquemas JSON Schema, estructuración y delegación de ejecución al backend.
+   - *Alucinaciones & Grounding*: Causas probabilísticas, mitigación y verificación con fuentes.
+   - *Alineación con RLHF y DPO*: Modelos de recompensa, utilidad, honestidad y seguridad inofensiva.
+   - *Redes Neuronales & Backpropagation*: Forward pass, cálculo de pérdida y regla de la cadena.
+   - *Modelos Multimodales Nativos*: Espacio latente unificado para texto, visión, audio y video.
+
+2. **🅰️ Angular (Framework Web Moderno)**:
+   - *Signals*: Reactividad atómica granular con `signal()`, `computed()` perezoso y `effect()`.
+   - *Standalone Components*: Arquitectura autosuficiente sin NgModules con imports directos.
+   - *Nuevo Control Flow*: Bloques declarativos `@if`, `@else`, `@switch` y `@for` con `track` obligatorio.
+   - *Inyección de Dependencias Moderna*: Función `inject()` en contexto de inicialización sin super().
+   - *Estrategias de Change Detection*: `OnPush` reactivo y el nuevo modo experimental `Zoneless`.
+   - *Angular Router*: Lazy loading por componente (`loadComponent`) y Functional Guards declarativos.
+   - *RxJS & Gestión de Ciclo de Vida*: Operadores reactivos, Subjects y prevención de memory leaks con `takeUntilDestroyed()`.
+   - *HttpClient & Functional Interceptors*: Intercepción centralizada de tokens JWT y errores con `HttpInterceptorFn`.
+   - *Directivas & Host Directives*: Directivas de atributo y composición de comportamientos sin herencia.
+   - *Pipes Puros vs Impuros*: Transformación idempotente con memoización y `AsyncPipe`.
+   - *Signal Queries*: `viewChild()`, `viewChildren()` y `contentChildren()` reactivos.
+   - *Strictly Typed Reactive Forms*: `FormGroup` y `FormControl` fuertemente tipados en compilación.
+   - *Ciclo de Vida*: Diferencia entre `ngOnInit` (lógica de datos) y `afterNextRender` (DOM seguro en SSR).
+   - *Input y Output Signals*: `input()`, `input.required()` y `output()` nativos.
+   - *Deferrable Views (`@defer`)*: Carga diferida con triggers (`on viewport`, `interaction`, `@placeholder`, `@loading`).
+   - *Hydration & SSR*: Hidratación no destructiva con preservación de DOM para Core Web Vitals.
+
+3. **🔷 TypeScript (Tipado Estricto)**:
+   - *Interfaces vs Type Aliases*: Declaration Merging en interfaces vs versatilidad de tipos y uniones.
+   - *Generics & Restricciones*: Parametrización con `<T extends Restriccion>` y preservación de tipos.
+   - *Union (|) vs Intersection (&)*: Alternativas válidas vs conjunción estricta de contratos.
+   - *Type Narrowing & Discriminant Unions*: Estrechamiento con guardas `typeof`/`instanceof` y propiedades literales.
+   - *Utility Types Básicos*: `Partial<T>`, `Required<T>`, `Readonly<T>`.
+   - *Utility Types de Selección*: `Pick<T, K>`, `Omit<T, K>`, `Record<K, T>`.
+   - *Operadores de Compilación*: `keyof` (extracción de claves) y `typeof` (inferencia desde objetos existentes).
+   - *Jerarquía de Tipos*: `unknown` (top-type seguro), `any` (inseguro) y `never` (estado imposible/exhaustividad).
+   - *Mapped Types*: Transformación sistemática de propiedades con `[P in keyof T]`.
+   - *Const Assertions (`as const`)*: Sellado de tipos literales y tuplas de solo lectura sin widening.
+   - *Conditional Types & infer*: Lógica ternaria en tipos y deducción de tipos anidados con `infer`.
+   - *Enums vs Const Objects*: Por qué la comunidad moderna prefiere objetos con `as const`.
+   - *Operadores Seguros*: Non-Null assertion (`!`) vs Optional Chaining (`?.`) y Coalescencia Nula (`??`).
+   - *Configuración tsconfig*: Modo `strict: true`, `strictNullChecks` y `noImplicitAny`.
+   - *Template Literal Types*: Tipado dinámico de nombres de métodos y eventos con sintaxis de template string.
+
+4. **🌐 HTML y Plataforma Web**:
+   - *HTML5 Semántico*: Landmark elements (`<main>`, `<article>`, `<section>`, `<nav>`, `<aside>`) para SEO y accesibilidad.
+   - *Accesibilidad Web (a11y) & WAI-ARIA*: Primera regla de ARIA, `role`, `aria-label`, `aria-live`.
+   - *Formularios & Constraint Validation API*: Validación nativa con `pattern`, `required` y `checkValidity()`.
+   - *Web Storage API*: Comparativa de ciclo de vida entre `localStorage`, `sessionStorage`, `Cookies` e `IndexedDB`.
+   - *DOM Event Flow*: Capturing, Target, Bubbling y el patrón de Delegación de Eventos.
+   - *Web Components*: Custom Elements, Shadow DOM para aislamiento de CSS y `<template>`.
+   - *Meta Tags Esenciales*: Viewport responsivo móvil, Charset UTF-8, SEO y tarjetas Open Graph.
+   - *Gráficos Nativos*: SVG vectorial escalable con nodos DOM vs Canvas 2D rasterizado por píxeles a 60fps.
+   - *Progressive Web Apps (PWA)*: Service Workers para modo Offline-First, Cache Storage y Push.
+   - *Web Workers*: Ejecución multihilo en segundo plano sin congelar la interfaz de usuario (UI Freezing).
+   - *Critical Rendering Path*: DOM -> CSSOM -> Render Tree -> Reflow (Layout) -> Repaint -> Composite.
+   - *Carga de Scripts*: Atributos `defer` (orden preservado sin bloqueo) vs `async` (ejecución inmediata).
+   - *Multimedia Nativa*: `<picture>` y `srcset` para imágenes responsivas y formatos AVIF/WebP con lazy loading.
+   - *Seguridad Web*: Content Security Policy (CSP) contra XSS y Cross-Origin Resource Sharing (CORS).
+   - *Tiempo Real*: WebSockets bidireccional full-duplex vs Server-Sent Events (SSE) para streaming de tokens.
+
+5. **☕ Ecosistema Java Completo (105+ Tarjetas)**:
+   - Java Core, JVM (JIT, Garbage Collector), Colecciones, Concurrencia multihilo, Sockets, Java RMI, NIO, JPA y Spring.
+
+6. **📦 POO y Fundamentos de Arquitectura**:
    - *Objeto vs. Instancia*: La diferencia precisa en memoria y concepto (plano vs. casa construida).
    - Encapsulamiento, Polimorfismo, Herencia vs. Composición, Clases Abstractas vs. Interfaces.
 2. **Nodos y Estructuras de Datos**:

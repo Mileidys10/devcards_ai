@@ -127,6 +127,10 @@ def get_categories():
 
     category_icons = {
         "Todos": "🌐",
+        "Inteligencia Artificial": "🤖",
+        "Angular": "🅰️",
+        "TypeScript": "🔷",
+        "HTML y Web": "🌐",
         "POO": "📦",
         "Estructuras de Datos": "⛓️",
         "Arquitectura Hexagonal": "⬡",
@@ -165,7 +169,11 @@ def get_categories():
 
     result = [
         {"name": "Todos", "count": len(cards), "icon": "🌐"},
-        {"name": "Java (Completo)", "count": java_count, "icon": "☕"}
+        {"name": "Java (Completo)", "count": java_count, "icon": "☕"},
+        {"name": "Inteligencia Artificial", "count": counts.get("Inteligencia Artificial", 0), "icon": "🤖"},
+        {"name": "Angular", "count": counts.get("Angular", 0), "icon": "🅰️"},
+        {"name": "TypeScript", "count": counts.get("TypeScript", 0), "icon": "🔷"},
+        {"name": "HTML y Web", "count": counts.get("HTML y Web", 0), "icon": "🌐"}
     ]
 
     preferred_order = [
@@ -188,7 +196,7 @@ def get_categories():
         "Patrones de Diseño",
         "Algoritmos y Big O"
     ]
-    added = {"Todos"}
+    added = {"Todos", "Inteligencia Artificial", "Angular", "TypeScript", "HTML y Web"}
     for cat in preferred_order:
         if cat in counts:
             result.append({"name": cat, "count": counts[cat], "icon": category_icons.get(cat, "🏷️")})
@@ -215,7 +223,8 @@ def get_cards(
     search_val = search if isinstance(search, str) else None
     
     if cat_val and cat_val.lower() != "todos":
-        if cat_val.lower() in ["java (completo)", "java", "ecosistema java"]:
+        c_lower = cat_val.lower()
+        if c_lower in ["java (completo)", "java", "ecosistema java"]:
             java_categories = {
                 "java core y jvm", "poo avanzada en java", "colecciones y generics",
                 "hilos y concurrencia", "sockets avanzados en java", "redes y protocolos tcp/ip",
@@ -225,6 +234,14 @@ def get_cards(
                 "java 8 funcional", "reflexión e introspección", "entrada/salida y serialización"
             }
             cards = [c for c in cards if (c.get("category", "").lower() in java_categories) or ("java" in c.get("category", "").lower()) or c.get("id", "").startswith(("java-", "net-", "rmi-", "corba-"))]
+        elif c_lower in ["inteligencia artificial", "ia", "ia (inteligencia artificial)", "inteligencia artificial (ia)"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "inteligencia artificial" or c.get("id", "").startswith("ia-")]
+        elif c_lower in ["angular", "angular framework"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "angular" or c.get("id", "").startswith("ng-")]
+        elif c_lower in ["typescript", "ts"]:
+            cards = [c for c in cards if c.get("category", "").lower() == "typescript" or c.get("id", "").startswith("ts-")]
+        elif c_lower in ["html", "html y web", "html5", "html & web", "web", "html y plataforma web"]:
+            cards = [c for c in cards if c.get("category", "").lower() in ["html y web", "html"] or c.get("id", "").startswith("html-")]
         else:
             cards = [c for c in cards if c.get("category", "").lower() == cat_val.lower()]
 

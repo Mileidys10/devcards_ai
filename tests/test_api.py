@@ -34,6 +34,13 @@ class TestDevCardsAPI(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         cats = res.json()
         cat_names = [c["name"] for c in cats]
+        # Materias principales solicitadas
+        self.assertIn("Java (Completo)", cat_names)
+        self.assertIn("Inteligencia Artificial", cat_names)
+        self.assertIn("Angular", cat_names)
+        self.assertIn("TypeScript", cat_names)
+        self.assertIn("HTML y Web", cat_names)
+        # Categorías pedagógicas base
         self.assertIn("POO", cat_names)
         self.assertIn("Estructuras de Datos", cat_names)
         self.assertIn("Arquitectura Hexagonal", cat_names)
@@ -59,6 +66,25 @@ class TestDevCardsAPI(unittest.TestCase):
         self.assertTrue(any("heap" in t or "prioridad" in t for t in titulos), "Falta tarjeta Cola de Prioridad")
         self.assertTrue(any("bfs" in t or "amplitud" in t for t in titulos), "Falta tarjeta BFS")
         self.assertTrue(any("dfs" in t or "profundidad" in t for t in titulos), "Falta tarjeta DFS")
+
+        # Verificar conceptos de las nuevas materias
+        # 1. Inteligencia Artificial
+        self.assertTrue(any("llm" in t or "lenguaje grande" in t for t in titulos), "Falta tarjeta de LLM")
+        self.assertTrue(any("rag" in t for t in titulos), "Falta tarjeta de RAG")
+        self.assertTrue(any("transformer" in t or "atención" in t or "attention" in t for t in titulos), "Falta tarjeta de Transformer")
+        self.assertTrue(any("mcp" in t or "model context" in t for t in titulos), "Falta tarjeta de MCP")
+        # 2. Angular
+        self.assertTrue(any("signals" in t or "signal" in t for t in titulos), "Falta tarjeta de Signals")
+        self.assertTrue(any("standalone" in t for t in titulos), "Falta tarjeta de Standalone Components")
+        self.assertTrue(any("control flow" in t or "@if" in t for t in titulos), "Falta tarjeta de Control Flow")
+        # 3. TypeScript
+        self.assertTrue(any("interfaces vs type" in t or "type alias" in t for t in titulos), "Falta tarjeta de Interfaces vs Types")
+        self.assertTrue(any("genéricos" in t or "generics" in t for t in titulos), "Falta tarjeta de Generics")
+        self.assertTrue(any("utility types" in t or "partial" in t for t in titulos), "Falta tarjeta de Utility Types")
+        # 4. HTML y Web
+        self.assertTrue(any("semántico" in t or "html5 semántico" in t for t in titulos), "Falta tarjeta de HTML5 Semántico")
+        self.assertTrue(any("accesibilidad" in t or "aria" in t for t in titulos), "Falta tarjeta de Accesibilidad / ARIA")
+        self.assertTrue(any("web storage" in t or "localstorage" in t for t in titulos), "Falta tarjeta de Web Storage")
 
     def test_04_hexagonal_info(self):
         res = self.client.get("/api/hexagonal-info")
@@ -157,6 +183,46 @@ class TestDevCardsAPI(unittest.TestCase):
         data = res.json()
         self.assertTrue(data.get("success"))
         self.assertGreaterEqual(data.get("total_cards", 0), 40)
+
+    def test_11_subject_filtering(self):
+        """Verifica que el filtrado por materias (Java, IA, Angular, TypeScript, HTML) funcione correctamente."""
+        # 1. Filtrado por IA
+        res_ia = self.client.get("/api/cards?category=IA")
+        self.assertEqual(res_ia.status_code, 200)
+        cards_ia = res_ia.json()
+        self.assertGreaterEqual(len(cards_ia), 15, "Debe retornar al menos 15 tarjetas de IA")
+        for c in cards_ia:
+            self.assertTrue(c.get("category") == "Inteligencia Artificial" or c.get("id", "").startswith("ia-"))
+
+        # 2. Filtrado por Angular
+        res_ng = self.client.get("/api/cards?category=Angular")
+        self.assertEqual(res_ng.status_code, 200)
+        cards_ng = res_ng.json()
+        self.assertGreaterEqual(len(cards_ng), 15, "Debe retornar al menos 15 tarjetas de Angular")
+        for c in cards_ng:
+            self.assertTrue(c.get("category") == "Angular" or c.get("id", "").startswith("ng-"))
+
+        # 3. Filtrado por TypeScript
+        res_ts = self.client.get("/api/cards?category=TypeScript")
+        self.assertEqual(res_ts.status_code, 200)
+        cards_ts = res_ts.json()
+        self.assertGreaterEqual(len(cards_ts), 15, "Debe retornar al menos 15 tarjetas de TypeScript")
+        for c in cards_ts:
+            self.assertTrue(c.get("category") == "TypeScript" or c.get("id", "").startswith("ts-"))
+
+        # 4. Filtrado por HTML
+        res_html = self.client.get("/api/cards?category=HTML")
+        self.assertEqual(res_html.status_code, 200)
+        cards_html = res_html.json()
+        self.assertGreaterEqual(len(cards_html), 15, "Debe retornar al menos 15 tarjetas de HTML y Web")
+        for c in cards_html:
+            self.assertTrue(c.get("category") == "HTML y Web" or c.get("id", "").startswith("html-"))
+
+        # 5. Filtrado por Java (Completo)
+        res_java = self.client.get("/api/cards?category=Java")
+        self.assertEqual(res_java.status_code, 200)
+        cards_java = res_java.json()
+        self.assertGreaterEqual(len(cards_java), 100, "Debe retornar más de 100 tarjetas del ecosistema Java")
 
 if __name__ == "__main__":
     unittest.main()

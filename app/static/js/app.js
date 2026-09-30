@@ -134,6 +134,11 @@ function renderCategoryTabs() {
     // Categorias dinamicas generadas a partir de las tarjetas reales
   const categoryIcons = {
     "Todos": "🌐",
+    "Java (Completo)": "☕",
+    "Inteligencia Artificial": "🤖",
+    "Angular": "🅰️",
+    "TypeScript": "🔷",
+    "HTML y Web": "🌐",
     "POO": "📦",
     "Estructuras de Datos": "⛓️",
     "Arquitectura Hexagonal": "⬡",
@@ -174,9 +179,37 @@ function renderCategoryTabs() {
     return javaCategories.has(cat) || cat.includes("java") || id.startsWith("java-") || id.startsWith("net-") || id.startsWith("rmi-") || id.startsWith("corba-");
   }).length;
 
+  const iaCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "inteligencia artificial" || cat.includes("ia") || id.startsWith("ia-");
+  }).length;
+
+  const ngCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "angular" || id.startsWith("ng-");
+  }).length;
+
+  const tsCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "typescript" || id.startsWith("ts-");
+  }).length;
+
+  const htmlCount = state.allCards.filter(c => {
+    const cat = (c.category || "").toLowerCase();
+    const id = (c.id || "").toLowerCase();
+    return cat === "html y web" || cat === "html" || id.startsWith("html-");
+  }).length;
+
   const categories = [
-    { name: "Todos", count: state.allCards.length, icon: "🌐" },
-    { name: "Java (Completo)", count: javaCount, icon: "☕" }
+    { name: "Todos", count: state.allCards.length, icon: "🌐", isMateria: true },
+    { name: "Java (Completo)", count: javaCount, icon: "☕", isMateria: true },
+    { name: "Inteligencia Artificial", count: iaCount, icon: "🤖", isMateria: true },
+    { name: "Angular", count: ngCount, icon: "🅰️", isMateria: true },
+    { name: "TypeScript", count: tsCount, icon: "🔷", isMateria: true },
+    { name: "HTML y Web", count: htmlCount, icon: "🌐", isMateria: true }
   ];
   
   // Orden prioritario sugerido
@@ -201,7 +234,7 @@ function renderCategoryTabs() {
     "Algoritmos y Big O"
   ];
 
-  const added = new Set(["Todos"]);
+  const added = new Set(["Todos", "Inteligencia Artificial", "Angular", "TypeScript", "HTML y Web"]);
   order.forEach(cat => {
     if (counts[cat]) {
       categories.push({
@@ -225,7 +258,7 @@ function renderCategoryTabs() {
   });
 
   container.innerHTML = categories.map(cat => `
-    <button class="cat-tab ${state.activeCategory === cat.name ? 'active' : ''}" onclick="selectCategory('${cat.name}')">
+    <button class="cat-tab ${cat.isMateria ? 'cat-tab-materia' : ''} ${state.activeCategory === cat.name ? 'active' : ''}" onclick="selectCategory('${cat.name}')">
       <span>${cat.icon}</span> ${cat.name} <span style="opacity: 0.6; font-size: 0.72rem;">(${cat.count})</span>
     </button>
   `).join("");
@@ -247,8 +280,9 @@ function onSearchInput() {
 
 function applyFilters() {
   let list = [...state.allCards];
+  const catActive = (state.activeCategory || "").toLowerCase();
 
-  if (state.activeCategory === "Java (Completo)" || state.activeCategory === "Java") {
+  if (catActive === "java (completo)" || catActive === "java") {
     const javaCategories = new Set([
       "java core y jvm", "poo avanzada en java", "colecciones y generics",
       "hilos y concurrencia", "sockets avanzados en java", "redes y protocolos tcp/ip",
@@ -262,8 +296,32 @@ function applyFilters() {
       const id = (c.id || "").toLowerCase();
       return javaCategories.has(cat) || cat.includes("java") || id.startsWith("java-") || id.startsWith("net-") || id.startsWith("rmi-") || id.startsWith("corba-");
     });
-  } else if (state.activeCategory !== "Todos") {
-    list = list.filter(c => (c.category || "").toLowerCase() === state.activeCategory.toLowerCase());
+  } else if (catActive === "inteligencia artificial" || catActive === "ia" || catActive === "ia (inteligencia artificial)") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "inteligencia artificial" || cat.includes("ia") || id.startsWith("ia-");
+    });
+  } else if (catActive === "angular") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "angular" || id.startsWith("ng-");
+    });
+  } else if (catActive === "typescript" || catActive === "ts") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "typescript" || id.startsWith("ts-");
+    });
+  } else if (catActive === "html y web" || catActive === "html") {
+    list = list.filter(c => {
+      const cat = (c.category || "").toLowerCase();
+      const id = (c.id || "").toLowerCase();
+      return cat === "html y web" || cat === "html" || id.startsWith("html-");
+    });
+  } else if (catActive !== "todos") {
+    list = list.filter(c => (c.category || "").toLowerCase() === catActive);
   }
 
   if (state.searchQuery) {
@@ -272,7 +330,9 @@ function applyFilters() {
       (c.title || "").toLowerCase().includes(q) ||
       (c.question || "").toLowerCase().includes(q) ||
       (c.definition || "").toLowerCase().includes(q) ||
-      (c.category || "").toLowerCase().includes(q)
+      (c.category || "").toLowerCase().includes(q) ||
+      (c.key_takeaway || "").toLowerCase().includes(q) ||
+      (c.code_example || "").toLowerCase().includes(q)
     );
   }
 
