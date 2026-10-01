@@ -1,0 +1,27 @@
+# ==============================================================================
+# docker-compose.yml — DevCards AI Workstation
+# Ejecución en un solo comando: docker compose up --build
+# ==============================================================================
+
+services:
+  devcards-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: devcards-ai
+    ports:
+      - "8055:8000"
+      - "8000:8000"
+    volumes:
+      # Persistencia de tarjetas personalizadas y progreso Leitner
+      - ./app/data:/app/app/data
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - PORT=8000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/cards"]
+      interval: 15s
+      timeout: 5s
+      retries: 3

@@ -18,3 +18,15 @@ Thumbs.db
 desktop.ini
 
 *.bak
+
+# Proteccion automatica de secretos de fabrica
+*.env
+.env.local
+credentials.json
+service_account.json
+AGENTS.md
+GEMINI.md
+.agents/
+.gemini/
+contexto/
+obsidian-vault/

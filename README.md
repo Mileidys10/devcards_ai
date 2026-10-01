@@ -5,6 +5,25 @@
 
 ---
 
+
+## 🐳 Despliegue Rápido con Docker (Sin Instalar Dependencias)
+
+Si no deseas configurar entornos virtuales ni instalar Python o paquetes manualmente, puedes ejecutar **DevCards AI** en cualquier sistema operativo con **Docker Compose**:
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/Mileidys10/devcards_ai.git
+cd devcards_ai
+
+# 2. Iniciar con Docker Compose
+docker compose up --build
+```
+
+- 🌐 **Acceso Web:** [http://localhost:8055](http://localhost:8055) o [http://localhost:8000](http://localhost:8000)
+- 💾 **Persistencia:** Tu progreso de estudio y tarjetas se guardan automáticamente en `./app/data/`.
+- 🔑 **API Key Opcional:** Puedes configurar tu `GOOGLE_API_KEY` en un archivo `.env` o en la consola para habilitar la generación de analogías con Gemini.
+
+
 ## Acceso Rápido: 3 Formas de Usar y Compartir
 
 Para instrucciones detalladas paso a paso, consulta [COMO_COMPARTIR.md](COMO_COMPARTIR.md).
