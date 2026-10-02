@@ -109,7 +109,7 @@ status: "APROBADO_PARA_PRODUCCION"
 * **RNF-04 (Compatibilidad Multiplataforma y Responsividad)**: Diseño 100% responsivo adaptable a monitores panorámicos de escritorio, laptops y dispositivos móviles.
 * **RNF-05 (Arquitectura Limpia en Backend)**: Backend en FastAPI con separación modular entre routers, servicios de IA y almacenamiento.
 * **RNF-06 (Cero Dependencias Externas Complejas para el Frontend)**: Frontend construido en HTML5, CSS3 moderno (Custom Properties, Grid, Flexbox, 3D Transform) y Vanilla JavaScript ES6+ sin requerir compiladores pesados de node_modules para ejecutarse.
-* **RNF-07 (Trazabilidad y Gobernanza OKF)**: Manifiesto `AGENTS.md` alineado al estándar de fábrica v0.2.
+* **RNF-07 (Trazabilidad y Calidad de Código)**: Estándares rigurosos de ingeniería, tipado estricto y documentación técnica modular.
 * **RNF-08 (Seguridad)**: Sanitización estricta de entradas en tarjetas personalizadas para prevenir ataques XSS.
 
 ---
@@ -121,7 +121,7 @@ graph TD
     S1["Sprint 1: Núcleo de Datos & Servidor FastAPI<br/>(Semillas, Endpoints, Integración Ollama/Gemini)"]
     S2["Sprint 2: UI/UX Cinema 3D & Motor Leitner<br/>(Flip Card, Filtros, Atajos de Teclado, TTS)"]
     S3["Sprint 3: Módulo Visual Hexagonal & Modo Quiz<br/>(Diagrama Puertos/Adaptadores, Cuestionarios)"]
-    S4["Sprint 4: Asistente IA, Pruebas & Gobernanza<br/>(Generador con IA, Tests Unitarios, OKF Sync)"]
+    S4["Sprint 4: Asistente IA, Pruebas & Calidad<br/>(Generador con IA, Tests Unitarios, CI/CD Ready)"]
 
     S1 --> S2 --> S3 --> S4
 ```
@@ -129,4 +129,4 @@ graph TD
 * **Sprint 1 (Backend & Catálogo Semilla)**: API REST con FastAPI, base de datos de 40+ tarjetas en JSON, router de IA para Ollama y Gemini.
 * **Sprint 2 (Frontend Flashcards 3D & Leitner)**: Interfaz visual moderna, giro 3D de tarjetas, motor de repaso espaciado, síntesis de voz nativa.
 * **Sprint 3 (Arquitectura Hexagonal & Modo Quiz)**: Visualizador interactivo de capas y puertos/adaptadores, motor de evaluación interactivo.
-* **Sprint 4 (Generación IA, Tests & Gobernanza)**: Modal de generación con IA, pruebas unitarias automatizadas (`pytest`/`unittest`), sincronización en la Wiki de Obsidian.
+* **Sprint 4 (Generación IA, Tests & Calidad)**: Modal de generación con IA, pruebas unitarias automatizadas (`pytest`/`unittest`), sincronización en la Wiki de Obsidian.

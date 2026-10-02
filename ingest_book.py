@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 ingest_book.py - Pipeline Oficial de Ingesta de Libros Técnicos para DevCards AI
-Gobernado por la Fábrica de Software Agéntica OKF v0.2
+Ingeniería de Software - Mileidys Agamez
 """
 
 import sys
