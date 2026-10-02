@@ -76,7 +76,7 @@
             <span class="domain-icon">💻</span> Programación & Software <span class="domain-count" id="count-domain-dev">(0)</span>
           </button>
           <button class="domain-pill domain-pill-english" id="pill-domain-eng" onclick="selectDomain('eng')">
-            <span class="domain-icon">🇬🇧</span> Inglés Profesional & Interpretación <span class="domain-count" id="count-domain-eng">(0)</span>
+            <span class="domain-icon">🇬🇧</span> Inglés Profesional <span class="domain-count" id="count-domain-eng">(0)</span>
           </button>
         </div>
 
@@ -133,14 +133,17 @@
             </div>
 
             <!-- REVERSO (Back) -->
-            <div class="flip-card-face flip-card-back">
+            <div class="flip-card-face flip-card-back" onclick="event.stopPropagation();">
               <div class="card-header">
                 <span class="card-category-badge" id="card-back-cat">POO</span>
                 <h3 class="card-back-title" id="card-back-title">Definición & Comprensión</h3>
-                <button class="btn-icon" onclick="event.stopPropagation(); speakCurrentCard();" title="Escuchar">🔊</button>
+                <div class="card-header-actions" style="display: flex; gap: 8px; align-items: center;">
+                  <button class="btn-icon" onclick="event.stopPropagation(); speakCurrentCard();" title="Escuchar pronunciación">🔊</button>
+                  <button class="btn-flip-back" onclick="event.stopPropagation(); toggleCardFlip();" title="Volver al anverso">↩️ Voltear</button>
+                </div>
               </div>
 
-              <div class="card-back-body">
+              <div class="card-back-body" onclick="event.stopPropagation();">
                 <!-- Definición Técnica -->
                 <div class="definition-box">
                   <h4 class="box-title" id="card-back-def-title">📖 Definición Técnica</h4>
@@ -165,6 +168,11 @@
                 <!-- Regla de Oro -->
                 <div class="takeaway-banner" id="card-back-takeaway">
                   <span id="takeaway-label">💡 <b>Regla de Oro:</b></span> <span id="takeaway-text">...</span>
+                </div>
+
+                <!-- Deslizado / Scroll Hint -->
+                <div class="scroll-hint-bar" id="scroll-hint-bar" onclick="event.stopPropagation(); scrollCardBackDown();" title="Haz clic o desliza para ver todo">
+                  <span>📜 Desliza hacia abajo para leer la tarjeta completa ⬇️</span>
                 </div>
               </div>
 
@@ -357,11 +365,11 @@
               <option value="Inglés: Departamentos y Gobierno">🇬🇧 Inglés: Departamentos y Gobierno</option>
               <option value="Inglés: Asistencia Social y Beneficios">🇬🇧 Inglés: Asistencia Social y Beneficios</option>
               <option value="Inglés: Atención al Cliente y Facturación">🇬🇧 Inglés: Atención al Cliente y Facturación</option>
-              <option value="Inglés: Salud y Médico (L2/L3)">🇬🇧 Inglés: Salud y Médico (L2/L3)</option>
-              <option value="Inglés: Seguros y Finanzas (L2/L3)">🇬🇧 Inglés: Seguros y Finanzas (L2/L3)</option>
-              <option value="Inglés: Emergencias, 911 y Legal (L2/L3)">🇬🇧 Inglés: Emergencias, 911 y Legal</option>
+              <option value="Inglés: Salud y Medicina">🇬🇧 Inglés: Salud y Medicina</option>
+              <option value="Inglés: Seguros y Finanzas">🇬🇧 Inglés: Seguros y Finanzas</option>
+              <option value="Inglés: Emergencias y Legal">🇬🇧 Inglés: Emergencias y Legal</option>
               <option value="Inglés: Educación y Academia">🇬🇧 Inglés: Educación y Academia</option>
-              <option value="Inglés: Falsos Amigos & Interpretación">🇬🇧 Inglés: Falsos Amigos & Interpretación</option>
+              <option value="Inglés: Falsos Amigos (False Friends)">🇬🇧 Inglés: Falsos Amigos (False Friends)</option>
               <option value="Python y Backend">Python y Backend Moderno</option>
               <option value="Bases de Datos y SQL">Bases de Datos y SQL (PostgreSQL/NoSQL)</option>
               <option value="Angular">Angular (Framework Web)</option>

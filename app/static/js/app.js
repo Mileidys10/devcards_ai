@@ -239,11 +239,11 @@ function renderCategoryTabs() {
     "Inglés: Departamentos y Gobierno": "🏛️",
     "Inglés: Asistencia Social y Beneficios": "🍞",
     "Inglés: Atención al Cliente y Facturación": "🎧",
-    "Inglés: Salud y Médico (L2/L3)": "🩺",
-    "Inglés: Seguros y Finanzas (L2/L3)": "🛡️",
-    "Inglés: Emergencias, 911 y Legal (L2/L3)": "🚨",
+    "Inglés: Salud y Medicina": "🩺",
+    "Inglés: Seguros y Finanzas": "🛡️",
+    "Inglés: Emergencias y Legal": "🚨",
     "Inglés: Educación y Academia": "🎓",
-    "Inglés: Falsos Amigos & Interpretación": "⚠️"
+    "Inglés: Falsos Amigos (False Friends)": "⚠️"
   };
 
   const javaCategories = new Set([
@@ -270,11 +270,11 @@ function renderCategoryTabs() {
       { name: "Inglés: Departamentos y Gobierno", count: counts["Inglés: Departamentos y Gobierno"] || 0, icon: "🏛️", isMateria: true },
       { name: "Inglés: Asistencia Social y Beneficios", count: counts["Inglés: Asistencia Social y Beneficios"] || 0, icon: "🍞", isMateria: true },
       { name: "Inglés: Atención al Cliente y Facturación", count: counts["Inglés: Atención al Cliente y Facturación"] || 0, icon: "🎧", isMateria: true },
-      { name: "Inglés: Salud y Médico (L2/L3)", count: counts["Inglés: Salud y Médico (L2/L3)"] || 0, icon: "🩺", isMateria: true },
-      { name: "Inglés: Seguros y Finanzas (L2/L3)", count: counts["Inglés: Seguros y Finanzas (L2/L3)"] || 0, icon: "🛡️", isMateria: true },
-      { name: "Inglés: Emergencias, 911 y Legal (L2/L3)", count: counts["Inglés: Emergencias, 911 y Legal (L2/L3)"] || 0, icon: "🚨", isMateria: true },
+      { name: "Inglés: Salud y Medicina", count: counts["Inglés: Salud y Medicina"] || 0, icon: "🩺", isMateria: true },
+      { name: "Inglés: Seguros y Finanzas", count: counts["Inglés: Seguros y Finanzas"] || 0, icon: "🛡️", isMateria: true },
+      { name: "Inglés: Emergencias y Legal", count: counts["Inglés: Emergencias y Legal"] || 0, icon: "🚨", isMateria: true },
       { name: "Inglés: Educación y Academia", count: counts["Inglés: Educación y Academia"] || 0, icon: "🎓", isMateria: true },
-      { name: "Inglés: Falsos Amigos & Interpretación", count: counts["Inglés: Falsos Amigos & Interpretación"] || 0, icon: "⚠️", isMateria: true }
+      { name: "Inglés: Falsos Amigos (False Friends)", count: counts["Inglés: Falsos Amigos (False Friends)"] || 0, icon: "⚠️", isMateria: true }
     ];
   } else if (state.activeDomain === "dev") {
     // Modo Específico de Programación
@@ -480,6 +480,8 @@ function renderCurrentCard() {
   const c = state.filteredCards[state.currentIndex];
   state.isFlipped = false;
   cardElem.classList.remove("flipped");
+  const backBody = document.querySelector(".card-back-body");
+  if (backBody) backBody.scrollTop = 0;
 
   const isEnglishCard = Boolean(c.is_english || (c.category || "").toLowerCase().includes("inglés") || (c.id || "").startsWith("eng-"));
 
@@ -514,23 +516,23 @@ function renderCurrentCard() {
 
   const analogyTitle = document.getElementById("card-back-analogy-title");
   if (analogyTitle) {
-    analogyTitle.innerHTML = isEnglishCard ? "🌟 Contexto de Interpretación & Registro Profesional" : "🌟 Analogía de la Vida Real (Para Nunca Olvidarlo)";
+    analogyTitle.innerHTML = isEnglishCard ? "🌟 Contexto y Uso Práctico en Inglés" : "🌟 Analogía de la Vida Real (Para Nunca Olvidarlo)";
   }
 
   const codeBoxTitle = document.getElementById("code-box-header-title");
   if (codeBoxTitle) {
-    codeBoxTitle.innerHTML = isEnglishCard ? "🗣️ Diálogo en Contexto Real / Guión de Interpretación" : "💻 Código Canónico Demostrativo";
+    codeBoxTitle.innerHTML = isEnglishCard ? "🗣️ Diálogo y Ejemplos de Conversación en Inglés" : "💻 Código Canónico Demostrativo";
   }
 
   const takeawayLabel = document.getElementById("takeaway-label");
   if (takeawayLabel) {
-    takeawayLabel.innerHTML = isEnglishCard ? "💡 <b>Tip de Interpretación:</b>" : "💡 <b>Regla de Oro:</b>";
+    takeawayLabel.innerHTML = isEnglishCard ? "💡 <b>Tip de Inglés Profesional:</b>" : "💡 <b>Regla de Oro:</b>";
   }
 
   document.getElementById("card-back-definition").textContent = c.definition;
   document.getElementById("card-back-analogy").textContent = c.analogy;
   document.getElementById("card-back-code").textContent = c.code_example || (isEnglishCard ? "# Guión en preparación" : "# Sin código necesario");
-  document.getElementById("takeaway-text").textContent = c.key_takeaway || (isEnglishCard ? "Mantén la precisión terminológica en interpretación." : "Practica este concepto con frecuencia.");
+  document.getElementById("takeaway-text").textContent = c.key_takeaway || (isEnglishCard ? "Domina este término para una comunicación fluida en inglés." : "Practica este concepto con frecuencia.");
 
   // Actualizar barra de progreso
   const total = state.filteredCards.length;
@@ -1024,3 +1026,13 @@ function setupKeyboardShortcuts() {
     }
   });
 }
+
+
+// Función para desplazamiento suave en el reverso de la tarjeta
+function scrollCardBackDown() {
+  const body = document.querySelector(".card-back-body");
+  if (body) {
+    body.scrollBy({ top: 160, behavior: "smooth" });
+  }
+}
+window.scrollCardBackDown = scrollCardBackDown;

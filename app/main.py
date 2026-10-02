@@ -166,11 +166,11 @@ def get_categories():
         "Inglés: Departamentos y Gobierno": "🏛️",
         "Inglés: Asistencia Social y Beneficios": "🍞",
         "Inglés: Atención al Cliente y Facturación": "🎧",
-        "Inglés: Salud y Médico (L2/L3)": "🩺",
-        "Inglés: Seguros y Finanzas (L2/L3)": "🛡️",
-        "Inglés: Emergencias, 911 y Legal (L2/L3)": "🚨",
+        "Inglés: Salud y Medicina": "🩺",
+        "Inglés: Seguros y Finanzas": "🛡️",
+        "Inglés: Emergencias y Legal": "🚨",
         "Inglés: Educación y Academia": "🎓",
-        "Inglés: Falsos Amigos & Interpretación": "⚠️"
+        "Inglés: Falsos Amigos (False Friends)": "⚠️"
     }
 
     java_categories = {
@@ -186,9 +186,9 @@ def get_categories():
     english_categories = {
         "Inglés: Grammar Refresher", "Inglés: Departamentos y Gobierno",
         "Inglés: Asistencia Social y Beneficios", "Inglés: Atención al Cliente y Facturación",
-        "Inglés: Salud y Médico (L2/L3)", "Inglés: Seguros y Finanzas (L2/L3)",
-        "Inglés: Emergencias, 911 y Legal (L2/L3)", "Inglés: Educación y Academia",
-        "Inglés: Falsos Amigos & Interpretación"
+        "Inglés: Salud y Medicina", "Inglés: Seguros y Finanzas",
+        "Inglés: Emergencias y Legal", "Inglés: Educación y Academia",
+        "Inglés: Falsos Amigos (False Friends)"
     }
     english_count = sum(1 for c in cards if c.get("category") in english_categories or c.get("is_english") or "inglés" in c.get("category", "").lower() or c.get("id", "").startswith("eng-"))
 
