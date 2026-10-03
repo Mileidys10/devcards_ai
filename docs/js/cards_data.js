@@ -12874,23 +12874,23 @@ window.DEVCARDS_RAW_DATA = window.DEVCARDS_SEED_DATA = [
   },
   {
     "id": "eng-voc-259",
-    "title": "Department of veteran affairs (VA) | Departamento de asusntos de los veteranos.",
+    "title": "Department of veteran affairs (VA) | Departamento de asuntos de los veteranos.",
     "category": "Inglés: Asistencia Social y Beneficios",
     "difficulty": "Avanzado",
     "icon": "🍞",
     "question": "¿Cómo se traduce y define 'Department of veteran affairs (VA)' en el sector de Social Services?",
-    "definition": "The United States Department of Veterans Affairs (VA) is an agency of the federal government that provides benefits, health care, and cemetery services to military veterans.\n\nEquivalente en español: Departamento de asusntos de los veteranos..",
+    "definition": "The United States Department of Veterans Affairs (VA) is an agency of the federal government that provides benefits, health care, and cemetery services to military veterans.\n\nEquivalente en español: Departamento de asuntos de los veteranos..",
     "analogy": "Contexto de Social Services: Vocabulario clave para comunicación profesional en inglés. Es fundamental no confundirlo con falsos amigos ni usar traducciones literales no avaladas por el glosario oficial.",
-    "code_example": "Inglés: \"The Department of Veteran Affairs (VA) supports those who serve or have served in defense of our nation, and their families.\"\n---\nEquivalente en Español: \"Departamento de asusntos de los veteranos.: The Department of Veteran Affairs (VA) supports those who serve or have served in defense of our nation, and their families.\"\nNote: Usar registro formal y mantener la precisión terminológica institucional.",
+    "code_example": "Inglés: \"The Department of Veteran Affairs (VA) supports those who serve or have served in defense of our nation, and their families.\"\n---\nEquivalente en Español: \"Departamento de asuntos de los veteranos.: The Department of Veteran Affairs (VA) supports those who serve or have served in defense of our nation, and their families.\"\nNote: Usar registro formal y mantener la precisión terminológica institucional.",
     "quiz_question": "¿Cuál es el significado y traducción exacta de 'Department of veteran affairs (VA)' en Social Services?",
     "quiz_options": [
       "Formulario de cancelación de membresía.",
-      "Departamento de asusntos de los veteranos. (The United States Department of Veterans Affairs (VA) is an ...)",
+      "Departamento de asuntos de los veteranos. (The United States Department of Veterans Affairs (VA) is an ...)",
       "Comprobante de depósito de nómina quincenal.",
       "Pago diferido de intereses bancarios."
     ],
     "quiz_answer": 1,
-    "key_takeaway": "'Department of veteran affairs (VA)' = 'Departamento de asusntos de los veteranos.'. Término esencial de inglés técnico para S.ocial Services.",
+    "key_takeaway": "'Department of veteran affairs (VA)' = 'Departamento de asuntos de los veteranos.'. Término esencial de inglés técnico para S.ocial Services.",
     "box": 1,
     "user_created": false,
     "is_english": true

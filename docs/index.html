@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=2.1">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
       <button class="nav-btn active" id="btn-mode-cards" onclick="setAppMode('cards')">
         <span class="icon">🎴</span> Flashcards 3D
       </button>
-      <button class="nav-btn" id="btn-mode-hex" onclick="setAppMode('hexagonal')">
+      <button class="nav-btn" id="btn-mode-hexagonal" onclick="setAppMode('hexagonal')">
         <span class="icon">⬡</span> Arquitectura Hexagonal
       </button>
       <button class="nav-btn" id="btn-mode-quiz" onclick="setAppMode('quiz')">
@@ -80,8 +80,12 @@
           </button>
         </div>
 
-        <div class="category-tabs" id="category-tabs-container">
-          <!-- Renderizado dinámico de categorías -->
+        <div class="category-tabs-wrapper">
+          <button class="cat-nav-btn cat-nav-prev" onclick="scrollCategories(-240)" title="Ver categorías anteriores" aria-label="Anterior">‹</button>
+          <div class="category-tabs" id="category-tabs-container">
+            <!-- Renderizado dinámico de categorías -->
+          </div>
+          <button class="cat-nav-btn cat-nav-next" onclick="scrollCategories(240)" title="Ver más categorías" aria-label="Siguiente">›</button>
         </div>
       </div>
 
@@ -422,7 +426,7 @@
     </div>
   </div>
 
-  <script src="js/cards_data.js"></script>
-  <script src="js/app.js"></script>
+  <script src="js/cards_data.js?v=2.1"></script>
+  <script src="js/app.js?v=2.1"></script>
 </body>
 </html>

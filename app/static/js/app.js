@@ -78,6 +78,56 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchStatus();
   fetchCards();
   setupKeyboardShortcuts();
+
+  // Scroll horizontal suave con rueda del ratón y arrastre en categorías
+  const catContainer = document.getElementById("category-tabs-container");
+  if (catContainer) {
+    catContainer.addEventListener("wheel", (e) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        catContainer.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+
+    catContainer.addEventListener("mousedown", (e) => {
+      isDown = true;
+      catContainer.classList.add("dragging");
+      startX = e.pageX - catContainer.offsetLeft;
+      scrollStart = catContainer.scrollLeft;
+    });
+
+    window.addEventListener("mouseup", () => {
+      isDown = false;
+      catContainer.classList.remove("dragging");
+    });
+
+    catContainer.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - catContainer.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      catContainer.scrollLeft = scrollStart - walk;
+    });
+  }
+
+  // Ocultar hint bar cuando el usuario desliza hacia abajo
+  const backBody = document.querySelector(".card-back-body");
+  const hintBar = document.getElementById("scroll-hint-bar");
+  if (backBody && hintBar) {
+    backBody.addEventListener("scroll", () => {
+      if (backBody.scrollTop > 35) {
+        hintBar.style.opacity = "0";
+        hintBar.style.pointerEvents = "none";
+      } else {
+        hintBar.style.opacity = "1";
+        hintBar.style.pointerEvents = "auto";
+      }
+    });
+  }
 });
 
 // ==============================================================================
@@ -339,6 +389,13 @@ function renderCategoryTabs() {
       <span>${cat.icon}</span> ${cat.name} <span style="opacity: 0.6; font-size: 0.72rem;">(${cat.count})</span>
     </button>
   `).join("");
+}
+
+function scrollCategories(dx) {
+  const container = document.getElementById("category-tabs-container");
+  if (container) {
+    container.scrollBy({ left: dx, behavior: "smooth" });
+  }
 }
 
 function selectCategory(catName) {
@@ -753,17 +810,24 @@ function updateLeitnerProgress() {
 function setAppMode(mode) {
   state.appMode = mode;
 
+  // Normalizar identificador para hexagonal
+  const modeKey = (mode === "hex" || mode === "hexagonal") ? "hexagonal" : mode;
+
   // Actualizar botones de navegación
   document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
-  document.getElementById(`btn-mode-${mode}`).classList.add("active");
+  const activeNav = document.getElementById(`btn-mode-${modeKey}`) || document.getElementById(`btn-mode-${mode}`) || (modeKey === "hexagonal" ? document.getElementById("btn-mode-hex") : null);
+  if (activeNav) activeNav.classList.add("active");
 
   // Actualizar secciones visibles
   document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
-  document.getElementById(`section-${mode}`).classList.add("active");
+  const activeSec = document.getElementById(`section-${modeKey}`) || document.getElementById(`section-${mode}`);
+  if (activeSec) activeSec.classList.add("active");
 
-  if (mode === "quiz") {
+  if (modeKey === "hexagonal") {
+    selectHexLayer("domain");
+  } else if (modeKey === "quiz") {
     startQuiz();
-  } else if (mode === "leitner") {
+  } else if (modeKey === "leitner") {
     updateLeitnerProgress();
   }
 }
