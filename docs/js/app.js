@@ -127,10 +127,17 @@ async function fetchCards() {
   }
 
   if (!loadedFromBackend) {
-    if (window.DEVCARDS_SEED_DATA && Array.isArray(window.DEVCARDS_SEED_DATA)) {
-      state.allCards = [...window.DEVCARDS_SEED_DATA];
+    const seedCards = (window.DEVCARDS_SEED_DATA && Array.isArray(window.DEVCARDS_SEED_DATA))
+      ? window.DEVCARDS_SEED_DATA
+      : (window.DEVCARDS_RAW_DATA && Array.isArray(window.DEVCARDS_RAW_DATA))
+        ? window.DEVCARDS_RAW_DATA
+        : null;
+
+    if (seedCards) {
+      state.allCards = [...seedCards];
+      console.log(`[DevCards] Cargadas exitosamente ${state.allCards.length} tarjetas de conocimiento en modo autónomo.`);
     } else {
-      console.warn("No se encontró window.DEVCARDS_SEED_DATA");
+      console.warn("[DevCards] No se encontraron tarjetas precargadas (ni window.DEVCARDS_SEED_DATA ni window.DEVCARDS_RAW_DATA)");
     }
   }
 
@@ -630,7 +637,7 @@ function updateStreakAndMetrics() {
 function exportDeck() {
   const cardsToExport = (state.allCards && state.allCards.length > 0) 
     ? state.allCards 
-    : (window.DEVCARDS_SEED_DATA || []);
+    : (window.DEVCARDS_SEED_DATA || window.DEVCARDS_RAW_DATA || []);
   
   if (cardsToExport.length === 0) {
     alert("No hay tarjetas para exportar.");

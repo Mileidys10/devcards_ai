@@ -1,5 +1,5 @@
 // Datos precargados de DevCards AI (Modo autónomo sin backend)
-window.DEVCARDS_RAW_DATA = [
+window.DEVCARDS_RAW_DATA = window.DEVCARDS_SEED_DATA = [
   {
     "id": "poo-01",
     "title": "Objeto vs. Instancia",
