@@ -1,4 +1,4 @@
-# DevCards AI &mdash; Plataforma de Repaso Nemotécnico & Arquitectura Hexagonal
+# 🧠 DevCards AI — Plataforma de Repaso Nemotécnico & Arquitectura Hexagonal
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.12" />
@@ -11,23 +11,23 @@
   <img src="https://img.shields.io/badge/Licencia-MIT-F59E0B?style=for-the-badge" alt="MIT License" />
 </p>
 
-> **1,295 Flashcards Interactivas** para dominar Arquitectura Hexagonal, POO, Estructuras de Datos, Principios SOLID, Big O e Inglés Profesional.  
-> Plataforma de ingeniería de software acelerada con IA, testing automatizado, metodología Leitner y arquitectura limpia.
+> **1,295 Flashcards Interactivas** para dominar Arquitectura Hexagonal, Programación Orientada a Objetos (POO), Estructuras de Datos, Principios SOLID, Complejidad Algorítmica Big O e Inglés Profesional para Entrevistas Técnicas.  
+> Plataforma de ingeniería de software acelerada con IA, testing automatizado, metodología Leitner / SM-2 y arquitectura desacoplada.
 
-> **Desarrollado por**: [Mileidys Agamez Ospino](https://github.com/Mileidys10) • Ingeniería de Software & Soluciones de Inteligencia Artificial.  
-> **Roles**: `FullStackEngineer`, `AIIntegrationSpecialist`, `SoftwareFactoryArchitect`  
-> **Gobernanza**: Estándar Oficial Google Cloud OKF (Open Knowledge Format) v0.2.
+* **Desarrolladora**: [Mileidys Agámez Ospino](https://github.com/Mileidys10) — Ingeniera de Software & Soluciones de Inteligencia Artificial.
+* **Roles**: `FullStackEngineer`, `AIIntegrationSpecialist`, `SoftwareFactoryArchitect`
+* **Gobernanza**: Estándar Oficial Google Cloud OKF (Open Knowledge Format) v0.2.
 
 ---
 
 ## 🌐 Demo en Vivo (Sin Instalación)
 
-Prueba la versión web en vivo directamente desde GitHub Pages sin instalar dependencias:  
+Prueba la versión web interactiva directamente desde GitHub Pages sin instalar nada:  
 👉 **[https://mileidys10.github.io/devcards_ai/](https://mileidys10.github.io/devcards_ai/)**
 
 ---
 
-## 🌟 ¿Qué es DevCards AI?
+## 💡 ¿Qué es DevCards AI?
 
 **DevCards AI** es una plataforma web interactiva de alto rendimiento diseñada para desarrolladores, arquitectos de software y profesionales técnicos que buscan dominar, consolidar y retener conceptos fundamentales de computación y comunicación profesional en inglés.
 
@@ -35,32 +35,18 @@ Implementa el método científico de **Repetición Espaciada de Leitner**, analo
 
 ---
 
-## 💎 Características Principales
+## 📚 Catálogo de Conocimiento (1,295 Tarjetas Activas)
 
-| Característica | Descripción |
-| :--- | :--- |
-| 🎴 **Flashcards 3D de Memoria Activa** | Giro tridimensional con preguntas conceptuales en el anverso y definiciones técnicas, analogías para recordar de por vida, reglas de oro y código demostrativo en el reverso. |
-| ⬡ **Guía Visual de Arquitectura Hexagonal** | Explorador interactivo del patrón Puertos y Adaptadores de Alistair Cockburn (Núcleo de Dominio, Puertos Primarios/Secundarios y Adaptadores Tecnológicos). |
-| 🎯 **Modo Quiz Gamificado** | Exámenes interactivos de 4 opciones por tarjeta con validación instantánea, puntaje en tiempo real y retroalimentación pedagógica. |
-| 📊 **Sistema de Repetición Espaciada Leitner** | Clasificación en 3 cajas de dominio (Caja 1: Difícil, Caja 2: Dudoso, Caja 3: Dominado) con cálculo de métricas de retención y racha de estudio. |
-| 🗣️ **Inglés Profesional y Vocabulario Técnico** | Más de 1,000 tarjetas con pronunciación por síntesis de voz, contextos laborales y guiones de diálogo en atención al cliente, asistencia social, medicina y gobierno. |
-| 🎨 **Estética Obsidian & Titanium** | Textura técnica mate, diseño de terminal macOS con acentos esmeralda/ámbar, tipografía fluida y cero clichés de IA genérica. |
-| ⚡ **100% Funcional Fuera de Línea** | Opera sin backend activo ni conexión a internet mediante catálogo empaquetado en `cards_data.js` con paridad total en FastAPI. |
+### Dominio 1: Ciencias de la Computación & Arquitectura de Software (284 Tarjetas)
 
----
-
-## 🎯 Plan de Estudios: 1,295 Conceptos en 2 Dominios
-
-### Dominio 1: Programación & Ingeniería de Software (284 Tarjetas)
-
-1. **📦 POO y Fundamentos de Arquitectura**: Objeto vs Instancia, Encapsulamiento, Polimorfismo, Herencia vs Composición, Clases Abstractas vs Interfaces.
-2. **⛓️ Nodos y Estructuras de Datos**: Nodos, Listas Enlazadas (Simple y Doble), Árboles Binarios de Búsqueda (BST), Pilas (LIFO), Colas (FIFO), Tablas Hash y Grafos.
-3. **⬡ Arquitectura Hexagonal**: Núcleo de Dominio puro, Puertos Inbound/Outbound, Adaptadores REST/PostgreSQL y Regla de Inversión de Dependencias (DIP).
-4. **🎯 Principios SOLID**: SRP (Responsabilidad Única), OCP (Abierto/Cerrado), LSP (Sustitución de Liskov), ISP (Segregación de Interfaces), DIP (Inversión de Dependencias).
-5. **♟️ Patrones de Diseño GoF**: Adapter, Strategy, Observer, Factory Method, Singleton seguro y Facade.
-6. **📈 Algoritmos y Complejidad Big O**: $O(1)$, $O(\log n)$, $O(n)$, $O(n \log n)$, $O(n^2)$ y análisis espacial/temporal.
-7. **☕ Ecosistema Java Completo (105+ Tarjetas)**: Java Core, JVM (JIT, Garbage Collector), Colecciones, Hilos y Concurrencia, Sockets TCP/IP, Java RMI, NIO, JPA y Spring Boot.
-8. **🤖 Inteligencia Artificial & LLMs**: Transformers, Self-Attention, Vector Embeddings, RAG, Bases HNSW, Fine-Tuning LoRA, MCP (Model Context Protocol), Prompt Engineering, Function Calling y Alineación RLHF.
+1. **🏛️ Arquitectura Hexagonal & Puertos y Adaptadores**: Dominio puro, Aplicación, Puertos de Entrada/Salida, Adaptadores Primarios/Secundarios, Regla de Dependencia, DTOs y Mappers.
+2. **📐 Patrones de Diseño GoF (Creacionales, Estructurales, Comportamiento)**: Singleton, Factory Method, Abstract Factory, Builder, Prototype, Adapter, Decorator, Facade, Composite, Proxy, Strategy, Observer, Command, State, Chain of Responsibility, Iterator, Template Method, Mediator, Memento y Visitor.
+3. **🧱 Principios SOLID & Clean Code**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion, DRY, KISS, YAGNI, Boy Scout Rule y Tell Don't Ask.
+4. **☕ Java Empresarial**: Memory Model (Heap vs Stack, Metaspace), Garbage Collectors (G1, ZGC), Records, Sealed Classes, Pattern Matching, Virtual Threads (Project Loom), Stream API y Concurrencia segura.
+5. **🍃 Spring Boot 3 & Ecosistema**: Ciclo de vida de Beans, Inyección por constructor, Spring Security 6 (Stateless JWT), Spring Data JPA, Hibernate L1/L2 Cache, `@Transactional` y Spring Boot Actuator.
+6. **🎯 Programación Orientada a Objetos**: Encapsulamiento, Abstracción, Herencia, Polimorfismo dinámico vs estático, Composición sobre herencia, Acoplamiento vs Cohesión y Clases Inmutables.
+7. **📊 Estructuras de Datos**: Arrays, LinkedLists, Stacks, Queues, Hash Tables, Binary Search Trees, Heaps, Trie y Graphs.
+8. **⏱️ Complejidad Algorítmica & Big O**: Notación asintótica (O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ)), Algoritmos de ordenamiento y Espacio auxiliar.
 9. **🅰️ Angular Framework**: Signals reactivos (`signal()`, `computed()`, `effect()`), Standalone Components, nuevo Control Flow (`@if`, `@for`), Zoneless e inyección moderna con `inject()`.
 10. **🔷 TypeScript**: Interfaces vs Type Aliases, Generics con restricciones, Union/Intersection, Type Narrowing, Utility Types, Mapped Types y sellado con `as const`.
 11. **🌐 HTML5 y Plataforma Web**: HTML semántico, Accesibilidad (WAI-ARIA), Constraint Validation API, Web Workers, PWA, Service Workers y Critical Rendering Path.
@@ -90,18 +76,18 @@ Implementa el método científico de **Repetición Espaciada de Leitner**, analo
 Abre directamente en cualquier dispositivo:  
 👉 **[https://mileidys10.github.io/devcards_ai/](https://mileidys10.github.io/devcards_ai/)**
 
-### 2. Con Docker Compose (Recomendado para Producción y Equipos)
+### 2. Con Docker Compose (Recomendado)
 Levanta todo el stack con un único comando:
 ```bash
-# Clonar el repositorio
+# 1. Clonar el repositorio
 git clone https://github.com/Mileidys10/devcards_ai.git
 cd devcards_ai
 
-# Iniciar con Docker Compose
-docker compose up --build
+# 2. Iniciar con Docker Compose
+docker compose up -d --build
 ```
-* 🌐 **Acceso Web**: [http://localhost:8000](http://localhost:8000)
-* 💾 **Persistencia**: Tus tarjetas creadas y calificaciones se conservan en `./app/data/`.
+* 🌐 **Acceso Web**: `http://localhost:8000`
+* 💾 **Persistencia**: Tarjetas creadas y calificaciones conservadas en `./app/data/`.
 
 ### 3. Con 1 Clic en Windows (Modo Autónomo Local)
 1. Clona o descarga el repositorio en formato ZIP.
@@ -110,18 +96,13 @@ docker compose up --build
 
 ### 4. Servidor de Desarrollo Local con FastAPI
 ```bash
-# 1. Crear entorno virtual
-python -m venv .venv
-source .venv/bin/activate   # En Linux/macOS
-.venv\Scripts\activate      # En Windows
-
-# 2. Instalar dependencias
+# 1. Instalar dependencias
 pip install -r requirements.txt
 
-# 3. Iniciar el servidor
+# 2. Iniciar el servidor
 python run_devcards.py
 ```
-El servidor arrancará en [http://localhost:8000](http://localhost:8000) y abrirá automáticamente tu navegador.
+El servidor arrancará en `http://localhost:8000` y abrirá automáticamente tu navegador.
 
 ---
 
@@ -129,9 +110,9 @@ El servidor arrancará en [http://localhost:8000](http://localhost:8000) y abrir
 
 DevCards AI cuenta con una arquitectura de IA adaptable a tu entorno:
 
-1. **Generador Sintético Offline**: Si no tienes conexión a internet ni claves de API, el sistema genera tarjetas técnicas completas y coherentes de forma determinista inmediata.
-2. **Google Gemini API**: Configura tu clave en el archivo `.env` (`GOOGLE_API_KEY=tu_clave`) para generar tarjetas personalizadas de alta precisión conceptual con el modelo Gemini Flash.
-3. **Ollama Local**: Si tienes Ollama corriendo localmente (`http://localhost:11434`), DevCards AI lo detecta automáticamente para usar modelos como `llama3.2`, `qwen2.5` o `mistral`.
+1. **Generador Sintético Offline**: Genera tarjetas técnicas completas y coherentes de forma determinista inmediata sin conexión a internet ni consumo de API keys.
+2. **Google Gemini API**: Configura tu clave en variables de entorno (`GOOGLE_API_KEY=tu_clave`) para generar tarjetas personalizadas con Gemini Flash.
+3. **Ollama Local**: Detecta automáticamente instancias locales de Ollama (`http://localhost:11434`) para inferencia privada.
 
 ---
 
@@ -186,18 +167,15 @@ devcards_ai/
 
 ## 🧪 Pruebas Automatizadas
 
-La suite de pruebas unitarias valida la integridad de los endpoints REST, persistencia de tarjetas, generación sintética y progresión Leitner:
-
 ```bash
-# Ejecutar suite de pruebas
 python tests/test_api.py
+# 11 tests ejecutados con 100% de éxito.
 ```
-* **Resultado**: 11/11 pruebas completadas con éxito (`100% OK`).
 
 ---
 
-## 📜 Gobernanza y Licencia
+## 📄 Licencia y Autoría
 
-* **Gobernanza**: Proyecto gobernado bajo las especificaciones de **Google Cloud OKF v0.2**.
-* **Licencia**: Distribuido bajo la licencia **MIT**. Consulta el archivo `LICENSE` para más detalles.
-* **Autora**: [Mileidys Agamez Ospino](https://github.com/Mileidys10) &mdash; Barranquilla, Colombia.
+* **Autora**: Mileidys Agámez Ospino
+* **GitHub**: [@Mileidys10](https://github.com/Mileidys10)
+* **Licencia**: MIT
