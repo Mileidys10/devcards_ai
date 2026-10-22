@@ -35,13 +35,26 @@ app = FastAPI(
     version="1.1.0"
 )
 
-# CORS habilitado para desarrollo y consumo local
+# CORS gobernado por lista de origenes permitidos (Proteccion contra Cross-Origin Data Theft)
+cors_env = os.getenv("CORS_ORIGINS", "")
+if cors_env:
+    allowed_origins = [o.strip() for o in cors_env.split(",") if o.strip()]
+else:
+    allowed_origins = [
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
+        "http://localhost:3000",
+        "http://localhost:4200",
+        "http://localhost:5173",
+        "https://mileidys10.github.io"
+    ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type", "Accept"],
 )
 
 ai_service = AIService()
