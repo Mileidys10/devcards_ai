@@ -134,9 +134,21 @@ document.addEventListener("DOMContentLoaded", () => {
 // COMUNICACIÓN CON LA API FASTAPI
 // ==============================================================================
 
+function isStaticHost() {
+  return window.location.protocol === "file:" || window.location.hostname.endsWith("github.io");
+}
+
 async function fetchStatus() {
   const dot = document.querySelector(".status-dot");
   const label = document.getElementById("status-label");
+  if (isStaticHost()) {
+    if (dot) {
+      dot.style.background = "#10b981";
+      dot.style.boxShadow = "0 0 8px #10b981";
+    }
+    if (label) label.textContent = "Modo Web Autónomo";
+    return;
+  }
   try {
     const res = await fetch("/api/status");
     if (!res.ok) throw new Error("Status endpoint error");
@@ -166,14 +178,16 @@ async function fetchStatus() {
 
 async function fetchCards() {
   let loadedFromBackend = false;
-  try {
-    const res = await fetch("/api/cards");
-    if (res.ok) {
-      state.allCards = await res.json();
-      loadedFromBackend = true;
+  if (!isStaticHost()) {
+    try {
+      const res = await fetch("/api/cards");
+      if (res.ok) {
+        state.allCards = await res.json();
+        loadedFromBackend = true;
+      }
+    } catch (err) {
+      // Backend no disponible (modo estático, doble clic o GitHub Pages)
     }
-  } catch (err) {
-    // Backend no disponible (modo estático, doble clic o GitHub Pages)
   }
 
   if (!loadedFromBackend) {
